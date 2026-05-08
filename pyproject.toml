@@ -1,0 +1,18 @@
+[project]
+name = "gabaypoz"
+version = "0.1.0"
+description = "Pangasinan higher-education EDA — Team 3, GabayPoz."
+requires-python = ">=3.11,<3.12"
+dependencies = [
+    "geopandas>=1.0",
+    "ipykernel>=6.29",
+    "jupyterlab>=4.2",
+    "matplotlib>=3.9",
+    "numpy>=2.0",
+    "openpyxl>=3.1",
+    "pandas>=2.2",
+    "pyarrow>=17.0",
+]
+
+[tool.uv]
+package = false
