@@ -1,18 +1,49 @@
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
+
 [project]
-name = "gabaypoz"
-version = "0.1.0"
-description = "Pangasinan higher-education EDA — Team 3, GabayPoz."
-requires-python = ">=3.11,<3.12"
+name = "gabaypoz-recommender"
+version = "1.1.0"
+description = "GabayPoz college program recommender for Pozorrubio, Pangasinan SHS students."
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.10"
+authors = [
+    { name = "GabayPoz Team 4 (Model Development)" },
+    { name = "GabayPoz Team 3 (Data Engineering and EDA)" },
+]
+keywords = [
+    "recommender", "education", "philippines", "pangasinan", "pozorrubio",
+    "content-based-filtering", "explainable",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Education",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering",
+]
 dependencies = [
-    "geopandas>=1.0",
-    "ipykernel>=6.29",
-    "jupyterlab>=4.2",
-    "matplotlib>=3.9",
-    "numpy>=2.0",
-    "openpyxl>=3.1",
-    "pandas>=2.2",
-    "pyarrow>=17.0",
+    "numpy>=1.24",
+    "pandas>=2.0",
 ]
 
-[tool.uv]
-package = false
+[project.optional-dependencies]
+test = ["pytest>=7"]
+demo = ["pytest>=7"]
+
+[project.urls]
+"Source" = "https://github.com/data-engineering-pilipinas/gabaypoz"
+"Specification" = "https://github.com/data-engineering-pilipinas/gabaypoz/blob/main/docs/reports/model/team4_tds_recommender_v1.md"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v"

@@ -1,0 +1,12 @@
+program_id,scholarship_name,nearby_hasSC,outside_hasSC
+1,DOST-SEI S&T Undergraduate Scholarship,True,True
+1,CHED Merit Scholarship,True,True
+2,CHED Full Merit Scholarship,True,True
+2,DOH Nursing Scholarship,False,True
+3,NCCA Arts and Culture Grant,False,True
+4,GSIS Scholarship,True,True
+5,DepEd Teacher Education Subsidy,True,True
+6,DA-ATI Agricultural Scholarship,False,True
+6,DOST-PCAARRD Agriculture Grant,False,True
+7,DOST-SEI S&T Undergraduate Scholarship,True,True
+8,DOH Allied Health Scholarship,False,True

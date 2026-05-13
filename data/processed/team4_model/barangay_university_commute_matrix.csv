@@ -1,0 +1,681 @@
+barangay_id,university_id,barangay_name,university_name,distance_km,commute_time_mins
+1,1,Alipangpang,University of Eastern Pangasinan,7.31,7.8
+1,2,Alipangpang,Urdaneta City University,16.68,15.6
+1,3,Alipangpang,Pangasinan State University - Urdaneta City,14.32,13.0
+1,4,Alipangpang,Pangasinan State University - Asingan,22.67,22.9
+1,5,Alipangpang,DMMMSU – South La Union Campus (SLUC),37.29,44.3
+1,6,Alipangpang,DMMMSU – Mid La Union Campus (MLUC),69.07,88.4
+1,7,Alipangpang,Benguet State University - La Trinidad,70.82,97.9
+1,8,Alipangpang,Central Luzon State University,86.87,81.2
+1,9,Alipangpang,Tarlac State University - Tarlac,76.56,65.5
+1,10,Alipangpang,Pangasinan State University - Lingayen,57.1,66.1
+1,11,Alipangpang,Pangasinan State University - Bayambang,45.74,55.4
+1,12,Alipangpang,Saint Louis University - Baguio,66.52,89.6
+1,13,Alipangpang,University of the Philippines - Baguio,47.22,57.5
+1,14,Alipangpang,University of Pangasinan - PHINMA,31.36,44.3
+1,15,Alipangpang,University of the Philippines - Diliman,197.15,163.6
+1,16,Alipangpang,University of the Philippines - Manila,198.77,167.2
+1,17,Alipangpang,Univeristy of the Philippines - Open University,196.57,162.1
+1,18,Alipangpang,Polytechnic University of the Philippines - Manila,197.66,163.5
+1,19,Alipangpang,Lyceum-Northwestern University,45.19,47.6
+1,20,Alipangpang,Pangasinan Polytechnic College,57.36,66.3
+2,1,Amagbagan,University of Eastern Pangasinan,11.47,14.9
+2,2,Amagbagan,Urdaneta City University,20.87,22.1
+2,3,Amagbagan,Pangasinan State University - Urdaneta City,18.51,19.5
+2,4,Amagbagan,Pangasinan State University - Asingan,26.86,29.4
+2,5,Amagbagan,DMMMSU – South La Union Campus (SLUC),37.66,46.5
+2,6,Amagbagan,DMMMSU – Mid La Union Campus (MLUC),69.45,90.7
+2,7,Amagbagan,Benguet State University - La Trinidad,71.19,100.1
+2,8,Amagbagan,Central Luzon State University,89.38,86.1
+2,9,Amagbagan,Tarlac State University - Tarlac,79.06,70.3
+2,10,Amagbagan,Pangasinan State University - Lingayen,39.22,63.4
+2,11,Amagbagan,Pangasinan State University - Bayambang,49.93,61.9
+2,12,Amagbagan,Saint Louis University - Baguio,66.89,91.9
+2,13,Amagbagan,University of the Philippines - Baguio,47.59,59.7
+2,14,Amagbagan,University of Pangasinan - PHINMA,22.27,37.2
+2,15,Amagbagan,University of the Philippines - Diliman,199.65,168.4
+2,16,Amagbagan,University of the Philippines - Manila,201.28,172.0
+2,17,Amagbagan,Univeristy of the Philippines - Open University,199.08,166.9
+2,18,Amagbagan,Polytechnic University of the Philippines - Manila,200.17,168.3
+2,19,Amagbagan,Lyceum-Northwestern University,24.2,41.4
+2,20,Amagbagan,Pangasinan Polytechnic College,39.49,63.6
+3,1,Balacag,University of Eastern Pangasinan,17.56,24.7
+3,2,Balacag,Urdaneta City University,26.96,30.9
+3,3,Balacag,Pangasinan State University - Urdaneta City,24.6,28.3
+3,4,Balacag,Pangasinan State University - Asingan,32.94,38.2
+3,5,Balacag,DMMMSU – South La Union Campus (SLUC),34.92,47.4
+3,6,Balacag,DMMMSU – Mid La Union Campus (MLUC),66.71,91.6
+3,7,Balacag,Benguet State University - La Trinidad,68.69,102.2
+3,8,Balacag,Central Luzon State University,95.66,93.6
+3,9,Balacag,Tarlac State University - Tarlac,85.34,77.9
+3,10,Balacag,Pangasinan State University - Lingayen,39.96,62.2
+3,11,Balacag,Pangasinan State University - Bayambang,47.09,64.3
+3,12,Balacag,Saint Louis University - Baguio,64.39,94.0
+3,13,Balacag,University of the Philippines - Baguio,44.85,60.7
+3,14,Balacag,University of Pangasinan - PHINMA,23.01,36.0
+3,15,Balacag,University of the Philippines - Diliman,205.93,176.0
+3,16,Balacag,University of the Philippines - Manila,207.56,179.6
+3,17,Balacag,Univeristy of the Philippines - Open University,205.36,174.5
+3,18,Balacag,Polytechnic University of the Philippines - Manila,206.45,175.9
+3,19,Balacag,Lyceum-Northwestern University,24.93,40.2
+3,20,Balacag,Pangasinan Polytechnic College,40.22,62.4
+4,1,Banding,University of Eastern Pangasinan,8.26,9.2
+4,2,Banding,Urdaneta City University,17.63,17.0
+4,3,Banding,Pangasinan State University - Urdaneta City,15.27,14.4
+4,4,Banding,Pangasinan State University - Asingan,23.62,24.3
+4,5,Banding,DMMMSU – South La Union Campus (SLUC),37.45,44.7
+4,6,Banding,DMMMSU – Mid La Union Campus (MLUC),69.23,88.9
+4,7,Banding,Benguet State University - La Trinidad,70.98,98.3
+4,8,Banding,Central Luzon State University,87.82,82.6
+4,9,Banding,Tarlac State University - Tarlac,77.51,66.8
+4,10,Banding,Pangasinan State University - Lingayen,58.04,67.4
+4,11,Banding,Pangasinan State University - Bayambang,46.69,56.8
+4,12,Banding,Saint Louis University - Baguio,66.68,90.1
+4,13,Banding,University of the Philippines - Baguio,47.37,57.9
+4,14,Banding,University of Pangasinan - PHINMA,30.41,42.9
+4,15,Banding,University of the Philippines - Diliman,198.09,164.9
+4,16,Banding,University of the Philippines - Manila,199.72,168.6
+4,17,Banding,Univeristy of the Philippines - Open University,197.52,163.5
+4,18,Banding,Polytechnic University of the Philippines - Manila,198.61,164.9
+4,19,Banding,Lyceum-Northwestern University,32.34,47.1
+4,20,Banding,Pangasinan Polytechnic College,58.31,67.7
+5,1,Bantugan,University of Eastern Pangasinan,13.52,18.7
+5,2,Bantugan,Urdaneta City University,22.91,25.9
+5,3,Bantugan,Pangasinan State University - Urdaneta City,20.55,23.3
+5,4,Bantugan,Pangasinan State University - Asingan,28.9,33.2
+5,5,Bantugan,DMMMSU – South La Union Campus (SLUC),39.71,50.4
+5,6,Bantugan,DMMMSU – Mid La Union Campus (MLUC),71.49,94.5
+5,7,Bantugan,Benguet State University - La Trinidad,73.24,104.0
+5,8,Bantugan,Central Luzon State University,91.42,89.9
+5,9,Bantugan,Tarlac State University - Tarlac,81.11,74.1
+5,10,Bantugan,Pangasinan State University - Lingayen,37.18,59.6
+5,11,Bantugan,Pangasinan State University - Bayambang,44.31,61.7
+5,12,Bantugan,Saint Louis University - Baguio,68.94,95.7
+5,13,Bantugan,University of the Philippines - Baguio,49.63,63.6
+5,14,Bantugan,University of Pangasinan - PHINMA,20.22,33.4
+5,15,Bantugan,University of the Philippines - Diliman,201.69,172.2
+5,16,Bantugan,University of the Philippines - Manila,203.32,175.9
+5,17,Bantugan,Univeristy of the Philippines - Open University,201.12,170.8
+5,18,Bantugan,Polytechnic University of the Philippines - Manila,202.21,172.2
+5,19,Bantugan,Lyceum-Northwestern University,22.15,37.6
+5,20,Bantugan,Pangasinan Polytechnic College,37.44,59.8
+6,1,Batakil,University of Eastern Pangasinan,13.73,15.5
+6,2,Batakil,Urdaneta City University,23.12,21.6
+6,3,Batakil,Pangasinan State University - Urdaneta City,20.76,19.0
+6,4,Batakil,Pangasinan State University - Asingan,29.11,28.9
+6,5,Batakil,DMMMSU – South La Union Campus (SLUC),31.66,38.6
+6,6,Batakil,DMMMSU – Mid La Union Campus (MLUC),63.44,82.7
+6,7,Batakil,Benguet State University - La Trinidad,65.42,93.4
+6,8,Batakil,Central Luzon State University,91.82,84.4
+6,9,Batakil,Tarlac State University - Tarlac,81.51,68.6
+6,10,Batakil,Pangasinan State University - Lingayen,43.09,69.7
+6,11,Batakil,Pangasinan State University - Bayambang,52.18,61.4
+6,12,Batakil,Saint Louis University - Baguio,61.12,85.1
+6,13,Batakil,University of the Philippines - Baguio,41.58,51.8
+6,14,Batakil,University of Pangasinan - PHINMA,26.14,43.5
+6,15,Batakil,University of the Philippines - Diliman,202.09,166.7
+6,16,Batakil,University of the Philippines - Manila,203.72,170.4
+6,17,Batakil,Univeristy of the Philippines - Open University,201.52,165.3
+6,18,Batakil,Polytechnic University of the Philippines - Manila,202.61,166.7
+6,19,Batakil,Lyceum-Northwestern University,28.06,47.7
+6,20,Batakil,Pangasinan Polytechnic College,43.35,69.9
+7,1,Bobonan,University of Eastern Pangasinan,12.75,14.0
+7,2,Bobonan,Urdaneta City University,22.14,20.2
+7,3,Bobonan,Pangasinan State University - Urdaneta City,19.78,17.6
+7,4,Bobonan,Pangasinan State University - Asingan,28.13,27.5
+7,5,Bobonan,DMMMSU – South La Union Campus (SLUC),31.92,38.3
+7,6,Bobonan,DMMMSU – Mid La Union Campus (MLUC),63.7,82.5
+7,7,Bobonan,Benguet State University - La Trinidad,66.87,93.1
+7,8,Bobonan,Central Luzon State University,90.84,82.9
+7,9,Bobonan,Tarlac State University - Tarlac,80.53,67.2
+7,10,Bobonan,Pangasinan State University - Lingayen,44.39,68.6
+7,11,Bobonan,Pangasinan State University - Bayambang,51.2,60.0
+7,12,Bobonan,Saint Louis University - Baguio,62.57,84.8
+7,13,Bobonan,University of the Philippines - Baguio,41.85,51.6
+7,14,Bobonan,University of Pangasinan - PHINMA,27.44,42.4
+7,15,Bobonan,University of the Philippines - Diliman,201.12,165.3
+7,16,Bobonan,University of the Philippines - Manila,202.74,168.9
+7,17,Bobonan,Univeristy of the Philippines - Open University,200.55,163.8
+7,18,Bobonan,Polytechnic University of the Philippines - Manila,201.64,165.2
+7,19,Bobonan,Lyceum-Northwestern University,29.36,46.6
+7,20,Bobonan,Pangasinan Polytechnic College,44.65,68.8
+8,1,Buneg,University of Eastern Pangasinan,8.53,9.9
+8,2,Buneg,Urdaneta City University,17.9,17.7
+8,3,Buneg,Pangasinan State University - Urdaneta City,15.54,15.1
+8,4,Buneg,Pangasinan State University - Asingan,23.89,25.0
+8,5,Buneg,DMMMSU – South La Union Campus (SLUC),37.89,46.8
+8,6,Buneg,DMMMSU – Mid La Union Campus (MLUC),69.68,91.0
+8,7,Buneg,Benguet State University - La Trinidad,71.42,100.4
+8,8,Buneg,Central Luzon State University,88.09,83.3
+8,9,Buneg,Tarlac State University - Tarlac,77.78,67.5
+8,10,Buneg,Pangasinan State University - Lingayen,58.31,68.1
+8,11,Buneg,Pangasinan State University - Bayambang,46.96,57.5
+8,12,Buneg,Saint Louis University - Baguio,67.12,92.2
+8,13,Buneg,University of the Philippines - Baguio,47.82,60.0
+8,14,Buneg,University of Pangasinan - PHINMA,32.96,46.9
+8,15,Buneg,University of the Philippines - Diliman,198.36,165.7
+8,16,Buneg,University of the Philippines - Manila,199.99,169.3
+8,17,Buneg,Univeristy of the Philippines - Open University,197.79,164.2
+8,18,Buneg,Polytechnic University of the Philippines - Manila,198.88,165.6
+8,19,Buneg,Lyceum-Northwestern University,46.4,49.7
+8,20,Buneg,Pangasinan Polytechnic College,58.58,68.4
+9,1,Cablong,University of Eastern Pangasinan,9.75,10.9
+9,2,Cablong,Urdaneta City University,19.12,18.7
+9,3,Cablong,Pangasinan State University - Urdaneta City,16.76,16.1
+9,4,Cablong,Pangasinan State University - Asingan,25.11,26.0
+9,5,Cablong,DMMMSU – South La Union Campus (SLUC),34.85,41.2
+9,6,Cablong,DMMMSU – Mid La Union Campus (MLUC),66.64,85.4
+9,7,Cablong,Benguet State University - La Trinidad,68.39,94.8
+9,8,Cablong,Central Luzon State University,89.31,84.3
+9,9,Cablong,Tarlac State University - Tarlac,78.99,68.5
+9,10,Cablong,Pangasinan State University - Lingayen,42.05,68.8
+9,11,Cablong,Pangasinan State University - Bayambang,48.18,58.5
+9,12,Cablong,Saint Louis University - Baguio,64.09,86.6
+9,13,Cablong,University of the Philippines - Baguio,44.78,54.5
+9,14,Cablong,University of Pangasinan - PHINMA,25.1,42.6
+9,15,Cablong,University of the Philippines - Diliman,199.58,166.6
+9,16,Cablong,University of the Philippines - Manila,201.21,170.2
+9,17,Cablong,Univeristy of the Philippines - Open University,199.01,165.2
+9,18,Cablong,Polytechnic University of the Philippines - Manila,200.1,166.5
+9,19,Cablong,Lyceum-Northwestern University,27.02,46.8
+9,20,Cablong,Pangasinan Polytechnic College,42.31,69.1
+10,1,Casanfernandoan,University of Eastern Pangasinan,17.07,21.3
+10,2,Casanfernandoan,Urdaneta City University,27.35,28.5
+10,3,Casanfernandoan,Pangasinan State University - Urdaneta City,24.99,25.9
+10,4,Casanfernandoan,Pangasinan State University - Asingan,33.34,35.8
+10,5,Casanfernandoan,DMMMSU – South La Union Campus (SLUC),38.55,47.8
+10,6,Casanfernandoan,DMMMSU – Mid La Union Campus (MLUC),70.33,91.9
+10,7,Casanfernandoan,Benguet State University - La Trinidad,72.08,101.4
+10,8,Casanfernandoan,Central Luzon State University,96.05,91.2
+10,9,Casanfernandoan,Tarlac State University - Tarlac,85.74,75.4
+10,10,Casanfernandoan,Pangasinan State University - Lingayen,37.71,59.0
+10,11,Casanfernandoan,Pangasinan State University - Bayambang,44.84,61.0
+10,12,Casanfernandoan,Saint Louis University - Baguio,67.78,93.1
+10,13,Casanfernandoan,University of the Philippines - Baguio,48.47,61.0
+10,14,Casanfernandoan,University of Pangasinan - PHINMA,20.76,32.8
+10,15,Casanfernandoan,University of the Philippines - Diliman,206.32,173.6
+10,16,Casanfernandoan,University of the Philippines - Manila,207.95,177.2
+10,17,Casanfernandoan,Univeristy of the Philippines - Open University,205.75,172.1
+10,18,Casanfernandoan,Polytechnic University of the Philippines - Manila,206.84,173.5
+10,19,Casanfernandoan,Lyceum-Northwestern University,22.68,37.0
+10,20,Casanfernandoan,Pangasinan Polytechnic College,37.97,59.2
+11,1,Castaño,University of Eastern Pangasinan,17.08,23.2
+11,2,Castaño,Urdaneta City University,27.36,30.4
+11,3,Castaño,Pangasinan State University - Urdaneta City,25.0,27.8
+11,4,Castaño,Pangasinan State University - Asingan,33.34,37.7
+11,5,Castaño,DMMMSU – South La Union Campus (SLUC),38.55,49.7
+11,6,Castaño,DMMMSU – Mid La Union Campus (MLUC),70.34,93.8
+11,7,Castaño,Benguet State University - La Trinidad,72.08,103.3
+11,8,Castaño,Central Luzon State University,96.06,93.1
+11,9,Castaño,Tarlac State University - Tarlac,85.74,77.3
+11,10,Castaño,Pangasinan State University - Lingayen,38.09,62.8
+11,11,Castaño,Pangasinan State University - Bayambang,45.22,64.9
+11,12,Castaño,Saint Louis University - Baguio,67.78,95.0
+11,13,Castaño,University of the Philippines - Baguio,48.48,62.9
+11,14,Castaño,University of Pangasinan - PHINMA,21.14,36.6
+11,15,Castaño,University of the Philippines - Diliman,206.33,175.5
+11,16,Castaño,University of the Philippines - Manila,207.95,179.1
+11,17,Castaño,Univeristy of the Philippines - Open University,205.76,174.0
+11,18,Castaño,Polytechnic University of the Philippines - Manila,206.85,175.4
+11,19,Castaño,Lyceum-Northwestern University,23.06,40.8
+11,20,Castaño,Pangasinan Polytechnic College,38.35,63.0
+12,1,Dilan,University of Eastern Pangasinan,11.98,15.6
+12,2,Dilan,Urdaneta City University,20.37,22.1
+12,3,Dilan,Pangasinan State University - Urdaneta City,18.01,19.5
+12,4,Dilan,Pangasinan State University - Asingan,26.36,29.4
+12,5,Dilan,DMMMSU – South La Union Campus (SLUC),40.02,50.9
+12,6,Dilan,DMMMSU – Mid La Union Campus (MLUC),71.8,95.1
+12,7,Dilan,Benguet State University - La Trinidad,73.55,104.5
+12,8,Dilan,Central Luzon State University,88.88,86.1
+12,9,Dilan,Tarlac State University - Tarlac,78.57,70.3
+12,10,Dilan,Pangasinan State University - Lingayen,37.76,60.0
+12,11,Dilan,Pangasinan State University - Bayambang,42.3,61.6
+12,12,Dilan,Saint Louis University - Baguio,69.25,96.3
+12,13,Dilan,University of the Philippines - Baguio,49.95,64.2
+12,14,Dilan,University of Pangasinan - PHINMA,20.8,33.8
+12,15,Dilan,University of the Philippines - Diliman,199.15,168.4
+12,16,Dilan,University of the Philippines - Manila,200.78,172.1
+12,17,Dilan,Univeristy of the Philippines - Open University,198.58,167.0
+12,18,Dilan,Polytechnic University of the Philippines - Manila,199.67,168.4
+12,19,Dilan,Lyceum-Northwestern University,22.73,38.0
+12,20,Dilan,Pangasinan Polytechnic College,38.02,60.2
+13,1,Don Benito,University of Eastern Pangasinan,16.23,21.6
+13,2,Don Benito,Urdaneta City University,25.63,27.7
+13,3,Don Benito,Pangasinan State University - Urdaneta City,23.27,25.1
+13,4,Don Benito,Pangasinan State University - Asingan,31.62,35.0
+13,5,Don Benito,DMMMSU – South La Union Campus (SLUC),33.6,44.3
+13,6,Don Benito,DMMMSU – Mid La Union Campus (MLUC),65.38,88.4
+13,7,Don Benito,Benguet State University - La Trinidad,67.36,99.1
+13,8,Don Benito,Central Luzon State University,94.33,90.5
+13,9,Don Benito,Tarlac State University - Tarlac,84.02,74.7
+13,10,Don Benito,Pangasinan State University - Lingayen,41.29,65.4
+13,11,Don Benito,Pangasinan State University - Bayambang,48.42,67.5
+13,12,Don Benito,Saint Louis University - Baguio,63.06,90.8
+13,13,Don Benito,University of the Philippines - Baguio,43.52,57.5
+13,14,Don Benito,University of Pangasinan - PHINMA,24.34,39.2
+13,15,Don Benito,University of the Philippines - Diliman,204.6,172.8
+13,16,Don Benito,University of the Philippines - Manila,206.23,176.4
+13,17,Don Benito,Univeristy of the Philippines - Open University,204.03,171.3
+13,18,Don Benito,Polytechnic University of the Philippines - Manila,205.12,172.7
+13,19,Don Benito,Lyceum-Northwestern University,26.27,43.4
+13,20,Don Benito,Pangasinan Polytechnic College,41.55,65.6
+14,1,Haway,University of Eastern Pangasinan,16.51,24.7
+14,2,Haway,Urdaneta City University,24.9,31.3
+14,3,Haway,Pangasinan State University - Urdaneta City,22.54,28.7
+14,4,Haway,Pangasinan State University - Asingan,30.89,38.6
+14,5,Haway,DMMMSU – South La Union Campus (SLUC),40.68,52.3
+14,6,Haway,DMMMSU – Mid La Union Campus (MLUC),72.46,96.5
+14,7,Haway,Benguet State University - La Trinidad,74.21,105.9
+14,8,Haway,Central Luzon State University,93.41,95.3
+14,9,Haway,Tarlac State University - Tarlac,83.1,79.5
+14,10,Haway,Pangasinan State University - Lingayen,36.42,59.3
+14,11,Haway,Pangasinan State University - Bayambang,43.55,61.4
+14,12,Haway,Saint Louis University - Baguio,69.91,97.7
+14,13,Haway,University of the Philippines - Baguio,50.61,65.5
+14,14,Haway,University of Pangasinan - PHINMA,19.47,33.1
+14,15,Haway,University of the Philippines - Diliman,203.68,177.6
+14,16,Haway,University of the Philippines - Manila,205.31,181.2
+14,17,Haway,Univeristy of the Philippines - Open University,203.11,176.1
+14,18,Haway,Polytechnic University of the Philippines - Manila,204.2,177.5
+14,19,Haway,Lyceum-Northwestern University,21.39,37.3
+14,20,Haway,Pangasinan Polytechnic College,36.68,59.6
+15,1,Imbalbalatong,University of Eastern Pangasinan,9.62,11.5
+15,2,Imbalbalatong,Urdaneta City University,18.99,19.3
+15,3,Imbalbalatong,Pangasinan State University - Urdaneta City,16.63,16.7
+15,4,Imbalbalatong,Pangasinan State University - Asingan,24.97,26.6
+15,5,Imbalbalatong,DMMMSU – South La Union Campus (SLUC),36.54,43.8
+15,6,Imbalbalatong,DMMMSU – Mid La Union Campus (MLUC),68.32,87.9
+15,7,Imbalbalatong,Benguet State University - La Trinidad,70.07,97.3
+15,8,Imbalbalatong,Central Luzon State University,89.17,84.9
+15,9,Imbalbalatong,Tarlac State University - Tarlac,78.86,69.1
+15,10,Imbalbalatong,Pangasinan State University - Lingayen,59.4,69.7
+15,11,Imbalbalatong,Pangasinan State University - Bayambang,48.05,59.1
+15,12,Imbalbalatong,Saint Louis University - Baguio,65.77,89.1
+15,13,Imbalbalatong,University of the Philippines - Baguio,46.47,57.0
+15,14,Imbalbalatong,University of Pangasinan - PHINMA,26.14,43.9
+15,15,Imbalbalatong,University of the Philippines - Diliman,199.45,167.2
+15,16,Imbalbalatong,University of the Philippines - Manila,201.07,170.8
+15,17,Imbalbalatong,Univeristy of the Philippines - Open University,198.87,165.8
+15,18,Imbalbalatong,Polytechnic University of the Philippines - Manila,199.97,167.1
+15,19,Imbalbalatong,Lyceum-Northwestern University,28.06,48.1
+15,20,Imbalbalatong,Pangasinan Polytechnic College,59.66,69.9
+16,1,Inoman,University of Eastern Pangasinan,13.86,17.6
+16,2,Inoman,Urdaneta City University,24.24,24.6
+16,3,Inoman,Pangasinan State University - Urdaneta City,21.88,22.0
+16,4,Inoman,Pangasinan State University - Asingan,30.23,31.9
+16,5,Inoman,DMMMSU – South La Union Campus (SLUC),35.43,44.0
+16,6,Inoman,DMMMSU – Mid La Union Campus (MLUC),67.22,88.1
+16,7,Inoman,Benguet State University - La Trinidad,68.97,97.5
+16,8,Inoman,Central Luzon State University,92.94,87.4
+16,9,Inoman,Tarlac State University - Tarlac,82.62,71.6
+16,10,Inoman,Pangasinan State University - Lingayen,45.6,72.1
+16,11,Inoman,Pangasinan State University - Bayambang,53.3,64.4
+16,12,Inoman,Saint Louis University - Baguio,64.67,89.3
+16,13,Inoman,University of the Philippines - Baguio,45.36,57.2
+16,14,Inoman,University of Pangasinan - PHINMA,28.65,45.9
+16,15,Inoman,University of the Philippines - Diliman,203.21,169.7
+16,16,Inoman,University of the Philippines - Manila,204.84,173.3
+16,17,Inoman,Univeristy of the Philippines - Open University,202.64,168.3
+16,18,Inoman,Polytechnic University of the Philippines - Manila,203.73,169.6
+16,19,Inoman,Lyceum-Northwestern University,30.58,50.1
+16,20,Inoman,Pangasinan Polytechnic College,45.86,72.3
+17,1,Laoac,University of Eastern Pangasinan,14.1,17.6
+17,2,Laoac,Urdaneta City University,23.49,23.7
+17,3,Laoac,Pangasinan State University - Urdaneta City,21.13,21.1
+17,4,Laoac,Pangasinan State University - Asingan,29.48,31.0
+17,5,Laoac,DMMMSU – South La Union Campus (SLUC),33.27,41.9
+17,6,Laoac,DMMMSU – Mid La Union Campus (MLUC),65.05,86.1
+17,7,Laoac,Benguet State University - La Trinidad,68.22,96.7
+17,8,Laoac,Central Luzon State University,92.19,86.5
+17,9,Laoac,Tarlac State University - Tarlac,81.88,70.7
+17,10,Laoac,Pangasinan State University - Lingayen,42.81,69.1
+17,11,Laoac,Pangasinan State University - Bayambang,52.55,63.5
+17,12,Laoac,Saint Louis University - Baguio,63.92,88.4
+17,13,Laoac,University of the Philippines - Baguio,43.19,55.1
+17,14,Laoac,University of Pangasinan - PHINMA,25.86,42.9
+17,15,Laoac,University of the Philippines - Diliman,202.47,168.8
+17,16,Laoac,University of the Philippines - Manila,204.09,172.4
+17,17,Laoac,Univeristy of the Philippines - Open University,201.89,167.4
+17,18,Laoac,Polytechnic University of the Philippines - Manila,202.99,168.7
+17,19,Laoac,Lyceum-Northwestern University,27.79,47.1
+17,20,Laoac,Pangasinan Polytechnic College,43.07,69.3
+18,1,Maambal,University of Eastern Pangasinan,15.24,21.0
+18,2,Maambal,Urdaneta City University,23.62,27.6
+18,3,Maambal,Pangasinan State University - Urdaneta City,21.26,25.0
+18,4,Maambal,Pangasinan State University - Asingan,29.61,34.8
+18,5,Maambal,DMMMSU – South La Union Campus (SLUC),41.44,53.5
+18,6,Maambal,DMMMSU – Mid La Union Campus (MLUC),73.22,97.7
+18,7,Maambal,Benguet State University - La Trinidad,75.91,109.0
+18,8,Maambal,Central Luzon State University,92.13,91.5
+18,9,Maambal,Tarlac State University - Tarlac,81.82,75.7
+18,10,Maambal,Pangasinan State University - Lingayen,34.52,54.7
+18,11,Maambal,Pangasinan State University - Bayambang,41.65,56.8
+18,12,Maambal,Saint Louis University - Baguio,71.61,100.7
+18,13,Maambal,University of the Philippines - Baguio,51.36,66.7
+18,14,Maambal,University of Pangasinan - PHINMA,17.57,28.5
+18,15,Maambal,University of the Philippines - Diliman,202.4,173.9
+18,16,Maambal,University of the Philippines - Manila,204.03,177.5
+18,17,Maambal,Univeristy of the Philippines - Open University,201.83,172.4
+18,18,Maambal,Polytechnic University of the Philippines - Manila,202.92,173.8
+18,19,Maambal,Lyceum-Northwestern University,19.49,32.7
+18,20,Maambal,Pangasinan Polytechnic College,34.78,54.9
+19,1,Malasin,University of Eastern Pangasinan,12.38,16.6
+19,2,Malasin,Urdaneta City University,21.78,23.8
+19,3,Malasin,Pangasinan State University - Urdaneta City,19.42,21.2
+19,4,Malasin,Pangasinan State University - Asingan,27.77,31.1
+19,5,Malasin,DMMMSU – South La Union Campus (SLUC),38.57,48.2
+19,6,Malasin,DMMMSU – Mid La Union Campus (MLUC),70.36,92.4
+19,7,Malasin,Benguet State University - La Trinidad,72.1,101.8
+19,8,Malasin,Central Luzon State University,90.29,87.8
+19,9,Malasin,Tarlac State University - Tarlac,79.97,72.0
+19,10,Malasin,Pangasinan State University - Lingayen,38.31,61.7
+19,11,Malasin,Pangasinan State University - Bayambang,50.84,63.6
+19,12,Malasin,Saint Louis University - Baguio,67.81,93.6
+19,13,Malasin,University of the Philippines - Baguio,48.5,61.4
+19,14,Malasin,University of Pangasinan - PHINMA,21.36,35.5
+19,15,Malasin,University of the Philippines - Diliman,200.56,170.1
+19,16,Malasin,University of the Philippines - Manila,202.19,173.7
+19,17,Malasin,Univeristy of the Philippines - Open University,199.99,168.7
+19,18,Malasin,Polytechnic University of the Philippines - Manila,201.08,170.0
+19,19,Malasin,Lyceum-Northwestern University,23.29,39.7
+19,20,Malasin,Pangasinan Polytechnic College,38.57,61.9
+20,1,Malokiat,University of Eastern Pangasinan,15.71,19.6
+20,2,Malokiat,Urdaneta City University,25.98,26.7
+20,3,Malokiat,Pangasinan State University - Urdaneta City,23.62,24.1
+20,4,Malokiat,Pangasinan State University - Asingan,31.97,34.0
+20,5,Malokiat,DMMMSU – South La Union Campus (SLUC),37.18,46.0
+20,6,Malokiat,DMMMSU – Mid La Union Campus (MLUC),68.96,90.2
+20,7,Malokiat,Benguet State University - La Trinidad,70.71,99.6
+20,8,Malokiat,Central Luzon State University,94.68,89.5
+20,9,Malokiat,Tarlac State University - Tarlac,84.37,73.7
+20,10,Malokiat,Pangasinan State University - Lingayen,39.86,62.7
+20,11,Malokiat,Pangasinan State University - Bayambang,46.99,64.8
+20,12,Malokiat,Saint Louis University - Baguio,66.41,91.4
+20,13,Malokiat,University of the Philippines - Baguio,47.11,59.3
+20,14,Malokiat,University of Pangasinan - PHINMA,22.91,36.5
+20,15,Malokiat,University of the Philippines - Diliman,204.96,171.8
+20,16,Malokiat,University of the Philippines - Manila,206.58,175.4
+20,17,Malokiat,Univeristy of the Philippines - Open University,204.38,170.3
+20,18,Malokiat,Polytechnic University of the Philippines - Manila,205.48,171.7
+20,19,Malokiat,Lyceum-Northwestern University,24.83,40.7
+20,20,Malokiat,Pangasinan Polytechnic College,40.12,62.9
+21,1,Manaol,University of Eastern Pangasinan,12.76,16.3
+21,2,Manaol,Urdaneta City University,22.13,24.1
+21,3,Manaol,Pangasinan State University - Urdaneta City,19.77,21.5
+21,4,Manaol,Pangasinan State University - Asingan,28.12,31.4
+21,5,Manaol,DMMMSU – South La Union Campus (SLUC),36.18,44.1
+21,6,Manaol,DMMMSU – Mid La Union Campus (MLUC),67.96,88.2
+21,7,Manaol,Benguet State University - La Trinidad,69.71,97.7
+21,8,Manaol,Central Luzon State University,93.68,87.5
+21,9,Manaol,Tarlac State University - Tarlac,83.37,71.7
+21,10,Manaol,Pangasinan State University - Lingayen,41.94,65.5
+21,11,Manaol,Pangasinan State University - Bayambang,51.19,63.9
+21,12,Manaol,Saint Louis University - Baguio,65.41,89.4
+21,13,Manaol,University of the Philippines - Baguio,46.11,57.3
+21,14,Manaol,University of Pangasinan - PHINMA,24.98,39.3
+21,15,Manaol,University of the Philippines - Diliman,203.96,169.8
+21,16,Manaol,University of the Philippines - Manila,205.58,173.5
+21,17,Manaol,Univeristy of the Philippines - Open University,203.38,168.4
+21,18,Manaol,Polytechnic University of the Philippines - Manila,204.47,169.8
+21,19,Manaol,Lyceum-Northwestern University,26.91,43.5
+21,20,Manaol,Pangasinan Polytechnic College,42.2,65.7
+22,1,Nama,University of Eastern Pangasinan,12.1,15.5
+22,2,Nama,Urdaneta City University,23.64,22.8
+22,3,Nama,Pangasinan State University - Urdaneta City,21.28,20.2
+22,4,Nama,Pangasinan State University - Asingan,29.63,30.1
+22,5,Nama,DMMMSU – South La Union Campus (SLUC),34.84,42.1
+22,6,Nama,DMMMSU – Mid La Union Campus (MLUC),66.62,86.2
+22,7,Nama,Benguet State University - La Trinidad,68.37,95.7
+22,8,Nama,Central Luzon State University,92.34,85.5
+22,9,Nama,Tarlac State University - Tarlac,82.03,69.7
+22,10,Nama,Pangasinan State University - Lingayen,45.01,70.2
+22,11,Nama,Pangasinan State University - Bayambang,52.7,62.6
+22,12,Nama,Saint Louis University - Baguio,64.07,87.4
+22,13,Nama,University of the Philippines - Baguio,44.76,55.3
+22,14,Nama,University of Pangasinan - PHINMA,28.05,44.0
+22,15,Nama,University of the Philippines - Diliman,202.61,167.9
+22,16,Nama,University of the Philippines - Manila,204.24,171.5
+22,17,Nama,Univeristy of the Philippines - Open University,202.04,166.4
+22,18,Nama,Polytechnic University of the Philippines - Manila,203.13,167.8
+22,19,Nama,Lyceum-Northwestern University,29.98,48.2
+22,20,Nama,Pangasinan Polytechnic College,45.27,70.5
+23,1,Nantangalan,University of Eastern Pangasinan,14.21,19.1
+23,2,Nantangalan,Urdaneta City University,22.6,25.6
+23,3,Nantangalan,Pangasinan State University - Urdaneta City,20.24,23.0
+23,4,Nantangalan,Pangasinan State University - Asingan,28.58,32.9
+23,5,Nantangalan,DMMMSU – South La Union Campus (SLUC),41.36,53.5
+23,6,Nantangalan,DMMMSU – Mid La Union Campus (MLUC),73.14,97.6
+23,7,Nantangalan,Benguet State University - La Trinidad,74.89,107.1
+23,8,Nantangalan,Central Luzon State University,91.11,89.6
+23,9,Nantangalan,Tarlac State University - Tarlac,80.79,73.8
+23,10,Nantangalan,Pangasinan State University - Lingayen,35.54,56.6
+23,11,Nantangalan,Pangasinan State University - Bayambang,42.67,58.7
+23,12,Nantangalan,Saint Louis University - Baguio,70.59,98.8
+23,13,Nantangalan,University of the Philippines - Baguio,51.28,66.7
+23,14,Nantangalan,University of Pangasinan - PHINMA,18.58,30.4
+23,15,Nantangalan,University of the Philippines - Diliman,201.38,171.9
+23,16,Nantangalan,University of the Philippines - Manila,203.0,175.6
+23,17,Nantangalan,Univeristy of the Philippines - Open University,200.81,170.5
+23,18,Nantangalan,Polytechnic University of the Philippines - Manila,201.9,171.9
+23,19,Nantangalan,Lyceum-Northwestern University,20.51,34.6
+23,20,Nantangalan,Pangasinan Polytechnic College,35.8,56.8
+24,1,Palacpalac,University of Eastern Pangasinan,11.18,12.5
+24,2,Palacpalac,Urdaneta City University,22.22,20.3
+24,3,Palacpalac,Pangasinan State University - Urdaneta City,19.86,17.7
+24,4,Palacpalac,Pangasinan State University - Asingan,28.21,27.6
+24,5,Palacpalac,DMMMSU – South La Union Campus (SLUC),33.42,39.6
+24,6,Palacpalac,DMMMSU – Mid La Union Campus (MLUC),65.2,83.7
+24,7,Palacpalac,Benguet State University - La Trinidad,66.95,93.2
+24,8,Palacpalac,Central Luzon State University,90.92,83.0
+24,9,Palacpalac,Tarlac State University - Tarlac,80.61,67.2
+24,10,Palacpalac,Pangasinan State University - Lingayen,43.59,67.7
+24,11,Palacpalac,Pangasinan State University - Bayambang,51.28,60.1
+24,12,Palacpalac,Saint Louis University - Baguio,62.65,84.9
+24,13,Palacpalac,University of the Philippines - Baguio,43.35,52.8
+24,14,Palacpalac,University of Pangasinan - PHINMA,26.64,41.5
+24,15,Palacpalac,University of the Philippines - Diliman,201.2,165.4
+24,16,Palacpalac,University of the Philippines - Manila,202.82,169.0
+24,17,Palacpalac,Univeristy of the Philippines - Open University,200.62,163.9
+24,18,Palacpalac,Polytechnic University of the Philippines - Manila,201.72,165.3
+24,19,Palacpalac,Lyceum-Northwestern University,28.56,45.7
+24,20,Palacpalac,Pangasinan Polytechnic College,43.85,68.0
+25,1,Palguyod,University of Eastern Pangasinan,12.95,15.0
+25,2,Palguyod,Urdaneta City University,23.22,22.2
+25,3,Palguyod,Pangasinan State University - Urdaneta City,20.86,19.6
+25,4,Palguyod,Pangasinan State University - Asingan,29.21,29.5
+25,5,Palguyod,DMMMSU – South La Union Campus (SLUC),34.42,41.5
+25,6,Palguyod,DMMMSU – Mid La Union Campus (MLUC),66.2,85.7
+25,7,Palguyod,Benguet State University - La Trinidad,67.95,95.1
+25,8,Palguyod,Central Luzon State University,91.92,84.9
+25,9,Palguyod,Tarlac State University - Tarlac,81.61,69.2
+25,10,Palguyod,Pangasinan State University - Lingayen,41.83,65.3
+25,11,Palguyod,Pangasinan State University - Bayambang,52.28,62.0
+25,12,Palguyod,Saint Louis University - Baguio,63.65,86.9
+25,13,Palguyod,University of the Philippines - Baguio,44.35,54.7
+25,14,Palguyod,University of Pangasinan - PHINMA,24.87,39.1
+25,15,Palguyod,University of the Philippines - Diliman,202.2,167.3
+25,16,Palguyod,University of the Philippines - Manila,203.82,170.9
+25,17,Palguyod,Univeristy of the Philippines - Open University,201.63,165.8
+25,18,Palguyod,Polytechnic University of the Philippines - Manila,202.72,167.2
+25,19,Palguyod,Lyceum-Northwestern University,26.8,43.3
+25,20,Palguyod,Pangasinan Polytechnic College,42.09,65.5
+26,1,Poblacion I,University of Eastern Pangasinan,9.83,11.4
+26,2,Poblacion I,Urdaneta City University,19.2,19.2
+26,3,Poblacion I,Pangasinan State University - Urdaneta City,16.84,16.6
+26,4,Poblacion I,Pangasinan State University - Asingan,25.19,26.5
+26,5,Poblacion I,DMMMSU – South La Union Campus (SLUC),35.63,42.7
+26,6,Poblacion I,DMMMSU – Mid La Union Campus (MLUC),67.41,86.9
+26,7,Poblacion I,Benguet State University - La Trinidad,69.16,96.3
+26,8,Poblacion I,Central Luzon State University,89.38,84.8
+26,9,Poblacion I,Tarlac State University - Tarlac,79.07,69.0
+26,10,Poblacion I,Pangasinan State University - Lingayen,41.59,67.8
+26,11,Poblacion I,Pangasinan State University - Bayambang,48.26,59.0
+26,12,Poblacion I,Saint Louis University - Baguio,64.86,88.1
+26,13,Poblacion I,University of the Philippines - Baguio,45.56,55.9
+26,14,Poblacion I,University of Pangasinan - PHINMA,24.63,41.6
+26,15,Poblacion I,University of the Philippines - Diliman,199.66,167.1
+26,16,Poblacion I,University of the Philippines - Manila,201.28,170.7
+26,17,Poblacion I,Univeristy of the Philippines - Open University,199.09,165.7
+26,18,Poblacion I,Polytechnic University of the Philippines - Manila,200.18,167.0
+26,19,Poblacion I,Lyceum-Northwestern University,26.56,45.8
+26,20,Poblacion I,Pangasinan Polytechnic College,41.85,68.0
+27,1,Poblacion II,University of Eastern Pangasinan,9.79,11.7
+27,2,Poblacion II,Urdaneta City University,19.16,19.5
+27,3,Poblacion II,Pangasinan State University - Urdaneta City,16.8,16.9
+27,4,Poblacion II,Pangasinan State University - Asingan,25.15,26.8
+27,5,Poblacion II,DMMMSU – South La Union Campus (SLUC),35.95,43.3
+27,6,Poblacion II,DMMMSU – Mid La Union Campus (MLUC),67.74,87.5
+27,7,Poblacion II,Benguet State University - La Trinidad,69.48,96.9
+27,8,Poblacion II,Central Luzon State University,89.35,85.1
+27,9,Poblacion II,Tarlac State University - Tarlac,79.04,69.3
+27,10,Poblacion II,Pangasinan State University - Lingayen,41.2,67.2
+27,11,Poblacion II,Pangasinan State University - Bayambang,48.22,59.3
+27,12,Poblacion II,Saint Louis University - Baguio,65.18,88.7
+27,13,Poblacion II,University of the Philippines - Baguio,45.88,56.5
+27,14,Poblacion II,University of Pangasinan - PHINMA,24.25,41.0
+27,15,Poblacion II,University of the Philippines - Diliman,199.62,167.4
+27,16,Poblacion II,University of the Philippines - Manila,201.25,171.0
+27,17,Poblacion II,Univeristy of the Philippines - Open University,199.05,166.0
+27,18,Poblacion II,Polytechnic University of the Philippines - Manila,200.14,167.3
+27,19,Poblacion II,Lyceum-Northwestern University,26.17,45.2
+27,20,Poblacion II,Pangasinan Polytechnic College,41.46,67.4
+28,1,Poblacion III,University of Eastern Pangasinan,9.56,10.8
+28,2,Poblacion III,Urdaneta City University,18.93,18.6
+28,3,Poblacion III,Pangasinan State University - Urdaneta City,16.57,16.0
+28,4,Poblacion III,Pangasinan State University - Asingan,24.91,25.9
+28,5,Poblacion III,DMMMSU – South La Union Campus (SLUC),35.67,42.4
+28,6,Poblacion III,DMMMSU – Mid La Union Campus (MLUC),67.46,86.5
+28,7,Poblacion III,Benguet State University - La Trinidad,69.2,96.0
+28,8,Poblacion III,Central Luzon State University,89.11,84.2
+28,9,Poblacion III,Tarlac State University - Tarlac,78.8,68.4
+28,10,Poblacion III,Pangasinan State University - Lingayen,41.58,67.7
+28,11,Poblacion III,Pangasinan State University - Bayambang,47.99,58.4
+28,12,Poblacion III,Saint Louis University - Baguio,64.9,87.7
+28,13,Poblacion III,University of the Philippines - Baguio,45.6,55.6
+28,14,Poblacion III,University of Pangasinan - PHINMA,24.63,41.5
+28,15,Poblacion III,University of the Philippines - Diliman,199.39,166.5
+28,16,Poblacion III,University of the Philippines - Manila,201.01,170.1
+28,17,Poblacion III,Univeristy of the Philippines - Open University,198.82,165.1
+28,18,Poblacion III,Polytechnic University of the Philippines - Manila,199.91,166.4
+28,19,Poblacion III,Lyceum-Northwestern University,26.56,45.7
+28,20,Poblacion III,Pangasinan Polytechnic College,41.84,68.0
+29,1,Poblacion IV,University of Eastern Pangasinan,9.41,11.1
+29,2,Poblacion IV,Urdaneta City University,18.78,18.9
+29,3,Poblacion IV,Pangasinan State University - Urdaneta City,16.42,16.3
+29,4,Poblacion IV,Pangasinan State University - Asingan,24.76,26.2
+29,5,Poblacion IV,DMMMSU – South La Union Campus (SLUC),35.97,42.9
+29,6,Poblacion IV,DMMMSU – Mid La Union Campus (MLUC),67.75,87.1
+29,7,Poblacion IV,Benguet State University - La Trinidad,69.5,96.5
+29,8,Poblacion IV,Central Luzon State University,88.96,84.5
+29,9,Poblacion IV,Tarlac State University - Tarlac,78.65,68.7
+29,10,Poblacion IV,Pangasinan State University - Lingayen,41.29,67.2
+29,11,Poblacion IV,Pangasinan State University - Bayambang,47.84,58.7
+29,12,Poblacion IV,Saint Louis University - Baguio,65.2,88.3
+29,13,Poblacion IV,University of the Philippines - Baguio,45.89,56.1
+29,14,Poblacion IV,University of Pangasinan - PHINMA,24.33,41.1
+29,15,Poblacion IV,University of the Philippines - Diliman,199.24,166.9
+29,16,Poblacion IV,University of the Philippines - Manila,200.86,170.5
+29,17,Poblacion IV,Univeristy of the Philippines - Open University,198.66,165.4
+29,18,Poblacion IV,Polytechnic University of the Philippines - Manila,199.76,166.8
+29,19,Poblacion IV,Lyceum-Northwestern University,26.26,45.2
+29,20,Poblacion IV,Pangasinan Polytechnic College,41.55,67.5
+30,1,Rosario,University of Eastern Pangasinan,5.71,6.0
+30,2,Rosario,Urdaneta City University,15.08,13.8
+30,3,Rosario,Pangasinan State University - Urdaneta City,12.72,11.2
+30,4,Rosario,Pangasinan State University - Asingan,21.06,21.1
+30,5,Rosario,DMMMSU – South La Union Campus (SLUC),38.9,46.1
+30,6,Rosario,DMMMSU – Mid La Union Campus (MLUC),70.68,90.3
+30,7,Rosario,Benguet State University - La Trinidad,72.43,99.7
+30,8,Rosario,Central Luzon State University,85.26,79.4
+30,9,Rosario,Tarlac State University - Tarlac,74.95,63.6
+30,10,Rosario,Pangasinan State University - Lingayen,55.49,64.2
+30,11,Rosario,Pangasinan State University - Bayambang,44.14,53.6
+30,12,Rosario,Saint Louis University - Baguio,68.13,91.5
+30,13,Rosario,University of the Philippines - Baguio,48.82,59.4
+30,14,Rosario,University of Pangasinan - PHINMA,41.81,43.2
+30,15,Rosario,University of the Philippines - Diliman,195.54,161.7
+30,16,Rosario,University of the Philippines - Manila,197.16,165.3
+30,17,Rosario,Univeristy of the Philippines - Open University,194.97,160.3
+30,18,Rosario,Polytechnic University of the Philippines - Manila,196.06,161.7
+30,19,Rosario,Lyceum-Northwestern University,43.58,45.8
+30,20,Rosario,Pangasinan Polytechnic College,55.75,64.5
+31,1,Sugcong,University of Eastern Pangasinan,12.86,16.7
+31,2,Sugcong,Urdaneta City University,22.23,24.6
+31,3,Sugcong,Pangasinan State University - Urdaneta City,19.86,22.0
+31,4,Sugcong,Pangasinan State University - Asingan,28.21,31.9
+31,5,Sugcong,DMMMSU – South La Union Campus (SLUC),34.2,43.3
+31,6,Sugcong,DMMMSU – Mid La Union Campus (MLUC),65.98,87.4
+31,7,Sugcong,Benguet State University - La Trinidad,67.96,98.1
+31,8,Sugcong,Central Luzon State University,92.41,90.2
+31,9,Sugcong,Tarlac State University - Tarlac,82.1,74.4
+31,10,Sugcong,Pangasinan State University - Lingayen,62.64,75.0
+31,11,Sugcong,Pangasinan State University - Bayambang,51.29,64.4
+31,12,Sugcong,Saint Louis University - Baguio,63.66,89.8
+31,13,Sugcong,University of the Philippines - Baguio,44.13,56.5
+31,14,Sugcong,University of Pangasinan - PHINMA,30.74,49.1
+31,15,Sugcong,University of the Philippines - Diliman,202.69,172.5
+31,16,Sugcong,University of the Philippines - Manila,204.31,176.1
+31,17,Sugcong,Univeristy of the Philippines - Open University,202.11,171.0
+31,18,Sugcong,Polytechnic University of the Philippines - Manila,203.21,172.4
+31,19,Sugcong,Lyceum-Northwestern University,32.67,53.3
+31,20,Sugcong,Pangasinan Polytechnic College,62.9,75.2
+32,1,Talogtog,University of Eastern Pangasinan,10.74,13.5
+32,2,Talogtog,Urdaneta City University,20.11,21.4
+32,3,Talogtog,Pangasinan State University - Urdaneta City,17.75,18.8
+32,4,Talogtog,Pangasinan State University - Asingan,26.1,28.6
+32,5,Talogtog,DMMMSU – South La Union Campus (SLUC),36.93,45.2
+32,6,Talogtog,DMMMSU – Mid La Union Campus (MLUC),68.72,89.3
+32,7,Talogtog,Benguet State University - La Trinidad,70.46,98.8
+32,8,Talogtog,Central Luzon State University,90.3,86.9
+32,9,Talogtog,Tarlac State University - Tarlac,79.99,71.2
+32,10,Talogtog,Pangasinan State University - Lingayen,39.95,64.8
+32,11,Talogtog,Pangasinan State University - Bayambang,49.17,61.1
+32,12,Talogtog,Saint Louis University - Baguio,66.16,90.5
+32,13,Talogtog,University of the Philippines - Baguio,46.86,58.4
+32,14,Talogtog,University of Pangasinan - PHINMA,23.0,38.6
+32,15,Talogtog,University of the Philippines - Diliman,200.57,169.3
+32,16,Talogtog,University of the Philippines - Manila,202.2,172.9
+32,17,Talogtog,Univeristy of the Philippines - Open University,200.0,167.8
+32,18,Talogtog,Polytechnic University of the Philippines - Manila,201.09,169.2
+32,19,Talogtog,Lyceum-Northwestern University,24.93,42.8
+32,20,Talogtog,Pangasinan Polytechnic College,40.21,65.0
+33,1,Tulnac,University of Eastern Pangasinan,12.27,15.5
+33,2,Tulnac,Urdaneta City University,21.64,23.3
+33,3,Tulnac,Pangasinan State University - Urdaneta City,19.28,20.7
+33,4,Tulnac,Pangasinan State University - Asingan,27.63,30.6
+33,5,Tulnac,DMMMSU – South La Union Campus (SLUC),38.46,47.0
+33,6,Tulnac,DMMMSU – Mid La Union Campus (MLUC),70.24,91.2
+33,7,Tulnac,Benguet State University - La Trinidad,71.99,100.6
+33,8,Tulnac,Central Luzon State University,91.83,88.9
+33,9,Tulnac,Tarlac State University - Tarlac,81.52,73.1
+33,10,Tulnac,Pangasinan State University - Lingayen,40.08,64.3
+33,11,Tulnac,Pangasinan State University - Bayambang,50.7,63.1
+33,12,Tulnac,Saint Louis University - Baguio,67.69,92.4
+33,13,Tulnac,University of the Philippines - Baguio,48.38,60.2
+33,14,Tulnac,University of Pangasinan - PHINMA,23.12,38.2
+33,15,Tulnac,University of the Philippines - Diliman,202.1,171.2
+33,16,Tulnac,University of the Philippines - Manila,203.73,174.8
+33,17,Tulnac,Univeristy of the Philippines - Open University,201.53,169.8
+33,18,Tulnac,Polytechnic University of the Philippines - Manila,202.62,171.1
+33,19,Tulnac,Lyceum-Northwestern University,25.05,42.3
+33,20,Tulnac,Pangasinan Polytechnic College,40.34,64.6
+34,1,Villegas,University of Eastern Pangasinan,10.12,12.5
+34,2,Villegas,Urdaneta City University,19.49,20.3
+34,3,Villegas,Pangasinan State University - Urdaneta City,17.13,17.7
+34,4,Villegas,Pangasinan State University - Asingan,25.48,27.6
+34,5,Villegas,DMMMSU – South La Union Campus (SLUC),37.56,46.1
+34,6,Villegas,DMMMSU – Mid La Union Campus (MLUC),69.34,90.3
+34,7,Villegas,Benguet State University - La Trinidad,71.09,99.7
+34,8,Villegas,Central Luzon State University,89.68,85.9
+34,9,Villegas,Tarlac State University - Tarlac,79.37,70.1
+34,10,Villegas,Pangasinan State University - Lingayen,59.9,70.7
+34,11,Villegas,Pangasinan State University - Bayambang,48.55,60.1
+34,12,Villegas,Saint Louis University - Baguio,66.79,91.5
+34,13,Villegas,University of the Philippines - Baguio,47.48,59.3
+34,14,Villegas,University of Pangasinan - PHINMA,27.76,46.3
+34,15,Villegas,University of the Philippines - Diliman,199.95,168.2
+34,16,Villegas,University of the Philippines - Manila,201.58,171.8
+34,17,Villegas,Univeristy of the Philippines - Open University,199.38,166.8
+34,18,Villegas,Polytechnic University of the Philippines - Manila,200.47,168.1
+34,19,Villegas,Lyceum-Northwestern University,29.69,50.5
+34,20,Villegas,Pangasinan Polytechnic College,60.17,70.9

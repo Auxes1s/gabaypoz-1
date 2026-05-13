@@ -1,0 +1,10 @@
+barangay_id,university_id,total_annual_burden_php,affordability_at_tier_1,affordability_at_tier_2,affordability_at_tier_3,affordability_at_tier_4,affordability_at_tier_5
+1,1,55000,True,True,True,True,True
+1,2,90000,False,True,True,True,True
+1,3,180000,False,False,False,True,True
+2,1,72000,False,True,True,True,True
+2,2,108000,False,False,True,True,True
+2,3,210000,False,False,False,False,True
+3,1,52000,True,True,True,True,True
+3,2,88000,False,True,True,True,True
+3,3,175000,False,False,False,True,True

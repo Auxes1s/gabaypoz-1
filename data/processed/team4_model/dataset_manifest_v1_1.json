@@ -1,0 +1,122 @@
+{
+  "dataset_version": "team4_recommender_v1_1",
+  "created_by": "analysis/team4_model/build_recommender_v1_1_datasets.py",
+  "sources": [
+    "data/raw/barangay_coords.xlsx",
+    "data/raw/Univerisity_coords.xlsx",
+    "data/raw/pozorrubio_commute_matrix.xlsx",
+    "data/raw/program_list_FINAL.xlsx",
+    "data/processed/team3_eda/barangay_university_economic_burden.parquet",
+    "data/processed/team3_eda/heap_occupation_by_field.parquet"
+  ],
+  "validation": {
+    "barangay_count": 34,
+    "university_count": 20,
+    "expected_barangay_university_pairs": 680,
+    "commute_pair_count": 680,
+    "economic_burden_pair_count": 680,
+    "saturation_field_count": 6,
+    "commute_complete": true,
+    "economic_burden_complete": true,
+    "tier_columns_present": true,
+    "saturation_fields": [
+      "AGRICULTURE",
+      "ARTS",
+      "BUSINESS",
+      "EDUCATION",
+      "HEALTH",
+      "STEM"
+    ],
+    "market_score_min": 0.23386577511296167,
+    "market_score_max": 0.5356177377995696
+  },
+  "datasets": [
+    {
+      "name": "barangay_location",
+      "rows": 34,
+      "columns": [
+        "barangay_id",
+        "barangay_name",
+        "municipality_code",
+        "municipality_name",
+        "latitude",
+        "longitude"
+      ],
+      "parquet": "data/processed/team4_model/barangay_location.parquet",
+      "csv": "data/processed/team4_model/barangay_location.csv"
+    },
+    {
+      "name": "university",
+      "rows": 20,
+      "columns": [
+        "university_id",
+        "university_name",
+        "university_type",
+        "address",
+        "website",
+        "latitude",
+        "longitude",
+        "distance_band_from_pozorrubio",
+        "economic_constraint",
+        "mobility_constraint"
+      ],
+      "parquet": "data/processed/team4_model/university.parquet",
+      "csv": "data/processed/team4_model/university.csv"
+    },
+    {
+      "name": "barangay_university_commute_matrix",
+      "rows": 680,
+      "columns": [
+        "barangay_id",
+        "university_id",
+        "barangay_name",
+        "university_name",
+        "distance_km",
+        "commute_time_mins"
+      ],
+      "parquet": "data/processed/team4_model/barangay_university_commute_matrix.parquet",
+      "csv": "data/processed/team4_model/barangay_university_commute_matrix.csv"
+    },
+    {
+      "name": "barangay_university_economic_burden",
+      "rows": 680,
+      "columns": [
+        "barangay_id",
+        "university_id",
+        "barangay_name",
+        "university_name",
+        "distance_km",
+        "commute_time_mins",
+        "distance_km_mid",
+        "economic_constraint",
+        "tuition_estimate",
+        "annual_transport_cost_php",
+        "total_annual_burden_php",
+        "affordability_at_tier_1",
+        "affordability_at_tier_2",
+        "affordability_at_tier_3",
+        "affordability_at_tier_4",
+        "affordability_at_tier_5"
+      ],
+      "parquet": "data/processed/team4_model/barangay_university_economic_burden.parquet",
+      "csv": "data/processed/team4_model/barangay_university_economic_burden.csv"
+    },
+    {
+      "name": "municipality_field_saturation",
+      "rows": 6,
+      "columns": [
+        "municipality_code",
+        "municipality_name",
+        "affinity_field",
+        "municipality_field_share",
+        "province_field_share",
+        "saturation_ratio",
+        "market_score",
+        "market_score_method",
+        "source_reference"
+      ],
+      "parquet": "data/processed/team4_model/municipality_field_saturation.parquet",
+      "csv": "data/processed/team4_model/municipality_field_saturation.csv"
+    }
+  ]
+}

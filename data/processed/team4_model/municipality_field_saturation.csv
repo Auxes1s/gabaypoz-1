@@ -1,0 +1,7 @@
+municipality_code,municipality_name,affinity_field,municipality_field_share,province_field_share,saturation_ratio,market_score,market_score_method,source_reference
+30,Pozorrubio,STEM,0.2519033432638199,0.24875382281407277,1.012661194164245,0.5063305970821225,ecosystem_saturation_v1_1,data/processed/team3_eda/heap_occupation_by_field.parquet
+30,Pozorrubio,HEALTH,0.16749420721615357,0.15635610566619307,1.0712354755991391,0.5356177377995696,ecosystem_saturation_v1_1,data/processed/team3_eda/heap_occupation_by_field.parquet
+30,Pozorrubio,ARTS,0.10526315789473684,0.10193368170106196,1.032663160381464,0.516331580190732,ecosystem_saturation_v1_1,data/processed/team3_eda/heap_occupation_by_field.parquet
+30,Pozorrubio,BUSINESS,0.34061569016881826,0.34144050858477615,0.9975842983031608,0.49879214915158043,ecosystem_saturation_v1_1,data/processed/team3_eda/heap_occupation_by_field.parquet
+30,Pozorrubio,EDUCATION,0.11684872558755378,0.11329978086546103,1.0313234914929534,0.5156617457464767,ecosystem_saturation_v1_1,data/processed/team3_eda/heap_occupation_by_field.parquet
+30,Pozorrubio,AGRICULTURE,0.01787487586891758,0.038216100368434994,0.46773155022592333,0.23386577511296167,ecosystem_saturation_v1_1,data/processed/team3_eda/heap_occupation_by_field.parquet

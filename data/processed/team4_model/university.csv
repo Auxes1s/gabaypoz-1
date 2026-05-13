@@ -1,0 +1,21 @@
+university_id,university_name,university_type,address,website,latitude,longitude,distance_band_from_pozorrubio,economic_constraint,mobility_constraint
+1,University of Eastern Pangasinan,Local University,"McArthur Highway, Binalonan, Pangasinan",uepbinalonan.edu.ph,16.0504354695446,120.587838281075,10-20,2,1
+2,Urdaneta City University,Local University,"1 San Vicente West, Urdaneta City",ucu.edu.ph,15.9807717979149,120.560555123404,20-30,2,2
+3,Pangasinan State University - Urdaneta City,State University,"MacArthur Hwy, Urdaneta City",urdaneta.psu.edu.ph,15.9884220765535,120.57361211837,30-40,1,2
+4,Pangasinan State University - Asingan,State University,"Dancanza, Asingan, Pangasinan",asingan.psu.edu.ph,15.9837100379012,120.633704161416,30-50,1,2
+5,DMMMSU – South La Union Campus (SLUC),State University,"Consolacion, Agoo, La Union",dmmmsu.edu.ph,16.3256018020192,120.371632138703,70-80,1,2
+6,DMMMSU – Mid La Union Campus (MLUC),State University,"Catbangen, San Fernando City",dmmmsu.edu.ph,16.606927415028,120.315561044533,50-60,1,4
+7,Benguet State University - La Trinidad,State University,"Km. 5, La Trinidad, Benguet",bsu.edu.ph,16.4545358048084,120.590714478608,90-100,1,4
+8,Central Luzon State University,State University,"Science City of Muñoz, Nueva Ecija",clsu.edu.ph,15.7304144065431,120.930429666946,80-90,1,4
+9,Tarlac State University - Tarlac,State University,"Romulo Blvd., San Vicente, Tarlac City",tsu.edu.ph,15.4874863110803,120.587971231177,40-50,1,4
+10,Pangasinan State University - Lingayen,State University,,,16.0323980157146,120.229685396367,50-60,1,3
+11,Pangasinan State University - Bayambang,State University,"Zone VI, Poblacion, Bayambang",bayambang.psu.edu.ph,15.8130680956008,120.452394225199,50-60,1,3
+12,Saint Louis University - Baguio,Private University,"Upper Bonifacio St., Baguio City, Benguet",https://www.slu.edu.ph,16.4191598540681,120.597208327054,50-60,3,4
+13,University of the Philippines - Baguio,State University,"Governor Pack Road, Baguio City, Benguet",https://www.upb.edu.ph,16.4053374127708,120.342997493941,50-60,1,4
+14,University of Pangasinan - PHINMA,Private University,"Arellano Street, Dagupan City, Pangasinan",https://up.phinma.edu.ph,16.0472278140654,120.342997493941,50-60,3,3
+15,University of the Philippines - Diliman,State University,"M328+J2C, E. Delos Santos Street, Diliman, Quezon City, 1101 Metro Manila",arch.upd.edu.ph,14.6559106554878,121.059601783376,>200,1,4
+16,University of the Philippines - Manila,State University,"UP Manila Compound, Pedro Gil Street, Ermita Manila 1000, Philippines",camp.upm.edu.ph,14.5788763821995,120.98568046409,>200,1,4
+17,Univeristy of the Philippines - Open University,State University,remote,upou.edu.ph,14.6536681669657,121.0584430669,>200,1,1
+18,Polytechnic University of the Philippines - Manila,State University,"Anonas Street, Sta. Mesa, Manila, Philippines 1055",https://www.pup.edu.ph/academic/colleges,14.5979610997756,121.010851867554,>200,1,4
+19,Lyceum-Northwestern University,Private University,"Tapuac District, Dagupan City, 2400",lyceum.edu.ph,16.0357065033838,120.330345150348,50-60,3,3
+20,Pangasinan Polytechnic College,Local University,"Narciso Ramos Sports and Civic Center, Alvear Street,Poblacion, Lingayen, Pangasinan 2615",https://nexus.ppc.edu.ph/aboutppc,16.0333854571754,120.227465644232,80-90,2,4

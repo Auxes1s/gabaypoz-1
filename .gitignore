@@ -1,15 +1,18 @@
-# Python
 __pycache__/
-*.py[cod]
-.ipynb_checkpoints/
-
-# Environments
+*.pyc
+*.pyo
+*.egg-info/
+build/
+dist/
+.pytest_cache/
 .venv/
-venv/
-env/
 
-# OS
-.DS_Store
-
-# Large extracted data — fetch separately, see data/extracted/README.md
-data/extracted/
+# LaTeX build artefacts (keep demo.pdf, drop intermediates)
+demo/*.aux
+demo/*.log
+demo/*.out
+demo/*.toc
+demo/*.fls
+demo/*.fdb_latexmk
+demo/*.synctex.gz
+demo/results.tex
