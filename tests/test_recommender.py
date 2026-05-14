@@ -175,6 +175,21 @@ def test_program_first_recommendations_write_three_rows_with_primary_schools():
     assert all(row["model_id"] == MODEL_ID for row in written)
 
 
+def test_primary_and_alternate_schools_include_distance_context():
+    result = call()
+    top = result["recommendations"][0]
+
+    assert top["primary_school"]["distance_km"] == 5.0
+    assert top["primary_school"]["commute_time_mins"] == 30.0
+    assert top["alternate_schools"][0]["distance_km"] == 10.0
+    assert top["alternate_schools"][0]["commute_time_mins"] == 60.0
+    assert all(
+        {"distance_km", "commute_time_mins"} <= set(school)
+        for rec in result["recommendations"]
+        for school in [rec["primary_school"], *rec["alternate_schools"]]
+    )
+
+
 def test_q11_filters_school_suggestions_not_program_scores():
     result = call(response_kwargs={"field": "Health", "q11": "B"})
 

@@ -1,12 +1,12 @@
 # Team 4 Model Development Project Plan v1.1
 
-| Item           | Value                                            |
-| -------------- | ------------------------------------------------ |
-| Document ID    | `team4_model_dev_project_plan_v1`                |
+| Item           | Value                             |
+| -------------- | --------------------------------- |
+| Document ID    | `team4_model_dev_project_plan_v1` |
 | Status         | Tracker updated with implemented/generated items |
-| Owner          | Team 4 Model Development                         |
-| TDS reference  | `team4_tds_recommender_v1_1`                     |
-| Target handoff | Team 5 Web Development                           |
+| Owner          | Team 4 Model Development          |
+| TDS reference  | `team4_tds_recommender_v1_1`      |
+| Target handoff | Team 5 Web Development            |
 
 ## 1. Goal
 
@@ -58,39 +58,39 @@ The model should:
 
 ## 4. Remaining Requirements and Proposals
 
-| Area            | Remaining requirement                        | Why it matters                                                         | Proposal                                                                                                   |
-| --------------- | -------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| Data            | Create `barangay_university_economic_burden` | Q10 cannot work without a barangay-school affordability table          | Team 3/4 creates it from commute distance, university cost class, tuition estimates, and Q10 thresholds    |
-| Data            | Create `municipality_field_saturation`       | Market context needs a municipality-field table                        | Start from Team 3 HEAP occupation shares; use Pozorrubio for launch and generalize later                   |
-| Data            | Confirm tuition estimate mapping             | Total burden needs a tuition estimate, not only transport cost         | Use current university `economic_constraint` as the first estimate; improve later with actual tuition data |
-| Data            | Confirm commute matrix IDs match DB IDs      | Q11 depends on joining `barangay_id` and `university_id` correctly     | Validate all 34 barangays and 20 universities have matching IDs                                            |
-| Database schema | Confirm `model_recommendation` fields        | The model must write results Team 5 can read                           | Require `session_id`, `model_id`, `rank`, `program_id`, `university_id`, `model_score`, `created_datetime` |
-| Database schema | Decide future explanation storage            | v2 training needs score details and explanations                       | For v1.1 return explanations only; for v2 add `explanation_json` or a separate recommendation trace table  |
-| Database schema | Confirm scholarship join                     | Explanations need scholarship names and requirements                   | Join `scholarship` to `dimension_scholarship` by `scholarship_code`                                        |
-| Questionnaire   | Make scoring rows unambiguous                | The model must know which answer option maps to which score values     | Add an answer-option scoring table, or make each selectable answer a unique `question_id` row              |
-| Questionnaire   | Freeze Q10/Q11/Q12 stored values             | The rules depend on stable option values like A/B/C                    | Team 1/Team 5 confirms stored values before backend integration                                            |
-| Questionnaire   | Require barangay input                       | Q11 and Q10 both depend on student location                            | Team 5 sends `student_barangay_id` when calling the recommender                                            |
-| Model           | Rebuild tests with ERD-shaped data           | Existing tests were built around older parquet-style names             | Team 4 updates fixtures to match DB field names                                                            |
-| Model           | Refactor zero-draft implementation           | `recommender_v1.py` ranks school-program pairs and uses old names      | Keep the scoring logic, but change the flow to rank programs first and pick schools second                 |
-| Model           | Add saturation to program scoring            | The new market signal belongs to program ranking, not school filtering | Use 90% base program fit plus 10% municipality saturation before the Q12 penalty                           |
-| Model           | Confirm primary-school rule                  | The DB stores only one `university_id` per recommendation row          | Persist the best school for each program; return alternate schools in the API response                     |
-| Model           | Decide no-data behavior                      | Missing affordability data should not produce misleading results       | Return `MISSING_Q10_BURDEN_DATA` and write no rows                                                         |
-| Web/API         | Confirm request and response                 | Integration breaks if Team 4 and Team 5 expect different shapes        | Team 5 sends `session_id` + `student_barangay_id`; Team 4 returns explanations and writes ranked rows      |
+| Area            | Remaining requirement                        | Why it matters                                                     | Proposal                                                                                                   |
+| --------------- | -------------------------------------------- | ------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------- |
+| Data            | Create `barangay_university_economic_burden` | Q10 cannot work without a barangay-school affordability table      | Team 3/4 creates it from commute distance, university cost class, tuition estimates, and Q10 thresholds    |
+| Data            | Create `municipality_field_saturation`       | Market context needs a municipality-field table                    | Start from Team 3 HEAP occupation shares; use Pozorrubio for launch and generalize later                  |
+| Data            | Confirm tuition estimate mapping             | Total burden needs a tuition estimate, not only transport cost     | Use current university `economic_constraint` as the first estimate; improve later with actual tuition data |
+| Data            | Confirm commute matrix IDs match DB IDs      | Q11 depends on joining `barangay_id` and `university_id` correctly | Validate all 34 barangays and 20 universities have matching IDs                                            |
+| Database schema | Confirm `model_recommendation` fields        | The model must write results Team 5 can read                       | Require `session_id`, `model_id`, `rank`, `program_id`, `university_id`, `model_score`, `created_datetime` |
+| Database schema | Decide future explanation storage            | v2 training needs score details and explanations                   | For v1.1 return explanations only; for v2 add `explanation_json` or a separate recommendation trace table  |
+| Database schema | Confirm scholarship join                     | Explanations need scholarship names and requirements               | Join `scholarship` to `dimension_scholarship` by `scholarship_code`                                        |
+| Questionnaire   | Make scoring rows unambiguous                | The model must know which answer option maps to which score values | Add an answer-option scoring table, or make each selectable answer a unique `question_id` row              |
+| Questionnaire   | Freeze Q10/Q11/Q12 stored values             | The rules depend on stable option values like A/B/C                | Team 1/Team 5 confirms stored values before backend integration                                            |
+| Questionnaire   | Require barangay input                       | Q11 and Q10 both depend on student location                        | Team 5 sends `student_barangay_id` when calling the recommender                                            |
+| Model           | Rebuild tests with ERD-shaped data           | Existing tests were built around older parquet-style names         | Team 4 updates fixtures to match DB field names                                                            |
+| Model           | Refactor zero-draft implementation           | `recommender_v1.py` ranks school-program pairs and uses old names  | Keep the scoring logic, but change the flow to rank programs first and pick schools second                 |
+| Model           | Add saturation to program scoring            | The new market signal belongs to program ranking, not school filtering | Use 90% base program fit plus 10% municipality saturation before the Q12 penalty                         |
+| Model           | Confirm primary-school rule                  | The DB stores only one `university_id` per recommendation row      | Persist the best school for each program; return alternate schools in the API response                     |
+| Model           | Decide no-data behavior                      | Missing affordability data should not produce misleading results   | Return `MISSING_Q10_BURDEN_DATA` and write no rows                                                         |
+| Web/API         | Confirm request and response                 | Integration breaks if Team 4 and Team 5 expect different shapes    | Team 5 sends `session_id` + `student_barangay_id`; Team 4 returns explanations and writes ranked rows      |
 
 ## 4.1 Implemented / Generated
 
-| Area                            | Status      | Evidence                                                                                                                       |
-| ------------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| Recommender module              | Implemented | `analysis/team4_model/recommender_v1_1.py` and packaged `dist/gabaypoz_recommender_v1/src/gabaypoz_recommender/recommender.py` |
-| ERD-shaped tests                | Implemented | `analysis/team4_model/test_recommender_v1_1.py` and packaged test mirror                                                       |
-| Barangay location dataset       | Generated   | `data/processed/team4_model/barangay_location.parquet`                                                                         |
-| University dataset              | Generated   | `data/processed/team4_model/university.parquet`                                                                                |
-| Commute matrix                  | Generated   | `data/processed/team4_model/barangay_university_commute_matrix.parquet`                                                        |
-| Economic burden dataset         | Generated   | `data/processed/team4_model/barangay_university_economic_burden.parquet`                                                       |
-| Municipality saturation dataset | Generated   | `data/processed/team4_model/municipality_field_saturation.parquet`                                                             |
-| Dataset manifest                | Generated   | `data/processed/team4_model/dataset_manifest_v1_1.json`                                                                        |
-| Proposed ERD                    | Documented  | `docs/reports/model/team4_recommender_v1_1_erd.md`                                                                             |
-| Dist handoff mirror             | Updated     | `dist/gabaypoz_recommender_v1/` mirrors the current v1.1 package and generated datasets                                        |
+| Area | Status | Evidence |
+| --- | --- | --- |
+| Recommender module | Implemented | `analysis/team4_model/recommender_v1_1.py` and packaged `dist/gabaypoz_recommender_v1/src/gabaypoz_recommender/recommender.py` |
+| ERD-shaped tests | Implemented | `analysis/team4_model/test_recommender_v1_1.py` and packaged test mirror |
+| Barangay location dataset | Generated | `data/processed/team4_model/barangay_location.parquet` |
+| University dataset | Generated | `data/processed/team4_model/university.parquet` |
+| Commute matrix | Generated | `data/processed/team4_model/barangay_university_commute_matrix.parquet` |
+| Economic burden dataset | Generated | `data/processed/team4_model/barangay_university_economic_burden.parquet` |
+| Municipality saturation dataset | Generated | `data/processed/team4_model/municipality_field_saturation.parquet` |
+| Dataset manifest | Generated | `data/processed/team4_model/dataset_manifest_v1_1.json` |
+| Proposed ERD | Documented | `docs/reports/model/team4_recommender_v1_1_erd.md` |
+| Dist handoff mirror | Updated | `dist/gabaypoz_recommender_v1/` mirrors the current v1.1 package and generated datasets |
 
 ## 5. Deliverables
 
@@ -129,7 +129,7 @@ The model is ready for Team 5 integration when:
 | Risk                                           | Impact                                                    | Mitigation                                                                                           |
 | ---------------------------------------------- | --------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
 | Affordability dataset is not ready             | Q10 cannot be finalized                                   | Assign owner and delivery date immediately                                                           |
-| Saturation is mistaken for guaranteed demand   | Students may over-read the market context                 | Label it as local field presence, not job guarantee                                                  |
+| Saturation is mistaken for guaranteed demand   | Students may over-read the market context                 | Label it as local field presence, not job guarantee                                                   |
 | Questionnaire scoring is ambiguous             | Student scores may be wrong                               | Add option-level scoring or make scoring rows unique                                                 |
 | Team 5 expects explanations in DB              | Integration delay                                         | Confirm explanations are returned by API for v1.1                                                    |
 | `model_recommendation` schema differs from TDS | Write failure or missing rank                             | Confirm schema before implementation                                                                 |

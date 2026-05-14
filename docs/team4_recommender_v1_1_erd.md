@@ -1,11 +1,11 @@
 # GabayPoz Recommender v1.1 Proposed ERD
 
-| Item               | Value                                        |
-| ------------------ | -------------------------------------------- |
-| Document ID        | `team4_recommender_v1_1_erd`                 |
-| Model ID           | `tds_recommender_v1_1`                       |
-| Status             | Generated handoff ERD for Team 5 integration |
-| Generated datasets | `data/processed/team4_model/`                |
+| Item | Value |
+| --- | --- |
+| Document ID | `team4_recommender_v1_1_erd` |
+| Model ID | `tds_recommender_v1_1` |
+| Status | Generated handoff ERD for Team 5 integration |
+| Generated datasets | `data/processed/team4_model/` |
 
 ## Summary
 
@@ -20,16 +20,16 @@ This ERD supports the v1.1 program-first recommender:
 
 ## Implemented / Generated
 
-| Item                          | Status      | Evidence                                                                 |
-| ----------------------------- | ----------- | ------------------------------------------------------------------------ |
-| ERD document                  | Generated   | `docs/reports/model/team4_recommender_v1_1_erd.md`                       |
-| ID-keyed barangay location    | Generated   | `data/processed/team4_model/barangay_location.parquet`                   |
-| ID-keyed university table     | Generated   | `data/processed/team4_model/university.parquet`                          |
-| ID-keyed commute matrix       | Generated   | `data/processed/team4_model/barangay_university_commute_matrix.parquet`  |
-| ID-keyed burden table         | Generated   | `data/processed/team4_model/barangay_university_economic_burden.parquet` |
-| Municipality saturation table | Generated   | `data/processed/team4_model/municipality_field_saturation.parquet`       |
-| Dataset manifest              | Generated   | `data/processed/team4_model/dataset_manifest_v1_1.json`                  |
-| Recommender module            | Implemented | `analysis/team4_model/recommender_v1_1.py` and packaged mirror in `dist` |
+| Item | Status | Evidence |
+| --- | --- | --- |
+| ERD document | Generated | `docs/reports/model/team4_recommender_v1_1_erd.md` |
+| ID-keyed barangay location | Generated | `data/processed/team4_model/barangay_location.parquet` |
+| ID-keyed university table | Generated | `data/processed/team4_model/university.parquet` |
+| ID-keyed commute matrix | Generated | `data/processed/team4_model/barangay_university_commute_matrix.parquet` |
+| ID-keyed burden table | Generated | `data/processed/team4_model/barangay_university_economic_burden.parquet` |
+| Municipality saturation table | Generated | `data/processed/team4_model/municipality_field_saturation.parquet` |
+| Dataset manifest | Generated | `data/processed/team4_model/dataset_manifest_v1_1.json` |
+| Recommender module | Implemented | `analysis/team4_model/recommender_v1_1.py` and packaged mirror in `dist` |
 
 ## Proposed ERD
 
@@ -176,33 +176,33 @@ erDiagram
 
 ## Keys And Constraints
 
-| Table                                 | Primary key                                          | Important foreign keys / unique constraints                                       |
-| ------------------------------------- | ---------------------------------------------------- | --------------------------------------------------------------------------------- |
-| `guest_tracker`                       | `session_id`                                         | `is_completed = true` required before recommendation                              |
-| `users_response`                      | proposed composite: `session_id`, `question_id`      | `session_id -> guest_tracker.session_id`; `question_id -> questions.question_id`  |
-| `questions`                           | proposed composite: `question_id`, `option_value`    | Needed because answer scoring must be option-level and unambiguous                |
-| `barangay_location`                   | `barangay_id`                                        | `municipality_code` joins market context                                          |
-| `university`                          | `university_id`                                      | Names retained for display/audit only                                             |
-| `barangay_university_commute_matrix`  | composite: `barangay_id`, `university_id`            | Complete 34 x 20 matrix for Q11                                                   |
-| `barangay_university_economic_burden` | composite: `barangay_id`, `university_id`            | Complete 34 x 20 matrix for Q10                                                   |
-| `municipality_field_saturation`       | composite: `municipality_code`, `affinity_field`     | `market_score` must be normalized to 0.0-1.0                                      |
-| `program`                             | `program_id`                                         | Six affinity score columns and `affinity_duration_score` required                 |
-| `university_program`                  | proposed composite: `university_id`, `program_id`    | Defines school options for each program                                           |
-| `scholarship`                         | proposed composite: `program_id`, `scholarship_code` | `scholarship_code -> dimension_scholarship.scholarship_code`                      |
-| `model_recommendation`                | `recommendation_id`                                  | Unique recommended rows by `session_id`, `model_id`, `rank`; rank must be 1, 2, 3 |
+| Table | Primary key | Important foreign keys / unique constraints |
+| --- | --- | --- |
+| `guest_tracker` | `session_id` | `is_completed = true` required before recommendation |
+| `users_response` | proposed composite: `session_id`, `question_id` | `session_id -> guest_tracker.session_id`; `question_id -> questions.question_id` |
+| `questions` | proposed composite: `question_id`, `option_value` | Needed because answer scoring must be option-level and unambiguous |
+| `barangay_location` | `barangay_id` | `municipality_code` joins market context |
+| `university` | `university_id` | Names retained for display/audit only |
+| `barangay_university_commute_matrix` | composite: `barangay_id`, `university_id` | Complete 34 x 20 matrix for Q11 |
+| `barangay_university_economic_burden` | composite: `barangay_id`, `university_id` | Complete 34 x 20 matrix for Q10 |
+| `municipality_field_saturation` | composite: `municipality_code`, `affinity_field` | `market_score` must be normalized to 0.0-1.0 |
+| `program` | `program_id` | Six affinity score columns and `affinity_duration_score` required |
+| `university_program` | proposed composite: `university_id`, `program_id` | Defines school options for each program |
+| `scholarship` | proposed composite: `program_id`, `scholarship_code` | `scholarship_code -> dimension_scholarship.scholarship_code` |
+| `model_recommendation` | `recommendation_id` | Unique recommended rows by `session_id`, `model_id`, `rank`; rank must be 1, 2, 3 |
 
 ## Generated Dataset Handoff
 
 The following files were generated from Team 3/raw sources:
 
-| Dataset                                                                           | Rows | Purpose                                                      |
-| --------------------------------------------------------------------------------- | ----:| ------------------------------------------------------------ |
-| `data/processed/team4_model/barangay_location.parquet` / `.csv`                   | 34   | Barangay IDs and coordinates                                 |
-| `data/processed/team4_model/university.parquet` / `.csv`                          | 20   | University IDs, metadata, coordinates, cost/mobility classes |
-| `data/processed/team4_model/barangay_university_commute_matrix.parquet` / `.csv`  | 680  | Q11 commute filtering                                        |
-| `data/processed/team4_model/barangay_university_economic_burden.parquet` / `.csv` | 680  | Q10 affordability filtering                                  |
-| `data/processed/team4_model/municipality_field_saturation.parquet` / `.csv`       | 6    | Municipality field saturation market context                 |
-| `data/processed/team4_model/dataset_manifest_v1_1.json`                           | 1    | Source paths, schema columns, and validation counts          |
+| Dataset | Rows | Purpose |
+| --- | ---:| --- |
+| `data/processed/team4_model/barangay_location.parquet` / `.csv` | 34 | Barangay IDs and coordinates |
+| `data/processed/team4_model/university.parquet` / `.csv` | 20 | University IDs, metadata, coordinates, cost/mobility classes |
+| `data/processed/team4_model/barangay_university_commute_matrix.parquet` / `.csv` | 680 | Q11 commute filtering |
+| `data/processed/team4_model/barangay_university_economic_burden.parquet` / `.csv` | 680 | Q10 affordability filtering |
+| `data/processed/team4_model/municipality_field_saturation.parquet` / `.csv` | 6 | Municipality field saturation market context |
+| `data/processed/team4_model/dataset_manifest_v1_1.json` | 1 | Source paths, schema columns, and validation counts |
 
 ## Integration Notes
 

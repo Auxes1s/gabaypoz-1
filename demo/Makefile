@@ -13,7 +13,7 @@ LATEXFLAGS ?= -interaction=nonstopmode -halt-on-error
 
 all: demo.pdf
 
-results.tex: demo.py ../data/sample/programs.csv ../data/sample/university_programs.csv ../data/sample/commute_matrix.csv ../data/sample/economic_burden.csv ../data/sample/scholarship_bridge.csv ../data/sample/questions.csv
+results.tex: demo.py ../data/sample/programs.csv ../data/sample/university_programs.csv ../data/sample/scholarship_bridge.csv ../data/sample/questions.csv ../data/processed/team4_model/barangay_location.csv ../data/processed/team4_model/university.csv ../data/processed/team4_model/barangay_university_commute_matrix.csv ../data/processed/team4_model/barangay_university_economic_burden.csv ../data/processed/team4_model/municipality_field_saturation.csv
 	$(PYTHON) demo.py
 
 demo.pdf: demo.tex results.tex
