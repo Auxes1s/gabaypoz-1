@@ -241,11 +241,30 @@ The core v1.1 recommender logic and local generated handoff datasets are usable,
 | Must     | Option scoring seed data   | Seed `answer_option` with every option and the six scoring columns: STEM, health, arts, business, education, and agriculture.                    | `answer_option` has 0 rows, so Supabase answers cannot be converted into student affinity scores.          |
 | Must     | Commute coverage           | Complete `barangay_university_commute_matrix` for every `barangay_id` x `university_id` pair in the live Supabase launch set.                    | Supabase has 34 barangays x 27 universities = 918 expected rows, but only 675 rows are present.            |
 | Must     | Recommendation persistence | Add or map `model_id`, `rank`, and `university_id` in `model_recommendation` so it can store the v1.1 write contract.                            | Current table has only `recommendation_id`, `session_id`, `program_id`, `model_score`, `created_datetime`. |
-| Must     | Derived dataset contract   | Decide whether `barangay_university_economic_burden` and `municipality_field_saturation` are loaded into Supabase or kept as backend data files. | They are complete in `data/processed/team4_model/`, but not fully represented as live Supabase tables.     |
+| Must     | Derived dataset load       | Load `barangay_university_economic_burden` and `municipality_field_saturation` into Supabase.                                         | Live Supabase does not currently have either derived table. Generated load files now exist locally.        |
 | Should   | Offering overrides         | Move `local_offering_overrides` into Supabase or merge the PMA/MAAP rows into official `university_program` data.                                | Overrides are local CSV data only.                                                                         |
 | Should   | End-to-end smoke test      | Create one completed test session, insert `users_response`, run the recommender, persist three ranked rows, and verify returned explanations.    | No demo sessions or persisted recommendations exist yet.                                                   |
 
 Highest-impact commute fixes are the universities with no barangay coverage in the current Supabase snapshot: Maritime Academy of Asia and the Pacific, Pangasinan Merchant Marine Academy, Philippine Military Academy, UP Manila School of Health Sciences - Tarlac, University of the Philippines - Open University, University of Baguio, and University of Cordilleras.
+
+## Supabase Derived Dataset Generation Note
+
+On 2026-05-16, live Supabase schema inspection confirmed that `barangay_university_economic_burden` and `municipality_field_saturation` are not present in `public`. A local generation pass produced load-ready files under `/tmp/gabaypoz_supabase_derived/`:
+
+| Dataset | Rows | Notes |
+| --- | ---:| --- |
+| `commute_missing_insert.csv` | 243 | Missing `barangay_id` x `university_id` rows for the live 34 x 27 launch scope |
+| `commute_complete_918.csv` | 918 | Existing 675 Supabase commute rows plus 243 generated rows |
+| `barangay_university_economic_burden_918.csv` | 918 | Q10 burden rows derived from the complete commute matrix, tuition tier estimates, and v1.1 affordability thresholds |
+| `municipality_field_saturation.csv` | 6 | One row per affinity field for Pozorrubio |
+
+Generation assumptions:
+
+- Existing Supabase commute rows remain the source of truth where present.
+- Missing commute rows are coordinate-based estimates calibrated against existing Supabase commute rows. The median road-distance multiplier is 1.2389622701602832 and the median minutes-per-km factor is 1.2082551594746718.
+- Supabase `university_latitude` and `university_longitude` are currently swapped for populated school coordinates; generation corrected them in memory.
+- The UP Open University row has no Supabase coordinates, so generation used an approximate UP Open University Headquarters location in Maahas, Los Banos, Laguna.
+- These generated files have not yet been loaded into live Supabase at the time of this note.
 
 ## v1.2 Q7 Strand Multiplier Decision
 

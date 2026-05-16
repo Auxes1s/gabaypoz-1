@@ -120,6 +120,8 @@ Supabase was exported locally on 2026-05-16 into `data/raw/supabase_exports/` fo
 
 Schema gap: the exported `model_recommendation` table currently has `recommendation_id`, `session_id`, `program_id`, `model_score`, and `created_datetime`. The v1.1 persistence contract still needs `model_id`, `rank`, and `university_id`.
 
+Derived dataset gap, checked against live Supabase on 2026-05-16: `barangay_university_economic_burden` and `municipality_field_saturation` do not exist in `public` yet. Load-ready local files were generated under `/tmp/gabaypoz_supabase_derived/`: 243 missing commute rows, a complete 918-row commute matrix, a 918-row Q10 burden table, and a 6-row saturation table.
+
 ## 6. Blocking Dataset: Affordability
 
 Q10 is supposed to remove school options that are not financially realistic for the student.
@@ -401,8 +403,8 @@ Minimum returned fields:
 | ------------- | ---------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
 | Data          | Complete Supabase commute coverage                         | Add missing barangay-university rows for newly added schools before appending them to v1.1 datasets     |
 | Data          | Add PMA and MAAP commute rows                              | Their local demo offerings are defined, but both still have 0/34 barangay commute coverage              |
-| Data          | Keep `barangay_university_economic_burden` generated       | Team 4 derives it from commute data, university cost class, tuition estimates, and Q10 tier thresholds |
-| Data          | Keep `municipality_field_saturation` generated             | Start from Team 3 HEAP occupation shares; use Pozorrubio for launch and generalize later                |
+| Data          | Load `barangay_university_economic_burden` to Supabase     | A 918-row local load file has been generated from the completed commute matrix and Q10 burden rules     |
+| Data          | Load `municipality_field_saturation` to Supabase           | A 6-row local load file has been generated from Team 3 HEAP occupation shares for Pozorrubio            |
 | Database      | Confirm `model_recommendation.rank` exists and is writable | Team 5 confirms schema before integration                                                               |
 | Database      | Decide future explanation logging                          | For v1.1, return explanations only; for v2, add `explanation_json` or a separate trace table            |
 | Questionnaire | Seed `questions` and `answer_option`                       | The tables exist in Supabase, but the 2026-05-16 export has zero rows                                   |
