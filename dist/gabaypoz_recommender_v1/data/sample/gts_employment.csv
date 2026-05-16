@@ -1,0 +1,7 @@
+affinity_field,effective_employment_probability,in_field_match_rate,median_months_to_first_job,data_source
+STEM,0.768,0.55,7,PIDS 4th Graduate Tracer Study (AY 2009-2011)
+HEALTH,0.728,0.49,14,PIDS 4th Graduate Tracer Study (AY 2009-2011)
+ARTS,0.717,0.72,5,PIDS 4th Graduate Tracer Study (AY 2009-2011)
+BUSINESS,0.781,0.72,5,PIDS 4th Graduate Tracer Study (AY 2009-2011)
+EDUCATION,0.824,0.80,8,PIDS 4th Graduate Tracer Study (AY 2009-2011)
+AGRICULTURE,0.765,0.62,5,PIDS 4th Graduate Tracer Study (AY 2009-2011)
