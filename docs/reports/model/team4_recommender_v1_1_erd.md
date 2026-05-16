@@ -239,9 +239,9 @@ The core v1.1 recommender logic and local generated handoff datasets are usable,
 | -------- | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------- |
 | Must     | Questionnaire seed data    | Seed `questions` with the final questionnaire IDs and text used by the app flow.                                                                 | `questions` has 0 rows.                                                                                    |
 | Must     | Option scoring seed data   | Seed `answer_option` with every option and the six scoring columns: STEM, health, arts, business, education, and agriculture.                    | `answer_option` has 0 rows, so Supabase answers cannot be converted into student affinity scores.          |
-| Must     | Commute coverage           | Complete `barangay_university_commute_matrix` for every `barangay_id` x `university_id` pair in the live Supabase launch set.                    | Supabase has 34 barangays x 27 universities = 918 expected rows, but only 675 rows are present.            |
+| Done     | Commute coverage           | Complete `barangay_university_commute_matrix` for every `barangay_id` x `university_id` pair in the live Supabase launch set.                    | Live Supabase now has 918/918 commute rows.                                                               |
 | Must     | Recommendation persistence | Add or map `model_id`, `rank`, and `university_id` in `model_recommendation` so it can store the v1.1 write contract.                            | Current table has only `recommendation_id`, `session_id`, `program_id`, `model_score`, `created_datetime`. |
-| Must     | Derived dataset load       | Load `barangay_university_economic_burden` and `municipality_field_saturation` into Supabase.                                         | Live Supabase does not currently have either derived table. Generated load files now exist locally.        |
+| Done     | Derived dataset load       | Load `barangay_university_economic_burden` and `municipality_field_saturation` into Supabase.                                         | Live Supabase now has 918/918 burden rows and 6 saturation rows.                                           |
 | Should   | Offering overrides         | Move `local_offering_overrides` into Supabase or merge the PMA/MAAP rows into official `university_program` data.                                | Overrides are local CSV data only.                                                                         |
 | Should   | End-to-end smoke test      | Create one completed test session, insert `users_response`, run the recommender, persist three ranked rows, and verify returned explanations.    | No demo sessions or persisted recommendations exist yet.                                                   |
 
@@ -249,7 +249,7 @@ Highest-impact commute fixes are the universities with no barangay coverage in t
 
 ## Supabase Derived Dataset Generation Note
 
-On 2026-05-16, live Supabase schema inspection confirmed that `barangay_university_economic_burden` and `municipality_field_saturation` are not present in `public`. A local generation pass produced load-ready files under `/tmp/gabaypoz_supabase_derived/`:
+On 2026-05-16, live Supabase schema inspection initially confirmed that `barangay_university_economic_burden` and `municipality_field_saturation` were not present in `public`. A local generation pass produced load-ready files under `/tmp/gabaypoz_supabase_derived/`, and those datasets were then loaded to live Supabase.
 
 | Dataset | Rows | Notes |
 | --- | ---:| --- |
@@ -264,7 +264,7 @@ Generation assumptions:
 - Missing commute rows are coordinate-based estimates calibrated against existing Supabase commute rows. The median road-distance multiplier is 1.2389622701602832 and the median minutes-per-km factor is 1.2082551594746718.
 - Supabase `university_latitude` and `university_longitude` are currently swapped for populated school coordinates; generation corrected them in memory.
 - The UP Open University row has no Supabase coordinates, so generation used an approximate UP Open University Headquarters location in Maahas, Los Banos, Laguna.
-- These generated files have not yet been loaded into live Supabase at the time of this note.
+- Live Supabase verification after load: `barangay_university_commute_matrix` has 918 rows with 0 missing barangay-university pairs, `barangay_university_economic_burden` has 918 rows with 0 missing pairs, and `municipality_field_saturation` has 6 rows.
 
 ## v1.2 Q7 Strand Multiplier Decision
 

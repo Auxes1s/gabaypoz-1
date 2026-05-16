@@ -92,18 +92,18 @@ Supabase data was pulled locally on 2026-05-16 into `data/raw/supabase_exports/`
 | `university_program.csv` | 530 | School-program offerings from Supabase |
 | `local_offering_overrides.csv` | 2 | Local demo overrides: PMA = `BACHELOR OF SCIENCE IN MANAGEMENT MAJOR IN SECURITY STUDIES`; MAAP = `Bachelor of Science in Marine Transportation` |
 | `barangay_location.csv` | 34 | Complete Pozorrubio barangay list |
-| `barangay_university_commute_matrix.csv` | 675 | Commute rows are present but incomplete for a 34 x 27 full matrix |
+| `barangay_university_commute_matrix.csv` | 675 | Original export snapshot; live Supabase was later completed to 918 rows |
 | `scholarship.csv` | 2,125 | Program-scholarship bridge rows |
 | `dimension_scholarship.csv` | 29 | Scholarship metadata |
 | `questions.csv` | 0 | Questionnaire seed data is missing in Supabase |
 | `answer_option.csv` | 0 | Option-level scoring seed data is missing in Supabase |
 | `guest_tracker.csv`, `users_response.csv`, `model_recommendation.csv` | 0 each | No live demo sessions or persisted recommendations yet |
 
-Current demo blockers: seed `questions` and `answer_option`, add Q7 multiplier handling to the scoring contract, add missing commute rows for the newly added universities, load the derived Q10/saturation datasets into Supabase, and align `model_recommendation` with the v1.2 write contract. PMA and MAAP now have local demo offering overrides, but they still cannot enter generated datasets until commute rows exist. The 2026-05-16 Supabase schema has `recommendation_id`, `session_id`, `program_id`, `model_score`, and `created_datetime`, but does not yet expose `model_id`, `rank`, or `university_id`.
+Current demo blockers: seed `questions` and `answer_option`, add Q7 multiplier handling to the scoring contract, and align `model_recommendation` with the v1.2 write contract. Commute coverage and the derived Q10/saturation datasets have been loaded to live Supabase. The 2026-05-16 Supabase schema has `recommendation_id`, `session_id`, `program_id`, `model_score`, and `created_datetime`, but does not yet expose `model_id`, `rank`, or `university_id`.
 
 ## 4.0a Supabase Derived Dataset Generation
 
-Live Supabase schema inspection on 2026-05-16 confirmed that `barangay_university_economic_burden` and `municipality_field_saturation` are not present in `public`. A local generation pass produced load-ready files under `/tmp/gabaypoz_supabase_derived/`.
+Live Supabase schema inspection on 2026-05-16 initially confirmed that `barangay_university_economic_burden` and `municipality_field_saturation` were not present in `public`. A local generation pass produced load-ready files under `/tmp/gabaypoz_supabase_derived/`, and those files were loaded to live Supabase.
 
 | Generated file | Rows | Purpose |
 | --- | ---:| --- |
@@ -113,6 +113,12 @@ Live Supabase schema inspection on 2026-05-16 confirmed that `barangay_universit
 | `municipality_field_saturation.csv` | 6 | Pozorrubio market-context rows for the six affinity fields |
 
 The generation pass kept existing Supabase commute rows where available and generated only missing commute rows with a coordinate-based, calibrated proxy. The calibration used the existing Supabase commute rows: median distance multiplier 1.2389622701602832 and median minutes per km 1.2082551594746718. The UP Open University row had no Supabase coordinates, so generation used an approximate UP Open University Headquarters location in Maahas, Los Banos, Laguna.
+
+Live verification after load:
+
+- `barangay_university_commute_matrix`: 918 rows, 0 missing barangay-university pairs.
+- `barangay_university_economic_burden`: 918 rows, 0 missing barangay-university pairs.
+- `municipality_field_saturation`: 6 rows.
 
 ## 4.1 Implemented / Generated
 
@@ -191,11 +197,11 @@ Team 4 final model checklist / agreements to close:
 
 3. Confirm explanations are returned by the API/UI response and are not stored in DB for v1.1. For now, the database only stores the recommendation rows. The longer explanation shown to students should be sent directly to the frontend when the model runs, including primary school details and alternate schools.
 
-4. Load `barangay_university_economic_burden` into Supabase. The generated local file has 918 rows and is required for the Q10 affordability rule.
+4. Verify `barangay_university_economic_burden` in Supabase during the smoke test. The live table has 918 rows and is required for the Q10 affordability rule.
 
 5. Confirm Q10 burden dataset fields: `barangay_id`, `university_id`, `distance_km`, `commute_time_mins`, `economic_constraint`, `tuition_estimate`, `annual_transport_cost_php`, `total_annual_burden_php`, and affordability flags for tiers 1-5. These fields let the model estimate whether a school is affordable for a student from a specific barangay. It combines tuition and transport cost, then marks which Q10 budget tiers can afford it.
 
-6. Load `municipality_field_saturation` into Supabase. The generated local file has 6 rows with `municipality_code`, `municipality_name`, `affinity_field`, `municipality_field_share`, `province_field_share`, `saturation_ratio`, `market_score`, `market_score_method`, and `source_reference`.
+6. Verify `municipality_field_saturation` in Supabase during the smoke test. The live table has 6 rows with `municipality_code`, `municipality_name`, `affinity_field`, `municipality_field_share`, `province_field_share`, `saturation_ratio`, `market_score`, `market_score_method`, and `source_reference`.
 
 7. Confirm questionnaire scoring is unambiguous: either option-level scoring table or unique scoring rows per selectable answer. The model must know exactly how each selected answer translates into STEM, Health, Arts, Business, Education, and Agriculture scores. For v1.2, Q7 must be handled as a multiplier, not as additive option points.
 
