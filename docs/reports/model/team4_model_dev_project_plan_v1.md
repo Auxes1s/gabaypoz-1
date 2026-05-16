@@ -99,7 +99,7 @@ Supabase data was pulled locally on 2026-05-16 into `data/raw/supabase_exports/`
 | `answer_option.csv` | 0 | Option-level scoring seed data is missing in Supabase |
 | `guest_tracker.csv`, `users_response.csv`, `model_recommendation.csv` | 0 each | No live demo sessions or persisted recommendations yet |
 
-Current demo blockers: seed `questions` and `answer_option`, add Q7 multiplier handling to the scoring contract, and align `model_recommendation` with the v1.2 write contract. Commute coverage and the derived Q10/saturation datasets have been loaded to live Supabase. The 2026-05-16 Supabase schema has `recommendation_id`, `session_id`, `program_id`, `model_score`, and `created_datetime`, but does not yet expose `model_id`, `rank`, or `university_id`.
+Current demo blockers: seed `questions` and `answer_option`, add Q7 multiplier handling to the scoring contract, and align `model_recommendation` with the v1.2 write contract. Commute coverage and the derived Q10/saturation datasets have been loaded to live Supabase. The 2026-05-16 Supabase schema has `recommendation_id`, `session_id`, `program_id`, `model_score`, and `created_datetime`, but does not yet expose `model_id`, `rank`, or `university_id`. The owner migration and rollback SQL for these fields is documented in `docs/reports/model/model_recommendation_v1_2_migration.sql`; Team 4's current DB URL cannot run it because it is not the table owner.
 
 ## 4.0a Supabase Derived Dataset Generation
 

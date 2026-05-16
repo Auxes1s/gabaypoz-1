@@ -120,6 +120,8 @@ Supabase was exported locally on 2026-05-16 into `data/raw/supabase_exports/` fo
 
 Schema gap: the exported `model_recommendation` table currently has `recommendation_id`, `session_id`, `program_id`, `model_score`, and `created_datetime`. The v1.1 persistence contract still needs `model_id`, `rank`, and `university_id`.
 
+Migration note: `docs/reports/model/model_recommendation_v1_2_migration.sql` contains the forward migration and rollback SQL for these three fields. The Team 4 DB URL cannot apply this migration because it is not the owner of `public.model_recommendation`; run it through the Supabase SQL editor or an owner connection.
+
 Derived dataset update, completed on 2026-05-16: live Supabase now has a complete 918-row `barangay_university_commute_matrix`, a complete 918-row `barangay_university_economic_burden`, and a 6-row `municipality_field_saturation`. The load was generated from `/tmp/gabaypoz_supabase_derived/`: 243 missing commute rows, a complete 918-row commute matrix, a 918-row Q10 burden table, and a 6-row saturation table.
 
 ## 6. Blocking Dataset: Affordability
@@ -405,7 +407,7 @@ Minimum returned fields:
 | Data          | Add PMA and MAAP commute rows                              | Done through the 918-row live commute matrix                                                            |
 | Data          | Load `barangay_university_economic_burden` to Supabase     | Done: live Supabase has 918/918 Q10 burden rows                                                         |
 | Data          | Load `municipality_field_saturation` to Supabase           | Done: live Supabase has 6 Pozorrubio saturation rows                                                    |
-| Database      | Confirm `model_recommendation.rank` exists and is writable | Team 5 confirms schema before integration                                                               |
+| Database      | Add `model_id`, `rank`, and `university_id` to `model_recommendation` | Owner migration SQL is documented; Team 4 DB URL cannot alter this table                                |
 | Database      | Decide future explanation logging                          | For v1.1, return explanations only; for v2, add `explanation_json` or a separate trace table            |
 | Questionnaire | Seed `questions` and `answer_option`                       | The tables exist in Supabase, but the 2026-05-16 export has zero rows                                   |
 | Questionnaire | Capture barangay reliably                                  | Team 5 sends `student_barangay_id` to recommender                                                       |

@@ -266,6 +266,12 @@ Generation assumptions:
 - The UP Open University row has no Supabase coordinates, so generation used an approximate UP Open University Headquarters location in Maahas, Los Banos, Laguna.
 - Live Supabase verification after load: `barangay_university_commute_matrix` has 918 rows with 0 missing barangay-university pairs, `barangay_university_economic_burden` has 918 rows with 0 missing pairs, and `municipality_field_saturation` has 6 rows.
 
+## model_recommendation Migration Note
+
+`recommender_v1_2.py` emits persisted rows with `model_id`, `rank`, and `university_id`. Live Supabase still lacks these three fields on `model_recommendation`, and an attempted migration using the Team 4 DB URL failed with `must be owner of table model_recommendation`. The ready-to-run owner migration and rollback script is stored at `docs/reports/model/model_recommendation_v1_2_migration.sql`.
+
+This migration is still required before an end-to-end persistence smoke test can pass.
+
 ## v1.2 Q7 Strand Multiplier Decision
 
 Q7 should be included in recommender v1.2 as a SHS strand aptitude multiplier. This is supported as a methodology move, not as a causal EDA finding: Team 3's questionnaire scoring contract already allows `scoring_type = multiplier`, and the Team 4 model-development notes state that Q7 should multiply matching aptitude dimensions rather than add raw points.
