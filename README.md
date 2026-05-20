@@ -10,29 +10,36 @@ This package is the Team 4 handoff for the DB-aligned, program-first GabayPoz re
 - Proposed ERD, methodology, validation, and tracker docs under `docs/`
 
 
-## Clone and test
+## Clone and run the smoke notebook
 
 From a fresh clone of this fork:
 
 ```bash
 git clone https://github.com/Auxes1s/gabaypoz-1.git
 cd gabaypoz-1
+python -m pip install -e ".[smoke]"
+```
+
+Set the live Supabase Postgres URL before opening the notebook:
+
+```bash
+cp .env.example .env.local
+# edit .env.local and set SUPABASE_DB_URL=postgresql://postgres:<password>@<host>:5432/postgres
+```
+
+Launch the interactive smoke-test notebook from the repo root:
+
+```bash
+python -m notebook notebooks/team4_recommender_supabase_smoke_gui.ipynb
+```
+
+In the notebook, run all cells, fill the V2Q01-V2Q29 questionnaire, and click **Run recommender**. Leave **Persist smoke-test session to Supabase** unchecked for a read-only test; check it only when you intentionally want to write one cleanup-ready smoke session.
+
+Optional local package verification:
+
+```bash
 python -m pip install -e ".[test]"
 python -m pytest -q
-```
-
-Optional focused v2 handoff checks:
-
-```bash
-python -m pytest -q analysis/team4_model/test_recommender_v2.py analysis/team4_model/test_recommender_v2_supabase_contract.py analysis/team4_model/test_program_profile_v2.py
-```
-
-Optional live Supabase smoke tooling requires database access:
-
-```bash
-python -m pip install -e ".[smoke]"
-# set SUPABASE_DB_URL in your shell or in .env.local first
-python analysis/team4_model/smoke_supabase_v2.py
 ```
 ## Current contract
 
