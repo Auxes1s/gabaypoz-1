@@ -139,6 +139,15 @@ def _responses(high_field: str, *, q7: str, q10: str, q11: str, q12: str, q13: s
     return result
 
 
+def _responses_multi(field_scores: dict[str, int], *, q7: str, q10: str, q11: str, q12: str, q13: str = "D") -> dict[str, str]:
+    """Like _responses but allows per-field likert scores (1–5)."""
+    result = {}
+    for question_id, target, _family in _question_blueprint():
+        result[question_id] = str(field_scores.get(target, 1))
+    result.update({"Q7": q7, "Q10": q10, "Q11": q11, "Q12": q12, "Q13": q13})
+    return result
+
+
 PROFILES = [
     Profile(
         "D1",
@@ -167,6 +176,16 @@ PROFILES = [
         2,
         "stem",
         _responses("stem", q7="GAS", q10="B", q11="B", q12="B"),
+    ),
+    Profile(
+        "D5",
+        "Arts-dominant HUMSS, medicine aspiration — validates 1.35x primary boost",
+        2,
+        "arts",
+        _responses_multi(
+            {"arts": 5, "health": 3},
+            q7="HUMSS", q10="B", q11="B", q12="A", q13="A",
+        ),
     ),
 ]
 
