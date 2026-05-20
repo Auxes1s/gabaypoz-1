@@ -1,0 +1,193 @@
+{
+  "exports": [
+    {
+      "file": "data/raw/supabase_exports/answer_option.csv",
+      "rows": 44,
+      "columns": [
+        "option_id",
+        "question_id",
+        "option_label",
+        "option_text",
+        "score_stem",
+        "score_health",
+        "score_arts",
+        "score_business",
+        "score_education",
+        "score_agri",
+        "question_group",
+        "display_order",
+        "created_datetime",
+        "updated_datetime"
+      ]
+    },
+    {
+      "file": "data/raw/supabase_exports/barangay_location.csv",
+      "rows": 34,
+      "columns": [
+        "barangay_id",
+        "municipality_name",
+        "province_name",
+        "region_name",
+        "barangay_name",
+        "origin_latitude",
+        "origin_longitude",
+        "created_datetime",
+        "updated_datetime"
+      ]
+    },
+    {
+      "file": "data/raw/supabase_exports/barangay_university_commute_matrix.csv",
+      "rows": 675,
+      "columns": [
+        "id",
+        "barangay_id",
+        "barangay_name",
+        "university_id",
+        "distance_km",
+        "commute_time_mins",
+        "created_datetime",
+        "updated_datetime",
+        "municipality_name"
+      ]
+    },
+    {
+      "file": "data/raw/supabase_exports/dimension_scholarship.csv",
+      "rows": 29,
+      "columns": [
+        "scholarship_id",
+        "scholarship_code",
+        "scholarship_name",
+        "benefactor_name",
+        "scholarship_type",
+        "minimum_grade",
+        "application_period",
+        "scholarship_or_subsidy",
+        "exam_required",
+        "eligibility_criteria",
+        "created_datetime",
+        "updated_datetime"
+      ]
+    },
+    {
+      "file": "data/raw/supabase_exports/guest_tracker.csv",
+      "rows": 0,
+      "columns": [
+        "session_id",
+        "is_completed",
+        "email",
+        "results_sent_datetime",
+        "start_datetime",
+        "end_datetime"
+      ]
+    },
+    {
+      "file": "data/raw/supabase_exports/local_offering_overrides.csv",
+      "rows": 2,
+      "columns": [
+        "university_name",
+        "degree",
+        "major",
+        "source_note"
+      ]
+    },
+    {
+      "file": "data/raw/supabase_exports/model_recommendation.csv",
+      "rows": 0,
+      "columns": [
+        "recommendation_id",
+        "session_id",
+        "program_id",
+        "model_score",
+        "created_datetime",
+        "rank",
+        "model_id",
+        "university_id"
+      ]
+    },
+    {
+      "file": "data/raw/supabase_exports/program.csv",
+      "rows": 142,
+      "columns": [
+        "program_id",
+        "program_name",
+        "affinity_stem_score",
+        "affinity_health_science_score",
+        "affinity_art_humanities_score",
+        "affinity_business_score",
+        "affinity_education_score",
+        "affinity_agriculture_score",
+        "affinity_duration_score",
+        "created_datetime",
+        "updated_datetime",
+        "program_code"
+      ]
+    },
+    {
+      "file": "data/raw/supabase_exports/questions.csv",
+      "rows": 12,
+      "columns": [
+        "question_id",
+        "question_text",
+        "created_datetime",
+        "updated_datetime"
+      ]
+    },
+    {
+      "file": "data/raw/supabase_exports/scholarship.csv",
+      "rows": 2125,
+      "columns": [
+        "scholarship_id",
+        "program_id",
+        "college_program",
+        "program_field",
+        "scholarship_code",
+        "created_datetime",
+        "updated_datetime",
+        "nearby_has_scholarship_yes_no",
+        "outside_has_scholarship_yes_no"
+      ]
+    },
+    {
+      "file": "data/raw/supabase_exports/university.csv",
+      "rows": 27,
+      "columns": [
+        "university_id",
+        "university_code",
+        "university_name",
+        "university_type",
+        "university_address",
+        "university_website_url",
+        "university_distance_from_pozorrubio_value",
+        "university_latitude",
+        "university_longitude",
+        "created_datetime",
+        "updated_datetime"
+      ]
+    },
+    {
+      "file": "data/raw/supabase_exports/university_program.csv",
+      "rows": 530,
+      "columns": [
+        "id",
+        "program_id",
+        "university_id",
+        "program_field",
+        "university_name",
+        "program_major",
+        "created_datetime",
+        "updated_datetime"
+      ]
+    },
+    {
+      "file": "data/raw/supabase_exports/users_response.csv",
+      "rows": 0,
+      "columns": [
+        "response_id",
+        "session_id",
+        "question_id",
+        "created_datetime",
+        "option_id"
+      ]
+    }
+  ]
+}

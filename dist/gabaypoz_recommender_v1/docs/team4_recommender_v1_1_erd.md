@@ -227,8 +227,8 @@ The following raw Supabase tables were exported locally on 2026-05-16 for recomm
 | `barangay_university_commute_matrix.csv`                              | 675    | Incomplete against the 34 x 27 expected full matrix                          |
 | `scholarship.csv`                                                     | 2,125  | Program-scholarship bridge rows                                              |
 | `dimension_scholarship.csv`                                           | 29     | Scholarship dimension metadata                                               |
-| `questions.csv`                                                       | 0      | Needs seeding before end-to-end questionnaire demo                           |
-| `answer_option.csv`                                                   | 0      | Needs seeding before option-level scoring demo                               |
+| `questions.csv`                                                       | 12     | Q1-Q12 seeded in live Supabase                                               |
+| `answer_option.csv`                                                   | 44     | Option-level scoring and constraint options seeded in live Supabase          |
 | `guest_tracker.csv`, `users_response.csv`, `model_recommendation.csv` | 0 each | No demo sessions/results are persisted yet                                   |
 
 ## Finalization Gaps
@@ -237,15 +237,50 @@ The core v1.1 recommender logic and local generated handoff datasets are usable,
 
 | Priority | Area                       | Required action                                                                                                                                  | Current gap                                                                                                |
 | -------- | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------- |
-| Must     | Questionnaire seed data    | Seed `questions` with the final questionnaire IDs and text used by the app flow.                                                                 | `questions` has 0 rows.                                                                                    |
-| Must     | Option scoring seed data   | Seed `answer_option` with every option and the six scoring columns: STEM, health, arts, business, education, and agriculture.                    | `answer_option` has 0 rows, so Supabase answers cannot be converted into student affinity scores.          |
-| Must     | Commute coverage           | Complete `barangay_university_commute_matrix` for every `barangay_id` x `university_id` pair in the live Supabase launch set.                    | Supabase has 34 barangays x 27 universities = 918 expected rows, but only 675 rows are present.            |
-| Must     | Recommendation persistence | Add or map `model_id`, `rank`, and `university_id` in `model_recommendation` so it can store the v1.1 write contract.                            | Current table has only `recommendation_id`, `session_id`, `program_id`, `model_score`, `created_datetime`. |
-| Must     | Derived dataset contract   | Decide whether `barangay_university_economic_burden` and `municipality_field_saturation` are loaded into Supabase or kept as backend data files. | They are complete in `data/processed/team4_model/`, but not fully represented as live Supabase tables.     |
+| Done     | Questionnaire seed data    | Seed `questions` with the final questionnaire IDs and text used by the app flow.                                                                 | Live Supabase has 12 Q1-Q12 rows.                                                                          |
+| Done     | Option scoring seed data   | Seed `answer_option` with every option and the six scoring columns: STEM, health, arts, business, education, and agriculture.                    | Live Supabase has 44 option rows. Q7 is present but remains multiplier-only in recommender v1.2.           |
+| Done     | Commute coverage           | Complete `barangay_university_commute_matrix` for every `barangay_id` x `university_id` pair in the live Supabase launch set.                    | Live Supabase now has 918/918 commute rows.                                                               |
+| Done     | Recommendation persistence | Add or map `model_id`, `rank`, and `university_id` in `model_recommendation` so it can store the v1.1 write contract.                            | Live Supabase now exposes all three v1.2 persistence fields.                                               |
+| Done     | Derived dataset load       | Load `barangay_university_economic_burden` and `municipality_field_saturation` into Supabase.                                         | Live Supabase now has 918/918 burden rows and 6 saturation rows.                                           |
 | Should   | Offering overrides         | Move `local_offering_overrides` into Supabase or merge the PMA/MAAP rows into official `university_program` data.                                | Overrides are local CSV data only.                                                                         |
 | Should   | End-to-end smoke test      | Create one completed test session, insert `users_response`, run the recommender, persist three ranked rows, and verify returned explanations.    | No demo sessions or persisted recommendations exist yet.                                                   |
 
 Highest-impact commute fixes are the universities with no barangay coverage in the current Supabase snapshot: Maritime Academy of Asia and the Pacific, Pangasinan Merchant Marine Academy, Philippine Military Academy, UP Manila School of Health Sciences - Tarlac, University of the Philippines - Open University, University of Baguio, and University of Cordilleras.
+
+## Supabase Derived Dataset Generation Note
+
+On 2026-05-16, live Supabase schema inspection initially confirmed that `barangay_university_economic_burden` and `municipality_field_saturation` were not present in `public`. A local generation pass produced load-ready files under `/tmp/gabaypoz_supabase_derived/`, and those datasets were then loaded to live Supabase.
+
+| Dataset | Rows | Notes |
+| --- | ---:| --- |
+| `commute_missing_insert.csv` | 243 | Missing `barangay_id` x `university_id` rows for the live 34 x 27 launch scope |
+| `commute_complete_918.csv` | 918 | Existing 675 Supabase commute rows plus 243 generated rows |
+| `barangay_university_economic_burden_918.csv` | 918 | Q10 burden rows derived from the complete commute matrix, tuition tier estimates, and v1.1 affordability thresholds |
+| `municipality_field_saturation.csv` | 6 | One row per affinity field for Pozorrubio |
+
+Generation assumptions:
+
+- Existing Supabase commute rows remain the source of truth where present.
+- Missing commute rows are coordinate-based estimates calibrated against existing Supabase commute rows. The median road-distance multiplier is 1.2389622701602832 and the median minutes-per-km factor is 1.2082551594746718.
+- Supabase `university_latitude` and `university_longitude` are currently swapped for populated school coordinates; generation corrected them in memory.
+- The UP Open University row has no Supabase coordinates, so generation used an approximate UP Open University Headquarters location in Maahas, Los Banos, Laguna.
+- Live Supabase verification after load: `barangay_university_commute_matrix` has 918 rows with 0 missing barangay-university pairs, `barangay_university_economic_burden` has 918 rows with 0 missing pairs, and `municipality_field_saturation` has 6 rows.
+
+## model_recommendation Migration Note
+
+`recommender_v1_2.py` emits persisted rows with `model_id`, `rank`, and `university_id`. Live Supabase still lacks these three fields on `model_recommendation`, and an attempted migration using the Team 4 DB URL failed with `must be owner of table model_recommendation`. The ready-to-run owner migration and rollback script is stored at `docs/reports/model/model_recommendation_v1_2_migration.sql`.
+
+This migration is still required before an end-to-end persistence smoke test can pass.
+
+## Supabase Questionnaire Seed
+
+On 2026-05-16, `questions` and `answer_option` were seeded in live Supabase using deterministic UUIDs from `analysis/team4_model/seed_recommender_questionnaire.py`. Local seed artifacts are saved in `data/processed/team4_model/supabase_seed/`.
+
+Rollback command:
+
+```bash
+python3 analysis/team4_model/seed_recommender_questionnaire.py --rollback --verify
+```
 
 ## v1.2 Q7 Strand Multiplier Decision
 
@@ -257,7 +292,8 @@ Implementation rule for v1.2:
 - Q7 is required, but it is not read as an additive row from `questions`.
 - Q8 and Q9 are scored normally, normalized as the aptitude vector, then Q7 applies the existing tested v1 multiplier map.
 - Unknown Q7 strand values fall back to neutral multipliers and return `UNKNOWN_Q7_STRAND`.
-- Supabase can seed/display Q7 immediately, but production scoring needs either `answer_option.scoring_type = multiplier` support or a separate v1.2 scoring contract for Q7.
+- Supabase now seeds/displays Q7 as an aptitude question with zero additive scores because `answer_option.question_group` is constrained to `internal`, `aptitude`, or `constraint`.
+- Production scoring must continue using the v1.2 code-level Q7 multiplier contract, unless Supabase later adds explicit multiplier metadata columns.
 
 ## Integration Notes
 
@@ -268,5 +304,5 @@ Implementation rule for v1.2:
 - Missing saturation data should not block the run; use neutral `market_score = 0.5` and return `MISSING_SATURATION_DATA`.
 - `municipality_field_saturation.market_score` is normalized to 0.0-1.0 in the generated dataset.
 - Scholarships do not bypass Q10/Q11 feasibility in v1.1; they are returned as context and used only after a school is already feasible.
-- Supabase currently has `answer_option` and `users_response.option_id` columns, but both `questions` and `answer_option` exports are empty and must be seeded for real questionnaire scoring.
+- Supabase currently has `answer_option` and `users_response.option_id` columns, and Q1-Q12 plus 44 options are now seeded for real questionnaire capture.
 - PMA and MAAP have local demo offering overrides, but both still need complete barangay commute rows before they can appear in v1.1 school suggestions.

@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "gabaypoz-recommender"
-version = "1.1.0"
-description = "GabayPoz college program recommender for Pozorrubio, Pangasinan SHS students."
+version = "2.0.0"
+description = "GabayPoz v2 college program recommender for Pozorrubio, Pangasinan SHS students."
 readme = "README.md"
 license = { text = "MIT" }
 requires-python = ">=3.10"
@@ -36,10 +36,15 @@ dependencies = [
 [project.optional-dependencies]
 test = ["pytest>=7"]
 demo = ["pytest>=7"]
+smoke = [
+    "ipywidgets>=8",
+    "notebook>=7",
+    "psycopg[binary]>=3.1",
+]
 
 [project.urls]
 "Source" = "https://github.com/data-engineering-pilipinas/gabaypoz"
-"Specification" = "https://github.com/data-engineering-pilipinas/gabaypoz/blob/main/docs/reports/model/team4_tds_recommender_v1.md"
+"Specification" = "https://github.com/data-engineering-pilipinas/gabaypoz/blob/main/docs/reports/model/team4_recommender_v2_methodology.md"
 
 [tool.setuptools.packages.find]
 where = ["src"]

@@ -1,5 +1,5 @@
-\subsection*{D1: Health-oriented STEM strand, ready for board-exam programs}
-\noindent Model: \texttt{tds\_recommender\_v1\_2}; Barangay id: \texttt{1}; Q7: \texttt{STEM}; Q10: \texttt{C}; Q11: \texttt{C}; Q12: \texttt{A}.
+\subsection*{D1: Health-oriented STEM strand, medicine aspiration, ready for board-exam programs}
+\noindent Model: \texttt{tds\_recommender\_v2}; Barangay id: \texttt{1}; High field: \texttt{health}; Q7: \texttt{STEM}; Q10: \texttt{C}; Q11: \texttt{C}; Q12: \texttt{A}; Q13: \texttt{A}.
 
 \paragraph{Top recommendations.}
 \begingroup\small\setlength{\tabcolsep}{6pt}
@@ -7,18 +7,21 @@
 \toprule
 Rank & Program & Primary school & Score \\
 \midrule
-1 & BS Nursing & PSU Lingayen & 0.746 \\
-2 & BS Medical Technology & PSU Lingayen & 0.669 \\
-3 & Bachelor of Elementary Education & PSU Lingayen & 0.198 \\
+1 & BS Nursing & PSU Lingayen & 0.869 \\
+2 & BS Medical Technology & PSU Lingayen & 0.815 \\
+3 & BS Computer Science & PSU Lingayen & 0.352 \\
 \bottomrule
 \end{tabular}\endgroup
 
 \paragraph{Rank-1 explanation.}
 BS Nursing matches your strongest Health signals. PSU Lingayen is the primary school suggestion because it passed your travel and affordability limits. Local Health field presence is included only as small context, not a job guarantee.
 
+\paragraph{Rank-1 trace.}
+Dominant field: \texttt{health}; track boost factor: \texttt{1.12}; low-confidence reason: \texttt{}.
+
 
 \subsection*{D2: Arts-oriented HUMSS strand, nearby-only travel}
-\noindent Model: \texttt{tds\_recommender\_v1\_2}; Barangay id: \texttt{1}; Q7: \texttt{HUMSS}; Q10: \texttt{B}; Q11: \texttt{A}; Q12: \texttt{B}.
+\noindent Model: \texttt{tds\_recommender\_v2}; Barangay id: \texttt{1}; High field: \texttt{arts}; Q7: \texttt{HUMSS}; Q10: \texttt{B}; Q11: \texttt{A}; Q12: \texttt{B}; Q13: \texttt{D}.
 
 \paragraph{Top recommendations.}
 \begingroup\small\setlength{\tabcolsep}{6pt}
@@ -26,18 +29,21 @@ BS Nursing matches your strongest Health signals. PSU Lingayen is the primary sc
 \toprule
 Rank & Program & Primary school & Score \\
 \midrule
-1 & AB Communication & PSU Lingayen & 0.760 \\
-2 & BS Business Administration & PSU Lingayen & 0.328 \\
-3 & BS Computer Science & PSU Lingayen & 0.195 \\
+1 & AB Communication & PSU Lingayen & 0.770 \\
+2 & BS Business Administration & PSU Lingayen & 0.417 \\
+3 & Bachelor of Elementary Education & PSU Lingayen & 0.315 \\
 \bottomrule
 \end{tabular}\endgroup
 
 \paragraph{Rank-1 explanation.}
 AB Communication matches your strongest Arts signals. PSU Lingayen is the primary school suggestion because it passed your travel and affordability limits. Local Arts field presence is included only as small context, not a job guarantee.
 
+\paragraph{Rank-1 trace.}
+Dominant field: \texttt{arts}; track boost factor: \texttt{1.00}; low-confidence reason: \texttt{}.
+
 
 \subsection*{D3: Agriculture-oriented TVL strand, moderate budget}
-\noindent Model: \texttt{tds\_recommender\_v1\_2}; Barangay id: \texttt{3}; Q7: \texttt{TVL}; Q10: \texttt{B}; Q11: \texttt{B}; Q12: \texttt{B}.
+\noindent Model: \texttt{tds\_recommender\_v2}; Barangay id: \texttt{3}; High field: \texttt{agriculture}; Q7: \texttt{TVL}; Q10: \texttt{B}; Q11: \texttt{B}; Q12: \texttt{B}; Q13: \texttt{D}.
 
 \paragraph{Top recommendations.}
 \begingroup\small\setlength{\tabcolsep}{6pt}
@@ -45,18 +51,21 @@ AB Communication matches your strongest Arts signals. PSU Lingayen is the primar
 \toprule
 Rank & Program & Primary school & Score \\
 \midrule
-1 & BS Agriculture & PSU Lingayen & 0.825 \\
-2 & BS Civil Engineering & PSU Lingayen & 0.168 \\
-3 & BS Medical Technology & PSU Lingayen & 0.159 \\
+1 & BS Agriculture & PSU Lingayen & 0.800 \\
+2 & BS Civil Engineering & PSU Lingayen & 0.339 \\
+3 & BS Medical Technology & PSU Lingayen & 0.301 \\
 \bottomrule
 \end{tabular}\endgroup
 
 \paragraph{Rank-1 explanation.}
 BS Agriculture matches your strongest Agriculture signals. PSU Lingayen is the primary school suggestion because it passed your travel and affordability limits. Local Agriculture field presence is included only as small context, not a job guarantee.
 
+\paragraph{Rank-1 trace.}
+Dominant field: \texttt{agriculture}; track boost factor: \texttt{1.00}; low-confidence reason: \texttt{}.
+
 
 \subsection*{D4: STEM-oriented GAS strand, moderate budget}
-\noindent Model: \texttt{tds\_recommender\_v1\_2}; Barangay id: \texttt{2}; Q7: \texttt{GAS}; Q10: \texttt{B}; Q11: \texttt{B}; Q12: \texttt{B}.
+\noindent Model: \texttt{tds\_recommender\_v2}; Barangay id: \texttt{2}; High field: \texttt{stem}; Q7: \texttt{GAS}; Q10: \texttt{B}; Q11: \texttt{B}; Q12: \texttt{B}; Q13: \texttt{D}.
 
 \paragraph{Top recommendations.}
 \begingroup\small\setlength{\tabcolsep}{6pt}
@@ -64,11 +73,14 @@ BS Agriculture matches your strongest Agriculture signals. PSU Lingayen is the p
 \toprule
 Rank & Program & Primary school & Score \\
 \midrule
-1 & BS Computer Science & PSU Lingayen & 0.775 \\
-2 & BS Civil Engineering & PSU Lingayen & 0.672 \\
-3 & BS Medical Technology & PSU Lingayen & 0.393 \\
+1 & BS Civil Engineering & PSU Lingayen & 0.790 \\
+2 & BS Computer Science & PSU Lingayen & 0.788 \\
+3 & BS Medical Technology & PSU Lingayen & 0.533 \\
 \bottomrule
 \end{tabular}\endgroup
 
 \paragraph{Rank-1 explanation.}
-BS Computer Science matches your strongest STEM signals. PSU Lingayen is the primary school suggestion because it passed your travel and affordability limits. Local STEM field presence is included only as small context, not a job guarantee.
+BS Civil Engineering matches your strongest STEM signals. PSU Lingayen is the primary school suggestion because it passed your travel and affordability limits. Local STEM field presence is included only as small context, not a job guarantee.
+
+\paragraph{Rank-1 trace.}
+Dominant field: \texttt{stem}; track boost factor: \texttt{1.00}; low-confidence reason: \texttt{}.

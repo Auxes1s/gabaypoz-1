@@ -1,0 +1,45 @@
+option_id,question_id,question_code,option_label,option_text,score_stem,score_health,score_arts,score_business,score_education,score_agri,question_group,display_order,created_datetime,updated_datetime
+f25a786a-563b-507b-924e-e6217ead1d78,a8be5a79-5d66-513b-ae57-bd7262328058,Q1,A,"Robotics, carpentry, or gardening.",2,0.0,0.0,0.0,0.0,1,internal,1,2026-05-16T00:00:00+00:00,2026-05-16T00:00:00+00:00
+1269fb67-fe6f-5a16-ac90-fedbed623231,a8be5a79-5d66-513b-ae57-bd7262328058,Q1,B,Science Club or Math Society.,2,2,0.0,0.0,0.0,0.0,internal,2,2026-05-16T00:00:00+00:00,2026-05-16T00:00:00+00:00
+8bd37d41-8712-54a6-9827-1bd9b2f9e2e5,a8be5a79-5d66-513b-ae57-bd7262328058,Q1,C,"Theater, arts, or school paper.",0.0,0.0,2,0.0,1,0.0,internal,3,2026-05-16T00:00:00+00:00,2026-05-16T00:00:00+00:00
+d25b66e9-7f9f-5aaf-a6f1-e7159f2409d8,a8be5a79-5d66-513b-ae57-bd7262328058,Q1,D,"Red Cross, peer facilitators, or tutoring.",0.0,2,0.0,0.0,1,0.0,internal,4,2026-05-16T00:00:00+00:00,2026-05-16T00:00:00+00:00
+ffda414f-19be-58d2-b2dc-07fc328c561d,a8be5a79-5d66-513b-ae57-bd7262328058,Q1,E,Finance or sports.,0.0,0.0,1,2,1,0.0,internal,5,2026-05-16T00:00:00+00:00,2026-05-16T00:00:00+00:00
+65e87d4b-8c0c-5484-be3f-edbc5747827b,da1aa3c5-19df-513f-993f-4c7438fd34fa,Q2,A,"Doing the actual building, coding, or hands-on work.",2,0.0,0.0,0.0,0.0,1,internal,1,2026-05-16T00:00:00+00:00,2026-05-16T00:00:00+00:00
+3c214d5d-2ef4-5886-b26d-1257e5f0de56,da1aa3c5-19df-513f-993f-4c7438fd34fa,Q2,B,Researching the data and finding out why something works.,2,1,0.0,1,0.0,0.0,internal,2,2026-05-16T00:00:00+00:00,2026-05-16T00:00:00+00:00
+11bf4226-e81d-59ac-ae2f-50a3b660ec6a,da1aa3c5-19df-513f-993f-4c7438fd34fa,Q2,C,Designing the project and making it look creative.,0.0,0.0,2,0.0,0.0,0.0,internal,3,2026-05-16T00:00:00+00:00,2026-05-16T00:00:00+00:00
+ec03ffef-4a80-5b03-b150-52ffc2bc4fdf,da1aa3c5-19df-513f-993f-4c7438fd34fa,Q2,D,Explaining the topic to the class and making sure everyone understands.,0.0,0.0,0.0,1,1,0.0,internal,4,2026-05-16T00:00:00+00:00,2026-05-16T00:00:00+00:00
+8ae04f14-173a-5674-aecd-a18dcacd37c1,4185ccc6-fb52-5b82-a43d-47c5e3574e56,Q3,A,Earning a high salary to support my family.,2,0.0,0.0,1,0.0,0.0,internal,1,2026-05-16T00:00:00+00:00,2026-05-16T00:00:00+00:00
+8d0c6bdc-15d7-5009-a32e-d6421dc456a9,4185ccc6-fb52-5b82-a43d-47c5e3574e56,Q3,B,Helping people in my community or saving lives.,0.0,2,0.0,0.0,1,0.0,internal,2,2026-05-16T00:00:00+00:00,2026-05-16T00:00:00+00:00
+1b4ac733-d1a9-5627-9241-d4239f472c6b,4185ccc6-fb52-5b82-a43d-47c5e3574e56,Q3,C,Continuing a family tradition or business.,0.0,0.0,0.0,2,0.0,2,internal,3,2026-05-16T00:00:00+00:00,2026-05-16T00:00:00+00:00
+6f08dbe9-dc4e-5329-8909-8c147945afc1,4185ccc6-fb52-5b82-a43d-47c5e3574e56,Q3,D,Creating something new or solving complex problems.,2,0.0,1,0.0,0.0,0.0,internal,4,2026-05-16T00:00:00+00:00,2026-05-16T00:00:00+00:00
+36071180-19b9-5312-926e-fcf3f3ab7bf2,f665f1c4-dfa8-50e5-994d-02e6b4f3bfd9,Q4,A,Predictable and stable.,0.0,0.0,0.0,0.0,1,1,internal,1,2026-05-16T00:00:00+00:00,2026-05-16T00:00:00+00:00
+07c8a681-c71d-5fde-82af-6423f0f6eb23,f665f1c4-dfa8-50e5-994d-02e6b4f3bfd9,Q4,B,Dynamic and always changing.,1,0.0,1,0.0,0.0,0.0,internal,2,2026-05-16T00:00:00+00:00,2026-05-16T00:00:00+00:00
+01af5f19-3698-5baf-b6f4-0330660a1498,32378de0-713d-5a92-8d9d-ee58d425382f,Q5,A,Working in a global city or abroad.,2,2,0.0,1,0.0,0.0,internal,1,2026-05-16T00:00:00+00:00,2026-05-16T00:00:00+00:00
+517e5478-7152-586c-8b8a-be09882c6468,32378de0-713d-5a92-8d9d-ee58d425382f,Q5,B,Working in a corporate office in Metro Manila or Clark.,1,0.0,0.0,2,0.0,0.0,internal,2,2026-05-16T00:00:00+00:00,2026-05-16T00:00:00+00:00
+a6ace349-c79a-55b3-92cc-d82fc8ac574f,32378de0-713d-5a92-8d9d-ee58d425382f,Q5,C,Staying in Pozorrubio or nearby cities to build a life here.,0.0,0.0,1,0.0,2,2,internal,3,2026-05-16T00:00:00+00:00,2026-05-16T00:00:00+00:00
+0ecd1c81-642e-584a-afaa-61b2e0644582,32378de0-713d-5a92-8d9d-ee58d425382f,Q5,D,Starting my own business or farm.,0.0,0.0,0.0,2,0.0,2,internal,4,2026-05-16T00:00:00+00:00,2026-05-16T00:00:00+00:00
+bfd7190f-b0e1-5cca-a417-a30ecf7b1bef,66d3fb25-2a0a-599a-ab52-377e282307cc,Q6,A,Hands-on experiments and labs.,1,1,0.0,0.0,0.0,1,internal,1,2026-05-16T00:00:00+00:00,2026-05-16T00:00:00+00:00
+79c966d7-0c03-5638-bf7b-5211f6498d05,66d3fb25-2a0a-599a-ab52-377e282307cc,Q6,B,Classroom lectures with detailed notes.,1,1,0.0,0.0,0.0,0.0,internal,2,2026-05-16T00:00:00+00:00,2026-05-16T00:00:00+00:00
+8f0732f8-4028-50f2-8369-fdbb3d0aa876,66d3fb25-2a0a-599a-ab52-377e282307cc,Q6,C,Guided discussion and group work.,0.0,0.0,1,1,1,0.0,internal,3,2026-05-16T00:00:00+00:00,2026-05-16T00:00:00+00:00
+d5f76057-14e7-5559-8c98-d062dc3fabd3,26df99fb-9082-5253-881f-41771e6d70a8,Q7,A,STEM,0.0,0.0,0.0,0.0,0.0,0.0,aptitude,1,2026-05-16T00:00:00+00:00,2026-05-16T00:00:00+00:00
+bec01e38-a4a0-5fa8-be08-cdb29b9b495b,26df99fb-9082-5253-881f-41771e6d70a8,Q7,B,ABM,0.0,0.0,0.0,0.0,0.0,0.0,aptitude,2,2026-05-16T00:00:00+00:00,2026-05-16T00:00:00+00:00
+1179d3cf-a083-5293-af80-76309606bbdb,26df99fb-9082-5253-881f-41771e6d70a8,Q7,C,HUMSS,0.0,0.0,0.0,0.0,0.0,0.0,aptitude,3,2026-05-16T00:00:00+00:00,2026-05-16T00:00:00+00:00
+3a90e4dd-14f4-5ead-a6bb-3c4b407a0753,26df99fb-9082-5253-881f-41771e6d70a8,Q7,D,TVL,0.0,0.0,0.0,0.0,0.0,0.0,aptitude,4,2026-05-16T00:00:00+00:00,2026-05-16T00:00:00+00:00
+247de202-3210-5bc7-8b82-5b3ef04507e5,26df99fb-9082-5253-881f-41771e6d70a8,Q7,E,GAS,0.0,0.0,0.0,0.0,0.0,0.0,aptitude,5,2026-05-16T00:00:00+00:00,2026-05-16T00:00:00+00:00
+c34ea7a8-010c-588b-87a2-24ef5b653aca,611c732a-c169-50ab-bfd0-3085717b2578,Q8,A,"Mathematics: algebra, calculus, or statistics.",2,0.0,0.0,1,0.0,0.0,aptitude,1,2026-05-16T00:00:00+00:00,2026-05-16T00:00:00+00:00
+0622f234-1a59-51aa-9c2c-8b23df169349,611c732a-c169-50ab-bfd0-3085717b2578,Q8,B,"Science: biology, chemistry, or physics.",2,2,0.0,0.0,0.0,1,aptitude,2,2026-05-16T00:00:00+00:00,2026-05-16T00:00:00+00:00
+bc771ffa-a556-5033-8a23-0e4a7d261df8,611c732a-c169-50ab-bfd0-3085717b2578,Q8,C,"English, literature, or communication.",0.0,0.0,2,0.0,1,0.0,aptitude,3,2026-05-16T00:00:00+00:00,2026-05-16T00:00:00+00:00
+d2740f70-2c3a-5fcc-840e-2a10559031a3,611c732a-c169-50ab-bfd0-3085717b2578,Q8,D,"Social sciences: history, philosophy, politics, or sports.",0.0,0.0,2,1,1,0.0,aptitude,4,2026-05-16T00:00:00+00:00,2026-05-16T00:00:00+00:00
+e478c624-32dd-5381-bf5c-611ad5c9f134,611c732a-c169-50ab-bfd0-3085717b2578,Q8,E,"Hands-on technical skills: coding, welding, cooking, and similar skills.",1,0.0,0.0,0.0,0.0,2,aptitude,5,2026-05-16T00:00:00+00:00,2026-05-16T00:00:00+00:00
+c0dcc2a9-c307-5fce-be8b-f25db049e291,fafad9ad-a002-5d88-9753-21909675fd8b,Q9,A,Work through logic step-by-step.,1,0.0,0.0,1,0.0,0.0,aptitude,1,2026-05-16T00:00:00+00:00,2026-05-16T00:00:00+00:00
+1e055569-a43e-5b17-98df-6c17aad540cd,fafad9ad-a002-5d88-9753-21909675fd8b,Q9,B,Think creatively or find multiple solutions.,0.0,0.0,1,0.0,1,0.0,aptitude,2,2026-05-16T00:00:00+00:00,2026-05-16T00:00:00+00:00
+66cd5620-c14f-561f-a52d-befa436bad58,fafad9ad-a002-5d88-9753-21909675fd8b,Q9,C,Use practical trial-and-error.,0.0,1,0.0,0.0,0.0,1,aptitude,3,2026-05-16T00:00:00+00:00,2026-05-16T00:00:00+00:00
+8b207ea0-88c9-5465-8b66-5dc4e0fac417,9a558104-a5e4-57bc-8d84-c7e7e3936716,Q10,A,Extremely limited; needs very low cost options.,0.0,0.0,0.0,0.0,0.0,0.0,constraint,1,2026-05-16T00:00:00+00:00,2026-05-16T00:00:00+00:00
+5cbcc416-1dd3-5dbf-a96f-ace7fd67922c,9a558104-a5e4-57bc-8d84-c7e7e3936716,Q10,B,Can afford reasonable tuition fees.,0.0,0.0,0.0,0.0,0.0,0.0,constraint,2,2026-05-16T00:00:00+00:00,2026-05-16T00:00:00+00:00
+7c706411-e2f8-5689-98a4-04f4c0a884ae,9a558104-a5e4-57bc-8d84-c7e7e3936716,Q10,C,More flexible budget; can consider higher-cost options.,0.0,0.0,0.0,0.0,0.0,0.0,constraint,3,2026-05-16T00:00:00+00:00,2026-05-16T00:00:00+00:00
+5318d859-d365-596f-a18f-28017e4cc7e4,8f3a753c-d973-5bbc-81af-c5e80c636961,Q11,A,I need a school within 30-45 minutes of Pozorrubio.,0.0,0.0,0.0,0.0,0.0,0.0,constraint,1,2026-05-16T00:00:00+00:00,2026-05-16T00:00:00+00:00
+a5225a08-43c3-5cbc-b3c9-61b38e797345,8f3a753c-d973-5bbc-81af-c5e80c636961,Q11,B,I am okay with traveling 1-2 hours.,0.0,0.0,0.0,0.0,0.0,0.0,constraint,2,2026-05-16T00:00:00+00:00,2026-05-16T00:00:00+00:00
+eb5339c7-7d0e-5837-aeb6-f61164f79d4a,8f3a753c-d973-5bbc-81af-c5e80c636961,Q11,C,I am willing to stay in a dorm or boarding house.,0.0,0.0,0.0,0.0,0.0,0.0,constraint,3,2026-05-16T00:00:00+00:00,2026-05-16T00:00:00+00:00
+daf3e53a-590f-5f85-b690-7b9c54275d10,20c4f9ec-8501-52eb-b4e9-608129ac639f,Q12,A,I am ready for the challenge.,0.0,0.0,0.0,0.0,0.0,0.0,constraint,1,2026-05-16T00:00:00+00:00,2026-05-16T00:00:00+00:00
+34bcc389-edab-500b-bb7f-34f061547c32,20c4f9ec-8501-52eb-b4e9-608129ac639f,Q12,B,I prefer a 4-year program with no board exam.,0.0,0.0,0.0,0.0,0.0,0.0,constraint,2,2026-05-16T00:00:00+00:00,2026-05-16T00:00:00+00:00
+332c36f7-31a5-53aa-8fbe-912a35374b3b,20c4f9ec-8501-52eb-b4e9-608129ac639f,Q12,C,I want the fastest path to a job.,0.0,0.0,0.0,0.0,0.0,0.0,constraint,3,2026-05-16T00:00:00+00:00,2026-05-16T00:00:00+00:00

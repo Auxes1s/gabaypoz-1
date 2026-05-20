@@ -1,0 +1,14 @@
+{
+  "profile_version": "program_profile_v2",
+  "rows": 143,
+  "needs_review_rows": 37,
+  "prior_weight": 0.55,
+  "template_weight": 0.45,
+  "source_programs": "data/raw/supabase_exports/program.csv",
+  "source_occupation_bridge": "data/processed/team3_eda/program_occupation_bridge.parquet",
+  "outputs": [
+    "data/processed/team4_model/program_profile_v2.csv",
+    "data/processed/team4_model/program_profile_v2.parquet",
+    "reports/model/program_profile_v2_review.csv"
+  ]
+}

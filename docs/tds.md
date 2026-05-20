@@ -86,8 +86,9 @@ The recommender reads a student's answers and barangay, scores which programs fi
 | Table                                 | Needed fields                                                                  | Used for                            |
 | ------------------------------------- | ------------------------------------------------------------------------------ | ----------------------------------- |
 | `guest_tracker`                       | `session_id`, `is_completed`, `email`                                          | Session validation                  |
-| `users_response`                      | `session_id`, `question_id`, `selected_option`                                 | Student answers                     |
-| `questions`                           | `question_id`, six score columns                                               | Convert answers into student scores |
+| `users_response`                      | `session_id`, `question_id`, `option_id`                                       | Student answers                     |
+| `questions`                           | `question_id`, `question_text`                                                 | Question metadata                   |
+| `answer_option`                       | `option_id`, `question_id`, six score columns                                  | Convert answers into student scores |
 | `barangay_location`                   | `barangay_id`, `barangay_name`                                                 | Validate student barangay           |
 | `municipality_field_saturation`       | See section 7                                                                  | Market-context adjustment           |
 | `barangay_university_commute_matrix`  | `barangay_id`, `university_id`, `distance_km`, `commute_time_mins`             | Q11 travel filter                   |
@@ -98,6 +99,28 @@ The recommender reads a student's answers and barangay, scores which programs fi
 | `scholarship`                         | `program_id`, `scholarship_code`, nearby/outside flags                         | Scholarship context                 |
 | `dimension_scholarship`               | `scholarship_code`, scholarship details                                        | Scholarship names and requirements  |
 | `model_recommendation`                | `session_id`, `model_id`, `rank`, `program_id`, `university_id`, `model_score` | Stored output                       |
+
+### 5.3 Local Supabase Snapshot
+
+Supabase was exported locally on 2026-05-16 into `data/raw/supabase_exports/` for recommender improvement and demos. This Supabase export snapshot is intentionally unignored so the fork can carry the demo data; unrelated raw files remain ignored.
+
+| Export | Rows | Status |
+| --- | ---:| --- |
+| `barangay_location.csv` | 34 | Complete barangay base |
+| `university.csv` | 27 | Includes added universities |
+| `program.csv` | 142 | Expanded program catalog |
+| `university_program.csv` | 530 | Supabase school-program offerings |
+| `local_offering_overrides.csv` | 2 | PMA = `BACHELOR OF SCIENCE IN MANAGEMENT MAJOR IN SECURITY STUDIES`; MAAP = `Bachelor of Science in Marine Transportation` |
+| `barangay_university_commute_matrix.csv` | 675 | Original export snapshot; live Supabase was later completed to 918 rows |
+| `scholarship.csv` | 2,125 | Available for scholarship context |
+| `dimension_scholarship.csv` | 29 | Available for scholarship names/details |
+| `questions.csv` | 12 | Q1-Q12 seeded in live Supabase |
+| `answer_option.csv` | 44 | Option-level scoring and constraint options seeded in live Supabase |
+| `guest_tracker.csv`, `users_response.csv`, `model_recommendation.csv` | 0 each | No persisted demo runs yet |
+
+Schema update, completed on 2026-05-16: live Supabase `model_recommendation` now has `recommendation_id`, `session_id`, `program_id`, `model_score`, `created_datetime`, `rank`, `model_id`, and `university_id`, matching the recommender v1.2 persistence contract.
+
+Derived dataset update, completed on 2026-05-16: live Supabase now has a complete 918-row `barangay_university_commute_matrix`, a complete 918-row `barangay_university_economic_burden`, and a 6-row `municipality_field_saturation`. The load was generated from `/tmp/gabaypoz_supabase_derived/`: 243 missing commute rows, a complete 918-row commute matrix, a 918-row Q10 burden table, and a 6-row saturation table.
 
 ## 6. Blocking Dataset: Affordability
 
@@ -172,6 +195,10 @@ If the saturation dataset is missing, the recommender should fall back to a neut
 The current schema needs one clarification before implementation is final.
 
 Status note: the recommender code already implements option-level scoring from `questions`, and the ERD-shaped tests cover that behavior. The DB schema still needs to adopt the same option-level contract everywhere Team 5 reads the answers from.
+
+Implementation note, 2026-05-16: the Supabase schema now includes `answer_option.option_id` and `users_response.option_id`. That is the preferred integration contract. The recommender can still accept ERD-shaped `question_id` + selected option values for local tests, but production reads should resolve each response through `option_id`.
+
+Implementation note, 2026-05-16: recommender v1.2 reintroduces Q7 as a required SHS strand aptitude multiplier under `model_id = tds_recommender_v1_2`. The support is methodological rather than causal: Team 3's questionnaire-scoring contract includes multiplier-style scoring, and the Team 4 model notes specify that Q7 should multiply matching aptitude dimensions. v1.2 uses the already-tested v1 multiplier map and keeps Q7 separate from additive `questions` scoring rows. Live Supabase seeds Q7 as an `aptitude` question with zero additive scores because `answer_option.question_group` is constrained to `internal`, `aptitude`, or `constraint`.
 
 | Requirement                              | Problem                                                                                                                                                                                                                | Proposed fix                                                                                            |
 | ---------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
@@ -258,6 +285,8 @@ If scores are tied, break ties in this order:
 3. Different dominant field from programs already selected.
 4. Alphabetical program name.
 
+For the program's own dominant affinity field, ties inside the six affinity scores are resolved alphabetically by field label. This keeps cases like Health = 5 and STEM = 5 deterministic.
+
 ### Rule 6: Find Schools For Each Recommended Program
 
 For each selected program, find schools that offer it by joining:
@@ -303,6 +332,8 @@ The first school becomes the primary school suggestion. Other feasible schools a
 
 If a recommended program has no feasible school after Q10/Q11, the recommender should try the next-highest program. If fewer than three programs have feasible schools, return `NO_CANDIDATES` and write no rows.
 
+Scholarships are context only in v1.1. They can improve the explanation and school ordering among already feasible schools, but they do not bypass Q10 affordability or Q11 mobility filters. There is no scholarship-rescue mechanism in v1.1.
+
 ## 10. Stored Output
 
 The recommender writes exactly three primary rows to `model_recommendation`.
@@ -313,7 +344,7 @@ Each row represents one recommended program. The stored `university_id` is the p
 | ------------------- | ------------------------------------------------------------------- |
 | `recommendation_id` | Unique row ID                                                       |
 | `session_id`        | Student session                                                     |
-| `model_id`          | Model version, use `tds_recommender_v1_1` unless backend uses UUIDs |
+| `model_id`          | Model version; use `tds_recommender_v1_1` for v1.1 and `tds_recommender_v1_2` for Q7-enabled v1.2 unless backend uses UUIDs |
 | `rank`              | 1, 2, or 3; this ranks the recommended programs                     |
 | `program_id`        | Recommended program                                                 |
 | `university_id`     | Primary suggested school for the recommended program                |
@@ -370,15 +401,15 @@ Minimum returned fields:
 
 | Area          | Requirement                                                | Proposal                                                                                                |
 | ------------- | ---------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
-| Data          | Build `barangay_university_economic_burden`                | Team 3/4 create it from commute data, university cost class, tuition estimates, and Q10 tier thresholds |
-| Data          | Build `municipality_field_saturation`                      | Start from Team 3 HEAP occupation shares; use Pozorrubio rows for launch and generalize later           |
-| Database      | Confirm `model_recommendation.rank` exists and is writable | Team 5 confirms schema before integration                                                               |
+| Data          | Complete Supabase commute coverage                         | Done: live Supabase has 918/918 barangay-university commute rows                                        |
+| Data          | Add PMA and MAAP commute rows                              | Done through the 918-row live commute matrix                                                            |
+| Data          | Load `barangay_university_economic_burden` to Supabase     | Done: live Supabase has 918/918 Q10 burden rows                                                         |
+| Data          | Load `municipality_field_saturation` to Supabase           | Done: live Supabase has 6 Pozorrubio saturation rows                                                    |
+| Database      | Add `model_id`, `rank`, and `university_id` to `model_recommendation` | Done: live Supabase exposes all three v1.2 persistence fields                                           |
 | Database      | Decide future explanation logging                          | For v1.1, return explanations only; for v2, add `explanation_json` or a separate trace table            |
-| Questionnaire | Make answer scoring unambiguous                            | Add option-level scoring table or make each selectable answer a unique `question_id` row                |
+| Questionnaire | Seed `questions` and `answer_option`                       | Done on 2026-05-16: 12 question rows and 44 answer-option rows are in live Supabase                     |
 | Questionnaire | Capture barangay reliably                                  | Team 5 sends `student_barangay_id` to recommender                                                       |
-| Model         | Refactor zero-draft recommender to program-first flow      | Reuse the current scoring logic, then select schools under each recommended program                     |
-| Model         | Add saturation to program scoring                          | Blend 90% base fit score with 10% municipality saturation before Q12 penalty                            |
-| Model         | Re-run tests using ERD-shaped fixtures                     | Team 4 updates fixtures and validates T1-T7                                                             |
+| Model         | Maintain program-first v1.1 tests                          | Tests must cover saturation, Q10/Q11 filtering, scholarship context, and deterministic tie-breaks       |
 | Web/API       | Confirm request and response contract                      | Team 5 consumes stored rows plus returned explanations                                                  |
 
 ## 14. Test Plan
@@ -396,6 +427,9 @@ Before Team 5 integration, verify:
 - missing `barangay_university_economic_burden` returns `MISSING_Q10_BURDEN_DATA`.
 - Q10 removes unaffordable school suggestions when burden data is present.
 - Q12 applies the duration penalty only when needed.
+- dominant-field ties resolve deterministically by alphabetical field label.
+- scholarships do not bypass Q10/Q11 feasibility filters.
+- weight-sensitivity output is generated at `reports/model/team4_recommender_v1_1_weight_sensitivity.csv`.
 - exactly three rows are written to `model_recommendation`.
 - persisted `rank` values rank programs, not alternate schools.
 - returned explanations are not written to `model_recommendation`.

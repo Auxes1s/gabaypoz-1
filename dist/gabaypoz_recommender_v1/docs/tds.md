@@ -111,14 +111,16 @@ Supabase was exported locally on 2026-05-16 into `data/raw/supabase_exports/` fo
 | `program.csv` | 142 | Expanded program catalog |
 | `university_program.csv` | 530 | Supabase school-program offerings |
 | `local_offering_overrides.csv` | 2 | PMA = `BACHELOR OF SCIENCE IN MANAGEMENT MAJOR IN SECURITY STUDIES`; MAAP = `Bachelor of Science in Marine Transportation` |
-| `barangay_university_commute_matrix.csv` | 675 | Incomplete for all 27 universities |
+| `barangay_university_commute_matrix.csv` | 675 | Original export snapshot; live Supabase was later completed to 918 rows |
 | `scholarship.csv` | 2,125 | Available for scholarship context |
 | `dimension_scholarship.csv` | 29 | Available for scholarship names/details |
-| `questions.csv` | 0 | Needs questionnaire seed data |
-| `answer_option.csv` | 0 | Needs option scoring seed data |
+| `questions.csv` | 12 | Q1-Q12 seeded in live Supabase |
+| `answer_option.csv` | 44 | Option-level scoring and constraint options seeded in live Supabase |
 | `guest_tracker.csv`, `users_response.csv`, `model_recommendation.csv` | 0 each | No persisted demo runs yet |
 
-Schema gap: the exported `model_recommendation` table currently has `recommendation_id`, `session_id`, `program_id`, `model_score`, and `created_datetime`. The v1.1 persistence contract still needs `model_id`, `rank`, and `university_id`.
+Schema update, completed on 2026-05-16: live Supabase `model_recommendation` now has `recommendation_id`, `session_id`, `program_id`, `model_score`, `created_datetime`, `rank`, `model_id`, and `university_id`, matching the recommender v1.2 persistence contract.
+
+Derived dataset update, completed on 2026-05-16: live Supabase now has a complete 918-row `barangay_university_commute_matrix`, a complete 918-row `barangay_university_economic_burden`, and a 6-row `municipality_field_saturation`. The load was generated from `/tmp/gabaypoz_supabase_derived/`: 243 missing commute rows, a complete 918-row commute matrix, a 918-row Q10 burden table, and a 6-row saturation table.
 
 ## 6. Blocking Dataset: Affordability
 
@@ -196,7 +198,7 @@ Status note: the recommender code already implements option-level scoring from `
 
 Implementation note, 2026-05-16: the Supabase schema now includes `answer_option.option_id` and `users_response.option_id`. That is the preferred integration contract. The recommender can still accept ERD-shaped `question_id` + selected option values for local tests, but production reads should resolve each response through `option_id`.
 
-Implementation note, 2026-05-16: recommender v1.2 reintroduces Q7 as a required SHS strand aptitude multiplier under `model_id = tds_recommender_v1_2`. The support is methodological rather than causal: Team 3's questionnaire-scoring contract includes multiplier-style scoring, and the Team 4 model notes specify that Q7 should multiply matching aptitude dimensions. v1.2 uses the already-tested v1 multiplier map and keeps Q7 separate from additive `questions` scoring rows.
+Implementation note, 2026-05-16: recommender v1.2 reintroduces Q7 as a required SHS strand aptitude multiplier under `model_id = tds_recommender_v1_2`. The support is methodological rather than causal: Team 3's questionnaire-scoring contract includes multiplier-style scoring, and the Team 4 model notes specify that Q7 should multiply matching aptitude dimensions. v1.2 uses the already-tested v1 multiplier map and keeps Q7 separate from additive `questions` scoring rows. Live Supabase seeds Q7 as an `aptitude` question with zero additive scores because `answer_option.question_group` is constrained to `internal`, `aptitude`, or `constraint`.
 
 | Requirement                              | Problem                                                                                                                                                                                                                | Proposed fix                                                                                            |
 | ---------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
@@ -399,13 +401,13 @@ Minimum returned fields:
 
 | Area          | Requirement                                                | Proposal                                                                                                |
 | ------------- | ---------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
-| Data          | Complete Supabase commute coverage                         | Add missing barangay-university rows for newly added schools before appending them to v1.1 datasets     |
-| Data          | Add PMA and MAAP commute rows                              | Their local demo offerings are defined, but both still have 0/34 barangay commute coverage              |
-| Data          | Keep `barangay_university_economic_burden` generated       | Team 4 derives it from commute data, university cost class, tuition estimates, and Q10 tier thresholds |
-| Data          | Keep `municipality_field_saturation` generated             | Start from Team 3 HEAP occupation shares; use Pozorrubio for launch and generalize later                |
-| Database      | Confirm `model_recommendation.rank` exists and is writable | Team 5 confirms schema before integration                                                               |
+| Data          | Complete Supabase commute coverage                         | Done: live Supabase has 918/918 barangay-university commute rows                                        |
+| Data          | Add PMA and MAAP commute rows                              | Done through the 918-row live commute matrix                                                            |
+| Data          | Load `barangay_university_economic_burden` to Supabase     | Done: live Supabase has 918/918 Q10 burden rows                                                         |
+| Data          | Load `municipality_field_saturation` to Supabase           | Done: live Supabase has 6 Pozorrubio saturation rows                                                    |
+| Database      | Add `model_id`, `rank`, and `university_id` to `model_recommendation` | Done: live Supabase exposes all three v1.2 persistence fields                                           |
 | Database      | Decide future explanation logging                          | For v1.1, return explanations only; for v2, add `explanation_json` or a separate trace table            |
-| Questionnaire | Seed `questions` and `answer_option`                       | The tables exist in Supabase, but the 2026-05-16 export has zero rows                                   |
+| Questionnaire | Seed `questions` and `answer_option`                       | Done on 2026-05-16: 12 question rows and 44 answer-option rows are in live Supabase                     |
 | Questionnaire | Capture barangay reliably                                  | Team 5 sends `student_barangay_id` to recommender                                                       |
 | Model         | Maintain program-first v1.1 tests                          | Tests must cover saturation, Q10/Q11 filtering, scholarship context, and deterministic tie-breaks       |
 | Web/API       | Confirm request and response contract                      | Team 5 consumes stored rows plus returned explanations                                                  |

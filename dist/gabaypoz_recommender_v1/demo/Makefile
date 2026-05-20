@@ -1,4 +1,4 @@
-# GabayPoz Recommender v1.1 demo build
+# GabayPoz Recommender v2 demo build
 #
 #   make           build demo.pdf from source (default target)
 #   make clean     remove LaTeX intermediates and generated results.tex

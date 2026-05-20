@@ -1,0 +1,262 @@
+{
+  "data_source": "synthetic_fixture",
+  "synthetic_fixture": true,
+  "construct_validity": {
+    "per_field": {
+      "stem": {
+        "n_students": 30,
+        "alpha": 0.22144112478031586,
+        "alpha_acceptable": false,
+        "item_total_correlations": [
+          0.13925649835303436,
+          -0.048840247054131244,
+          0.13549172840925214,
+          0.22708166147411665
+        ],
+        "flagged_items": [
+          "V2Q01",
+          "V2Q02",
+          "V2Q03",
+          "V2Q04"
+        ]
+      },
+      "health": {
+        "n_students": 30,
+        "alpha": 0.5412621359223302,
+        "alpha_acceptable": false,
+        "item_total_correlations": [
+          0.5779081812346889,
+          0.08508193154580865,
+          0.2579848923898614,
+          0.4426592572070146
+        ],
+        "flagged_items": [
+          "V2Q06",
+          "V2Q07"
+        ]
+      },
+      "arts": {
+        "n_students": 30,
+        "alpha": 0.343541006687786,
+        "alpha_acceptable": false,
+        "item_total_correlations": [
+          0.12416931957945827,
+          0.34205585784644826,
+          0.034754072609463144,
+          0.23348336216711232
+        ],
+        "flagged_items": [
+          "V2Q09",
+          "V2Q11",
+          "V2Q12"
+        ]
+      },
+      "business": {
+        "n_students": 30,
+        "alpha": 0.12342079689018481,
+        "alpha_acceptable": false,
+        "item_total_correlations": [
+          0.14406971882120084,
+          0.051607676490299355,
+          0.023713706781881234,
+          0.018473001033849436
+        ],
+        "flagged_items": [
+          "V2Q13",
+          "V2Q14",
+          "V2Q15",
+          "V2Q16"
+        ]
+      },
+      "education": {
+        "n_students": 30,
+        "alpha": 0.46839167935058335,
+        "alpha_acceptable": false,
+        "item_total_correlations": [
+          0.29700248700130605,
+          0.38221791556574713,
+          0.2874512811364202,
+          0.14508889417987153
+        ],
+        "flagged_items": [
+          "V2Q17",
+          "V2Q19",
+          "V2Q20"
+        ]
+      },
+      "agriculture": {
+        "n_students": 30,
+        "alpha": 0.5331799002685078,
+        "alpha_acceptable": false,
+        "item_total_correlations": [
+          0.21122378892107443,
+          0.3871076047185323,
+          0.3419451759284773,
+          0.3742683404713793
+        ],
+        "flagged_items": [
+          "V2Q21"
+        ]
+      }
+    },
+    "summary": {
+      "fields_passing_alpha": 0,
+      "total_flagged_items": 17
+    }
+  },
+  "outcome_metrics": {
+    "precision_field": {
+      "n_sessions_with_ground_truth": 16,
+      "n_hits": 8,
+      "precision_at_3": 0.5,
+      "target": 0.7,
+      "meets_target": false
+    },
+    "precision_program": {
+      "n_sessions_with_ground_truth": 0,
+      "n_hits": 0,
+      "precision_at_3": NaN,
+      "target": null,
+      "meets_target": null
+    },
+    "acceptance": {
+      "n_sessions": 30,
+      "n_accepting": 24,
+      "acceptance_rate": 0.8,
+      "target": 0.75,
+      "meets_target": true
+    },
+    "relevance": {
+      "n_sessions": 30,
+      "mean": 3.5976576496493835,
+      "std": 0.8556710817097515,
+      "target": 3.5,
+      "meets_target": true
+    },
+    "confidence_shift": {
+      "n_sessions": 30,
+      "mean": 0.47571441914558105,
+      "std": 0.9261181501588203,
+      "positive_shift": true
+    },
+    "field_fairness": {
+      "n_rank1_recommendations": 30,
+      "per_field_share": {
+        "stem": 0.16666666666666666,
+        "health": 0.36666666666666664,
+        "arts": 0.13333333333333333,
+        "business": 0.1,
+        "education": 0.13333333333333333,
+        "agriculture": 0.1
+      },
+      "flagged_fields": [],
+      "n_top3_recommendations": 90,
+      "top3_per_field_share": {
+        "stem": 0.23333333333333334,
+        "health": 0.2111111111111111,
+        "arts": 0.1111111111111111,
+        "business": 0.14444444444444443,
+        "education": 0.13333333333333333,
+        "agriculture": 0.16666666666666666
+      },
+      "top3_flagged_fields": []
+    },
+    "strand_field_fairness": {
+      "per_strand": {
+        "ABM": {
+          "n_top3_recommendations": 17,
+          "top3_per_field_share": {
+            "stem": 0.11764705882352941,
+            "health": 0.17647058823529413,
+            "arts": 0.11764705882352941,
+            "business": 0.29411764705882354,
+            "education": 0.17647058823529413,
+            "agriculture": 0.11764705882352941
+          },
+          "exclusive_one_field": false
+        },
+        "GAS": {
+          "n_top3_recommendations": 16,
+          "top3_per_field_share": {
+            "stem": 0.3125,
+            "health": 0.125,
+            "arts": 0.1875,
+            "business": 0.0625,
+            "education": 0.125,
+            "agriculture": 0.1875
+          },
+          "exclusive_one_field": false
+        },
+        "HUMSS": {
+          "n_top3_recommendations": 16,
+          "top3_per_field_share": {
+            "stem": 0.3125,
+            "health": 0.1875,
+            "arts": 0.0625,
+            "business": 0.125,
+            "education": 0.0625,
+            "agriculture": 0.25
+          },
+          "exclusive_one_field": false
+        },
+        "STEM": {
+          "n_top3_recommendations": 19,
+          "top3_per_field_share": {
+            "stem": 0.15789473684210525,
+            "health": 0.21052631578947367,
+            "arts": 0.10526315789473684,
+            "business": 0.15789473684210525,
+            "education": 0.21052631578947367,
+            "agriculture": 0.15789473684210525
+          },
+          "exclusive_one_field": false
+        },
+        "TVL": {
+          "n_top3_recommendations": 22,
+          "top3_per_field_share": {
+            "stem": 0.2727272727272727,
+            "health": 0.3181818181818182,
+            "arts": 0.09090909090909091,
+            "business": 0.09090909090909091,
+            "education": 0.09090909090909091,
+            "agriculture": 0.13636363636363635
+          },
+          "exclusive_one_field": false
+        }
+      },
+      "flagged_strands": []
+    },
+    "calibration": {
+      "n_flagged_sessions": 7,
+      "n_not_flagged_sessions": 23,
+      "acceptance_rate_flagged": 1.0,
+      "acceptance_rate_not_flagged": 0.7391304347826086,
+      "flags_correlate_with_lower_acceptance": false
+    },
+    "feedback_completeness": {
+      "n_feedback_rows": 30,
+      "n_complete_feedback_rows": 16,
+      "missing_by_column": {
+        "session_id": 0,
+        "stated_choice_field": 14,
+        "would_consider_any": 0,
+        "relevance_score": 0,
+        "confidence_shift": 0
+      }
+    },
+    "trace_completeness": {
+      "n_sessions": 30,
+      "n_sessions_with_3_traces": 30,
+      "n_sessions_with_feedback": 30,
+      "n_complete_sessions": 30,
+      "missing_trace_sessions": [],
+      "missing_feedback_sessions": []
+    },
+    "aspiration_boost_acceptance": {
+      "n_boosted_sessions": 7,
+      "n_not_boosted_sessions": 23,
+      "acceptance_rate_boosted": 0.8571428571428571,
+      "acceptance_rate_not_boosted": 0.782608695652174
+    }
+  }
+}

@@ -1,11 +1,11 @@
-# Team 4 Model Development Project Plan v1.1
+# Team 4 Model Development Project Plan v1.2 Update
 
 | Item           | Value                             |
 | -------------- | --------------------------------- |
 | Document ID    | `team4_model_dev_project_plan_v1` |
 | Status         | Tracker updated with implemented/generated items |
 | Owner          | Team 4 Model Development          |
-| TDS reference  | `team4_tds_recommender_v1_1`      |
+| TDS reference  | `team4_tds_recommender_v1_1` plus v1.2 Q7 update |
 | Target handoff | Team 5 Web Development            |
 
 ## 1. Goal
@@ -17,6 +17,7 @@ The model should:
 - accept a student session and barangay,
 - use questionnaire answers to understand the student's likely program fit,
 - include a small municipality saturation signal as market context,
+- apply Q7 SHS strand as an aptitude multiplier in v1.2,
 - recommend the top three programs first,
 - choose one primary school suggestion for each recommended program,
 - return alternate feasible schools when available,
@@ -29,16 +30,17 @@ The model should:
 2. The model reads the student's answers from `users_response`.
 3. The model uses `questions` to compute six student scores:
    STEM, Health, Arts, Business, Education, Agriculture.
-4. The model compares the student scores with each program's six affinity scores.
-5. The model applies a small municipality saturation adjustment as market context.
-6. The model applies a small Q12 penalty when a program is longer or more board-exam-heavy than the student prefers.
-7. The model chooses the top three programs.
-8. For each selected program, the model finds schools that offer it through `university_program`.
-9. The model uses `barangay_university_commute_matrix` to remove school suggestions outside the student's Q11 travel limit.
-10. The model uses `barangay_university_economic_burden` to remove school suggestions outside the student's Q10 affordability tier.
-11. The model chooses one primary school for each program and returns alternate feasible schools when available.
-12. The model writes the top three program recommendations to `model_recommendation`.
-13. The model returns explanations to the UI/API response.
+4. In v1.2, Q7 is required and multiplies the normalized Q8/Q9 aptitude vector using the tested v1 strand map.
+5. The model compares the student scores with each program's six affinity scores.
+6. The model applies a small municipality saturation adjustment as market context.
+7. The model applies a small Q12 penalty when a program is longer or more board-exam-heavy than the student prefers.
+8. The model chooses the top three programs.
+9. For each selected program, the model finds schools that offer it through `university_program`.
+10. The model uses `barangay_university_commute_matrix` to remove school suggestions outside the student's Q11 travel limit.
+11. The model uses `barangay_university_economic_burden` to remove school suggestions outside the student's Q10 affordability tier.
+12. The model chooses one primary school for each program and returns alternate feasible schools when available.
+13. The model writes the top three program recommendations to `model_recommendation`.
+14. The model returns explanations to the UI/API response.
 
 ## 3. What Is Already Decided
 
@@ -51,6 +53,7 @@ The model should:
 | Q11 travel rule         | Hard filter for school suggestions by commute time      |
 | Q10 affordability rule  | Hard filter for school suggestions using burden dataset |
 | Market context          | Municipality saturation, capped at 10% of program score |
+| Q7 strand rule          | Required in v1.2; multiplier on Q8/Q9 aptitude, not additive scoring |
 | Q12 duration rule       | Soft penalty using `program.affinity_duration_score`    |
 | Stored output           | Three program rows, each with one primary school        |
 | Explanation storage     | Returned by API, not stored yet                         |
@@ -68,6 +71,7 @@ The model should:
 | Database schema | Decide future explanation storage            | v2 training needs score details and explanations                   | For v1.1 return explanations only; for v2 add `explanation_json` or a separate recommendation trace table  |
 | Database schema | Confirm scholarship join                     | Explanations need scholarship names and requirements               | Join `scholarship` to `dimension_scholarship` by `scholarship_code`                                        |
 | Questionnaire   | Make scoring rows unambiguous                | The model must know which answer option maps to which score values | Add an answer-option scoring table, or make each selectable answer a unique `question_id` row              |
+| Questionnaire   | Add Q7 multiplier support                    | v1.2 requires Q7 but does not score it as additive points          | Add `scoring_type = multiplier` support or document a separate v1.2 Q7 scoring contract                   |
 | Questionnaire   | Freeze Q10/Q11/Q12 stored values             | The rules depend on stable option values like A/B/C                | Team 1/Team 5 confirms stored values before backend integration                                            |
 | Questionnaire   | Require barangay input                       | Q11 and Q10 both depend on student location                        | Team 5 sends `student_barangay_id` when calling the recommender                                            |
 | Model           | Rebuild tests with ERD-shaped data           | Existing tests were built around older parquet-style names         | Team 4 updates fixtures to match DB field names                                                            |
@@ -77,12 +81,73 @@ The model should:
 | Model           | Decide no-data behavior                      | Missing affordability data should not produce misleading results   | Return `MISSING_Q10_BURDEN_DATA` and write no rows                                                         |
 | Web/API         | Confirm request and response                 | Integration breaks if Team 4 and Team 5 expect different shapes    | Team 5 sends `session_id` + `student_barangay_id`; Team 4 returns explanations and writes ranked rows      |
 
+## 4.0 Supabase Export Snapshot
+
+Supabase data was pulled locally on 2026-05-16 into `data/raw/supabase_exports/`. These export snapshots are checked into the fork for recommender improvement and demos; `.env.local` and unrelated raw source files remain ignored.
+
+| Export | Rows | Demo implication |
+| --- | ---:| --- |
+| `university.csv` | 27 | Includes the original universities plus PMMA, PMA, MAAP, University of Baguio, University of Cordilleras, and other schools |
+| `program.csv` | 142 | Expanded program universe from Supabase |
+| `university_program.csv` | 530 | School-program offerings from Supabase |
+| `local_offering_overrides.csv` | 2 | Local demo overrides: PMA = `BACHELOR OF SCIENCE IN MANAGEMENT MAJOR IN SECURITY STUDIES`; MAAP = `Bachelor of Science in Marine Transportation` |
+| `barangay_location.csv` | 34 | Complete Pozorrubio barangay list |
+| `barangay_university_commute_matrix.csv` | 675 | Original export snapshot; live Supabase was later completed to 918 rows |
+| `scholarship.csv` | 2,125 | Program-scholarship bridge rows |
+| `dimension_scholarship.csv` | 29 | Scholarship metadata |
+| `questions.csv` | 12 | Live Supabase now has Q1-Q12 seeded from the final questionnaire |
+| `answer_option.csv` | 44 | Live Supabase now has option-level scoring for Q1-Q6, Q8-Q9, and constraint options for Q10-Q12 |
+| `guest_tracker.csv`, `users_response.csv`, `model_recommendation.csv` | 0 each | No live demo sessions or persisted recommendations yet |
+
+Current demo blockers: insert one test `guest_tracker` session plus `users_response` rows, run the recommender against Supabase-shaped data, and persist three `model_recommendation` rows. Commute coverage, Q10 burden data, saturation data, `questions`, `answer_option`, and the `model_recommendation` v1.2 columns are now present in live Supabase.
+
+## 4.0b Supabase Questionnaire Seed
+
+On 2026-05-16, live Supabase was seeded with the recommender questionnaire contract:
+
+| Table | Rows written | Notes |
+| --- | ---:| --- |
+| `questions` | 12 | Q1-Q12 from `docs/questionnaires/final_questionnaire.docx`, using deterministic UUIDs and Q-code prefixes in `question_text` |
+| `answer_option` | 44 | 27 internal/aptitude scoring options, 5 Q7 strand options, and 12 constraint options for Q10-Q12 |
+
+Seed artifacts are stored in `data/processed/team4_model/supabase_seed/`. The seed utility is `analysis/team4_model/seed_recommender_questionnaire.py`.
+
+Rollback command:
+
+```bash
+python3 analysis/team4_model/seed_recommender_questionnaire.py --rollback --verify
+```
+
+Q7 is seeded as an aptitude question with zero additive scores because the current Supabase check constraint allows only `internal`, `aptitude`, and `constraint` in `answer_option.question_group`. Recommender v1.2 still applies Q7 through the code-level strand multiplier map after Q8/Q9 aptitude normalization; Q7 should not be summed as additive option points.
+
+Q10 includes the v1.2/TDS `C` option for tier-5 affordability (`More flexible budget; can consider higher-cost options`) so the live questionnaire can satisfy the recommender's `Q10_MAP = {"A": 1, "B": 3, "C": 5}` contract.
+
+## 4.0a Supabase Derived Dataset Generation
+
+Live Supabase schema inspection on 2026-05-16 initially confirmed that `barangay_university_economic_burden` and `municipality_field_saturation` were not present in `public`. A local generation pass produced load-ready files under `/tmp/gabaypoz_supabase_derived/`, and those files were loaded to live Supabase.
+
+| Generated file | Rows | Purpose |
+| --- | ---:| --- |
+| `commute_missing_insert.csv` | 243 | Rows needed to complete the live `barangay_university_commute_matrix` table |
+| `commute_complete_918.csv` | 918 | Full 34 barangays x 27 universities launch matrix |
+| `barangay_university_economic_burden_918.csv` | 918 | Full Q10 burden table for the launch university scope |
+| `municipality_field_saturation.csv` | 6 | Pozorrubio market-context rows for the six affinity fields |
+
+The generation pass kept existing Supabase commute rows where available and generated only missing commute rows with a coordinate-based, calibrated proxy. The calibration used the existing Supabase commute rows: median distance multiplier 1.2389622701602832 and median minutes per km 1.2082551594746718. The UP Open University row had no Supabase coordinates, so generation used an approximate UP Open University Headquarters location in Maahas, Los Banos, Laguna.
+
+Live verification after load:
+
+- `barangay_university_commute_matrix`: 918 rows, 0 missing barangay-university pairs.
+- `barangay_university_economic_burden`: 918 rows, 0 missing barangay-university pairs.
+- `municipality_field_saturation`: 6 rows.
+
 ## 4.1 Implemented / Generated
 
 | Area | Status | Evidence |
 | --- | --- | --- |
 | Recommender module | Implemented | `analysis/team4_model/recommender_v1_1.py` and packaged `dist/gabaypoz_recommender_v1/src/gabaypoz_recommender/recommender.py` |
 | ERD-shaped tests | Implemented | `analysis/team4_model/test_recommender_v1_1.py` and packaged test mirror |
+| v1.2 Q7 multiplier | Implemented | `analysis/team4_model/recommender_v1_2.py`, `analysis/team4_model/test_recommender_v1_2.py`, and packaged demo mirror |
 | Barangay location dataset | Generated | `data/processed/team4_model/barangay_location.parquet` |
 | University dataset | Generated | `data/processed/team4_model/university.parquet` |
 | Commute matrix | Generated | `data/processed/team4_model/barangay_university_commute_matrix.parquet` |
@@ -117,10 +182,14 @@ The model is ready for Team 5 integration when:
 - Q11 commute filtering works for school suggestions.
 - Q10 affordability filtering works for school suggestions or fails safely with `MISSING_Q10_BURDEN_DATA`.
 - Q12 duration penalty works.
+- Q7 is required in v1.2 and applies only as an aptitude multiplier.
 - exactly three rows are written to `model_recommendation`.
 - rank values are 1, 2, and 3.
 - explanations are returned but not stored.
 - scholarship names and requirements can be shown.
+- scholarships are context only in v1.1 and do not bypass Q10/Q11 feasibility.
+- dominant-field ties are deterministic by alphabetical affinity-field label.
+- weight-sensitivity output is generated for 45/55, 50/50, 55/45, and saturation-weight comparisons.
 - T1-T7 tests pass with ERD-shaped fixtures.
 - Team 5 has sample request and response payloads.
 
@@ -131,6 +200,7 @@ The model is ready for Team 5 integration when:
 | Affordability dataset is not ready             | Q10 cannot be finalized                                   | Assign owner and delivery date immediately                                                           |
 | Saturation is mistaken for guaranteed demand   | Students may over-read the market context                 | Label it as local field presence, not job guarantee                                                   |
 | Questionnaire scoring is ambiguous             | Student scores may be wrong                               | Add option-level scoring or make scoring rows unique                                                 |
+| Q7 is seeded as additive scores                | Strand could overweight or distort aptitude               | Keep Q7 as multiplier-only in v1.2; do not add it into additive Q1-Q6/Q8-Q9 scoring rows              |
 | Team 5 expects explanations in DB              | Integration delay                                         | Confirm explanations are returned by API for v1.1                                                    |
 | `model_recommendation` schema differs from TDS | Write failure or missing rank                             | Confirm schema before implementation                                                                 |
 | Program-first output is misunderstood          | Team 5 may display one school as the whole recommendation | Explain that `program_id` is the recommendation and `university_id` is the primary school suggestion |
@@ -148,17 +218,17 @@ Team 4 final model checklist / agreements to close:
 
 3. Confirm explanations are returned by the API/UI response and are not stored in DB for v1.1. For now, the database only stores the recommendation rows. The longer explanation shown to students should be sent directly to the frontend when the model runs, including primary school details and alternate schools.
 
-4. Assign owner and delivery date for `barangay_university_economic_burden`. This dataset is required for the Q10 affordability rule. We need one person/team responsible for creating it and a clear date when it will be ready.
+4. Verify `barangay_university_economic_burden` in Supabase during the smoke test. The live table has 918 rows and is required for the Q10 affordability rule.
 
 5. Confirm Q10 burden dataset fields: `barangay_id`, `university_id`, `distance_km`, `commute_time_mins`, `economic_constraint`, `tuition_estimate`, `annual_transport_cost_php`, `total_annual_burden_php`, and affordability flags for tiers 1-5. These fields let the model estimate whether a school is affordable for a student from a specific barangay. It combines tuition and transport cost, then marks which Q10 budget tiers can afford it.
 
-6. Confirm municipality saturation dataset fields: `municipality_code`, `municipality_name`, `affinity_field`, `municipality_field_share`, `province_field_share`, `saturation_ratio`, `market_score`, `market_score_method`, and `source_reference`. This lets the model add a small local field-presence signal without claiming guaranteed job demand.
+6. Verify `municipality_field_saturation` in Supabase during the smoke test. The live table has 6 rows with `municipality_code`, `municipality_name`, `affinity_field`, `municipality_field_share`, `province_field_share`, `saturation_ratio`, `market_score`, `market_score_method`, and `source_reference`.
 
-7. Confirm questionnaire scoring is unambiguous: either option-level scoring table or unique scoring rows per selectable answer. The model must know exactly how each selected answer translates into STEM, Health, Arts, Business, Education, and Agriculture scores. If this mapping is unclear, student profiles may be scored incorrectly.
+7. Confirm questionnaire scoring is unambiguous: either option-level scoring table or unique scoring rows per selectable answer. The model must know exactly how each selected answer translates into STEM, Health, Arts, Business, Education, and Agriculture scores. For v1.2, Q7 must be handled as a multiplier, not as additive option points.
 
 8. Confirm Q10/Q11/Q12 stored option values are frozen before integration. The model rules depend on stable answer values. For example, Q11=A means nearby only, Q11=B means willing to travel, and Q11=C means dorm/relocation is acceptable. These values should not change after integration starts.
 
-9. Re-run T1-T7 tests using ERD-shaped fixtures. Include tests showing saturation can affect close rankings but cannot override poor student-program fit.
+9. Re-run v1.1 tests using ERD-shaped fixtures. Include tests showing saturation can affect close rankings but cannot override poor student-program fit, dominant-field ties are deterministic, and scholarships do not bypass Q10/Q11 filters.
 
 10. Confirm scholarship explanation join through `scholarship_code`. The model needs to connect program scholarship rows to scholarship details like name, benefactor, grade requirement, exam requirement, and application period. `scholarship_code` is the shared key for that join.
 

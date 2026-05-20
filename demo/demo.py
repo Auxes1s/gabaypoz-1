@@ -1,4 +1,4 @@
-"""Small v1.1 demo for the packaged GabayPoz recommender."""
+"""Small v2 demo for the packaged GabayPoz recommender."""
 from __future__ import annotations
 
 import sys
@@ -8,13 +8,23 @@ from pathlib import Path
 import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[1]
-SAMPLE_DATA = ROOT / "data" / "sample"
-PROCESSED_DATA = ROOT / "data" / "processed" / "team4_model"
+DATA = ROOT / "data" / "sample"
 OUT = Path(__file__).resolve().parent / "results.tex"
 
 sys.path.insert(0, str(ROOT / "src"))
 
-from gabaypoz_recommender import recommend_programs
+from gabaypoz_recommender import MODEL_ID, recommend_programs
+
+
+DIMS = ["stem", "health", "arts", "business", "education", "agriculture"]
+DIM_LABELS = {
+    "stem": "STEM",
+    "health": "Health",
+    "arts": "Arts",
+    "business": "Business",
+    "education": "Education",
+    "agriculture": "Agriculture",
+}
 
 
 @dataclass
@@ -22,56 +32,141 @@ class Profile:
     code: str
     title: str
     barangay_id: int
-    responses: dict
+    high_field: str
+    responses: dict[str, str]
+
+
+def _question_blueprint() -> list[tuple[str, str, str]]:
+    rows = []
+    qnum = 1
+    for field in DIMS:
+        for family in ["domain_interest", "domain_interest", "domain_self_efficacy", "domain_self_efficacy"]:
+            rows.append((f"V2Q{qnum:02d}", field, family))
+            qnum += 1
+    return rows
+
+
+def build_v2_questions() -> pd.DataFrame:
+    rows = []
+    for question_id, field, family in _question_blueprint():
+        for value in ["1", "2", "3", "4", "5"]:
+            rows.append(
+                {
+                    "question_id": question_id,
+                    "option_value": value,
+                    "construct_family": family,
+                    "target_field": field,
+                    "response_value": int(value),
+                    "reverse_scored": False,
+                }
+            )
+    return pd.DataFrame(rows)
+
+
+def _demo_programs() -> pd.DataFrame:
+    raw = pd.read_csv(DATA / "programs.csv")
+    programs = raw.rename(columns={"program": "program_name"}).copy()
+    for dim in DIMS:
+        programs[f"affinity_{dim}_score"] = programs[dim].astype(float)
+    programs["affinity_duration_score"] = programs["duration"].astype(float)
+    return programs[["program_id", "program_name", "affinity_duration_score", *[f"affinity_{dim}_score" for dim in DIMS]]]
+
+
+def _program_profiles(programs: pd.DataFrame) -> pd.DataFrame:
+    profiles = programs.copy()
+    score_cols = [f"affinity_{dim}_score" for dim in DIMS]
+    dominant_idx = profiles[score_cols].to_numpy().argmax(axis=1)
+    profiles["profile_version"] = "program_profile_v2"
+    profiles["profile_method"] = "demo_profile_from_sample_fixture"
+    profiles["profile_confidence"] = "medium"
+    profiles["profile_family"] = "demo_fixture"
+    profiles["dominant_dim"] = [DIMS[idx] for idx in dominant_idx]
+    profiles["dominant_dim_label"] = profiles["dominant_dim"].map(DIM_LABELS)
+    profiles["secondary_dims"] = ""
+    profiles["evidence_text"] = "Demo fixture profile generated from bundled sample program affinity scores."
+    profiles["evidence_sources"] = "sample_programs_csv"
+    profiles["review_status"] = "demo_fixture"
+    profiles["program_code"] = profiles["program_id"].map(lambda value: f"DEMO-{value}")
+    return profiles
 
 
 def load_fixtures() -> dict[str, pd.DataFrame]:
-    university_programs = pd.read_csv(SAMPLE_DATA / "university_programs.csv")[
-        ["program_id", "university_id"]
-    ]
+    university_programs = pd.read_csv(DATA / "university_programs.csv")
+    universities = (
+        university_programs[["university_id", "university_name"]]
+        .drop_duplicates()
+        .reset_index(drop=True)
+    )
+    commute = pd.read_csv(DATA / "commute_matrix.csv")
+    barangays = (
+        commute[["barangay_id"]]
+        .drop_duplicates()
+        .assign(
+            barangay_name=lambda df: "Barangay " + df["barangay_id"].astype(str),
+            municipality_code="155522000",
+            municipality_name="Pozorrubio",
+        )
+    )
+    saturation = pd.DataFrame(
+        {
+            "municipality_code": "155522000",
+            "municipality_name": "Pozorrubio",
+            "affinity_field": [label.upper() for label in DIM_LABELS.values()],
+            "market_score": [0.5] * len(DIMS),
+            "market_score_method": "ecosystem_saturation_v1_1",
+        }
+    )
+    programs = _demo_programs()
     return {
-        "programs": pd.read_csv(SAMPLE_DATA / "programs.csv"),
+        "programs": programs,
+        "program_profile_v2": _program_profiles(programs),
         "university_programs": university_programs,
-        "universities": pd.read_csv(PROCESSED_DATA / "university.csv"),
-        "commute_matrix": pd.read_csv(PROCESSED_DATA / "barangay_university_commute_matrix.csv"),
-        "economic_burden": pd.read_csv(PROCESSED_DATA / "barangay_university_economic_burden.csv"),
-        "scholarship": pd.read_csv(SAMPLE_DATA / "scholarship_bridge.csv"),
-        "questions": pd.read_csv(SAMPLE_DATA / "questions.csv"),
-        "barangay_location": pd.read_csv(PROCESSED_DATA / "barangay_location.csv"),
-        "municipality_field_saturation": pd.read_csv(
-            PROCESSED_DATA / "municipality_field_saturation.csv"
-        ),
+        "universities": universities,
+        "commute_matrix": commute,
+        "economic_burden": pd.read_csv(DATA / "economic_burden.csv"),
+        "scholarship": pd.read_csv(DATA / "scholarship_bridge.csv"),
+        "questions": build_v2_questions(),
+        "barangay_location": barangays,
+        "municipality_field_saturation": saturation,
     }
 
 
-def _max_for(dim: str) -> dict:
-    return {f"Q{i}": f"OPT_{dim}" for i in [1, 2, 3, 4, 5, 6, 8, 9]}
+def _responses(high_field: str, *, q7: str, q10: str, q11: str, q12: str, q13: str = "D") -> dict[str, str]:
+    result = {}
+    for question_id, target, _family in _question_blueprint():
+        result[question_id] = "5" if target == high_field else "1"
+    result.update({"Q7": q7, "Q10": q10, "Q11": q11, "Q12": q12, "Q13": q13})
+    return result
 
 
 PROFILES = [
     Profile(
         "D1",
-        "Health-oriented, ready for board-exam programs",
+        "Health-oriented STEM strand, medicine aspiration, ready for board-exam programs",
         1,
-        {**_max_for("HEALTH"), "Q10": "C", "Q11": "C", "Q12": "A"},
+        "health",
+        _responses("health", q7="STEM", q10="C", q11="C", q12="A", q13="A"),
     ),
     Profile(
         "D2",
-        "Arts-oriented, nearby-only travel",
+        "Arts-oriented HUMSS strand, nearby-only travel",
         1,
-        {**_max_for("ARTS"), "Q10": "B", "Q11": "A", "Q12": "B"},
+        "arts",
+        _responses("arts", q7="HUMSS", q10="B", q11="A", q12="B"),
     ),
     Profile(
         "D3",
-        "Agriculture-oriented, moderate budget",
+        "Agriculture-oriented TVL strand, moderate budget",
         3,
-        {**_max_for("AGRICULTURE"), "Q10": "B", "Q11": "B", "Q12": "B"},
+        "agriculture",
+        _responses("agriculture", q7="TVL", q10="B", q11="B", q12="B"),
     ),
     Profile(
         "D4",
-        "STEM-oriented, tight budget",
+        "STEM-oriented GAS strand, moderate budget",
         2,
-        {**_max_for("STEM"), "Q10": "A", "Q11": "A", "Q12": "B"},
+        "stem",
+        _responses("stem", q7="GAS", q10="B", q11="B", q12="B"),
     ),
 ]
 
@@ -104,49 +199,17 @@ def _tex_escape(value) -> str:
     return text
 
 
-def _fmt_money(value) -> str:
-    if value is None or pd.isna(value):
-        return "--"
-    return f"PHP {float(value):,.0f}"
-
-
-def _fmt_number(value, suffix: str = "") -> str:
-    if value is None or pd.isna(value):
-        return "--"
-    return f"{float(value):.1f}{suffix}"
-
-
-def _fmt_commute_ceiling(value) -> str:
-    if value is None or pd.isna(value):
-        return "none"
-    return f"{float(value):.1f} min"
-
-
-def _school_summary(school: dict) -> str:
-    return (
-        f"{school['university_name']} "
-        f"({_fmt_number(school.get('distance_km'), ' km')}, "
-        f"{_fmt_number(school.get('commute_time_mins'), ' min')}, "
-        f"{_fmt_money(school.get('total_annual_burden_php'))})"
-    )
-
-
-def _field_list(values: list) -> str:
-    return ", ".join(str(value) for value in values) if values else "--"
-
-
-def _warning_text(result: dict) -> str:
-    warnings = result.get("warnings") or []
-    return ", ".join(warnings) if warnings else "none"
-
-
 def render_profile(profile: Profile, result: dict) -> str:
     parts = [
         r"\subsection*{" + _tex_escape(f"{profile.code}: {profile.title}") + "}",
-        rf"\noindent Barangay id: \texttt{{{profile.barangay_id}}}; "
+        rf"\noindent Model: \texttt{{{_tex_escape(result.get('model_id', MODEL_ID))}}}; "
+        rf"Barangay id: \texttt{{{profile.barangay_id}}}; "
+        rf"High field: \texttt{{{_tex_escape(profile.high_field)}}}; "
+        rf"Q7: \texttt{{{_tex_escape(profile.responses['Q7'])}}}; "
         rf"Q10: \texttt{{{profile.responses['Q10']}}}; "
         rf"Q11: \texttt{{{profile.responses['Q11']}}}; "
-        rf"Q12: \texttt{{{profile.responses['Q12']}}}.",
+        rf"Q12: \texttt{{{profile.responses['Q12']}}}; "
+        rf"Q13: \texttt{{{profile.responses['Q13']}}}.",
         "",
     ]
     if result["status"] != "ok":
@@ -162,94 +225,34 @@ def render_profile(profile: Profile, result: dict) -> str:
 
     parts.extend(
         [
-            rf"\noindent Model id: \texttt{{{_tex_escape(result['model_id'])}}}; "
-            rf"warnings: \texttt{{{_tex_escape(_warning_text(result))}}}.",
-            "",
             r"\paragraph{Top recommendations.}",
-            r"\begingroup\scriptsize\setlength{\tabcolsep}{4pt}",
-            r"\noindent\begin{tabular}{@{}c p{3.3cm} p{3.5cm} r r r@{}}",
+            r"\begingroup\small\setlength{\tabcolsep}{6pt}",
+            r"\noindent\begin{tabular}{@{}c p{4.4cm} p{4.4cm} r@{}}",
             r"\toprule",
-            r"Rank & Program & Primary school & Score & Distance & Commute \\",
+            r"Rank & Program & Primary school & Score \\",
             r"\midrule",
         ]
     )
     for rec in result["recommendations"]:
-        primary = rec["primary_school"]
         parts.append(
             rf"{rec['rank']} & {_tex_escape(rec['program_name'])} & "
-            rf"{_tex_escape(primary['university_name'])} & "
-            rf"{rec['program_score']:.3f} & "
-            rf"{_tex_escape(_fmt_number(primary.get('distance_km'), ' km'))} & "
-            rf"{_tex_escape(_fmt_number(primary.get('commute_time_mins'), ' min'))} \\"
+            rf"{_tex_escape(rec['primary_school']['university_name'])} & "
+            rf"{rec['program_score']:.3f} \\"
         )
     top = result["recommendations"][0]
-    top_constraints = top["constraints_applied"]
-    top_market = top["market_context"]
-    top_scholarship = top["scholarship_context"]
+    trace = result["model_recommendation_trace_rows"][0]["explanation_json"]
     parts.extend(
         [
             r"\bottomrule",
             r"\end{tabular}\endgroup",
-            "",
-            r"\paragraph{Primary and alternate school suggestions.}",
-            r"\begin{itemize}",
-        ]
-    )
-    for rec in result["recommendations"]:
-        parts.append(
-            rf"  \item {_tex_escape(rec['program_name'])}: "
-            rf"\textbf{{Primary}} -- {_tex_escape(_school_summary(rec['primary_school']))}."
-        )
-        alternates = rec["alternate_schools"]
-        if alternates:
-            parts.append(
-                rf"        \textbf{{Alternates}} -- "
-                rf"{_tex_escape('; '.join(_school_summary(school) for school in alternates))}."
-            )
-        else:
-            parts.append(r"        \textbf{Alternates} -- none after Q10/Q11 filters.")
-    parts.extend(
-        [
-            r"\end{itemize}",
-            "",
-            r"\paragraph{Rank-1 structured details.}",
-            r"\begin{itemize}",
-            rf"  \item Matched dimensions: {_tex_escape(_field_list(top['matched_dimensions']))}.",
-            rf"  \item Alternate feasible schools: {len(top['alternate_schools'])}.",
-            rf"  \item Q10 tier: \texttt{{{top_constraints['q10_tier']}}}; "
-            rf"Q11 commute ceiling: \texttt{{{_tex_escape(_fmt_commute_ceiling(top_constraints['q11_max_commute_mins']))}}}; "
-            rf"Q12 response: \texttt{{{_tex_escape(profile.responses['Q12'])}}}.",
-            rf"  \item Market context: {_tex_escape(top_market['affinity_field'])} "
-            rf"score {_tex_escape(top_market['market_score'])} "
-            rf"via \texttt{{{_tex_escape(top_market['market_score_method'])}}}.",
-            rf"  \item Penalties: {_tex_escape(_field_list(top['penalties_applied']))}.",
-            rf"  \item Scholarships at primary school: "
-            rf"{top_scholarship['primary_school_scholarship_count']} "
-            rf"({_tex_escape(_field_list(top_scholarship['sample_names']))}).",
-            rf"  \item Low confidence flag: \texttt{{{str(top['low_confidence_flag']).lower()}}}; "
-            rf"reason: \texttt{{{_tex_escape(top['low_confidence_reason'] or 'none')}}}.",
-            r"\end{itemize}",
             "",
             r"\paragraph{Rank-1 explanation.}",
             _tex_escape(top["explanation_text"]),
             "",
-            r"\paragraph{Persisted rows.}",
-            r"\begingroup\scriptsize\setlength{\tabcolsep}{4pt}",
-            r"\noindent\begin{tabular}{@{}c r r r@{}}",
-            r"\toprule",
-            r"Rank & Program id & University id & Model score \\",
-            r"\midrule",
-        ]
-    )
-    for row in result["model_recommendation_rows"]:
-        parts.append(
-            rf"{row['rank']} & {row['program_id']} & {row['university_id']} & "
-            rf"{row['model_score']:.3f} \\"
-        )
-    parts.extend(
-        [
-            r"\bottomrule",
-            r"\end{tabular}\endgroup",
+            r"\paragraph{Rank-1 trace.}",
+            rf"Dominant field: \texttt{{{_tex_escape(top['program_profile']['dominant_dim'])}}}; "
+            rf"track boost factor: \texttt{{{trace.get('track_boost_factor', 1.0):.2f}}}; "
+            rf"low-confidence reason: \texttt{{{_tex_escape(top.get('low_confidence_reason'))}}}.",
             "",
         ]
     )

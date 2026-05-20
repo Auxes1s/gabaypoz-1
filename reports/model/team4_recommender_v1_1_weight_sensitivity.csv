@@ -1,0 +1,16 @@
+scenario,rank,program_id,program_name,program_score,base_fit_score,market_score
+student_45_55_market_90_10,1,4,BS Business Administration,0.801682,0.779647,1.0
+student_45_55_market_90_10,2,3,BS Information Systems,0.771302,0.807002,0.45
+student_45_55_market_90_10,3,1,BS Computer Science,0.62594,0.645488,0.45
+student_50_50_market_90_10,1,3,BS Information Systems,0.796929,0.835476,0.45
+student_50_50_market_90_10,2,4,BS Business Administration,0.784911,0.761012,1.0
+student_50_50_market_90_10,3,1,BS Computer Science,0.6755,0.700556,0.45
+student_55_45_market_90_10,1,3,BS Information Systems,0.804894,0.844327,0.45
+student_55_45_market_90_10,2,4,BS Business Administration,0.763213,0.736904,1.0
+student_55_45_market_90_10,3,1,BS Computer Science,0.723642,0.754047,0.45
+student_55_45_market_100_0,1,3,BS Information Systems,0.844327,0.844327,0.45
+student_55_45_market_100_0,2,1,BS Computer Science,0.754047,0.754047,0.45
+student_55_45_market_100_0,3,4,BS Business Administration,0.736904,0.736904,1.0
+student_55_45_market_80_20,1,4,BS Business Administration,0.789523,0.736904,1.0
+student_55_45_market_80_20,2,3,BS Information Systems,0.765461,0.844327,0.45
+student_55_45_market_80_20,3,1,BS Computer Science,0.693237,0.754047,0.45
