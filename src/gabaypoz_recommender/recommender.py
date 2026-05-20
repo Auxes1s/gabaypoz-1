@@ -40,9 +40,12 @@ STRAND_FIELD_SUPPORT: dict[str, set[str]] = {
     "Sports / Arts and Design": {"arts"},
 }
 _STRAND_LOOKUP = {strand.lower(): fields for strand, fields in STRAND_FIELD_SUPPORT.items()}
-Q12_PENALTY = 0.85
-TRACK_ASPIRATION_PRIMARY_BOOST = 1.12
-TRACK_ASPIRATION_SECONDARY_BOOST = 1.06
+Q12_PENALTY = 0.85  # legacy alias — _apply_q12 now uses tiered penalties below
+Q12_PENALTY_MILD = 0.75      # programme 1 duration level above student tolerance
+Q12_PENALTY_MODERATE = 0.60  # 2 levels above
+Q12_PENALTY_SEVERE = 0.45    # 3+ levels above
+TRACK_ASPIRATION_PRIMARY_BOOST = 1.35   # was 1.12 — raised to overcome non-health dominant fields
+TRACK_ASPIRATION_SECONDARY_BOOST = 1.12  # was 1.06
 TRACK_ASPIRATION_FIELD_MAP: dict[str, dict[str, set[str]]] = {
     "medicine":  {"primary": {"health"}, "secondary": {"stem"}},
     "dentistry": {"primary": {"health"}, "secondary": {"stem"}},
@@ -612,7 +615,7 @@ def _score_programs(
             "track_boost_applied": track_boost_factor != 1.0,
             "track_boost_factor": float(track_boost_factor),
             "market_context": market_context,
-            "penalties_applied": ["Q12 duration/board-exam penalty x0.85"] if penalty_applied else [],
+            "penalties_applied": ["Q12 duration/board-exam penalty (tiered)"] if penalty_applied else [],
             "program_profile": _program_profile_meta(r, dominant_dim),
         })
 
@@ -681,10 +684,13 @@ def _select_programs_with_schools(
     top_n: int,
 ) -> list[dict]:
     selected: list[dict] = []
-    selected_fields: set[str] = set()
+    field_count: dict[str, int] = {}
 
     for row in program_scores.itertuples(index=False):
         candidate = row._asdict()
+        dom = candidate["dominant_dim"]
+        if field_count.get(dom, 0) >= 2:
+            continue  # Already have 2 programmes from this field in the top set
         schools = _feasible_schools(
             candidate["program_id"],
             student_barangay_id,
@@ -706,40 +712,9 @@ def _select_programs_with_schools(
         enriched["alternate_schools"] = [_school_dict(s) for _, s in schools.iloc[1:].iterrows()]
         enriched["matched_dimensions"] = _matched_dimensions(student_vector, candidate["program_vector"])
         selected.append(enriched)
-        selected_fields.add(candidate["dominant_dim"])
+        field_count[dom] = field_count.get(dom, 0) + 1
         if len(selected) == top_n:
             break
-
-    if len(selected) < top_n:
-        return selected
-
-    # Light diversity pass for the third slot only, preserving strong score order.
-    if len({r["dominant_dim"] for r in selected}) == 1:
-        for row in program_scores.iloc[top_n:].itertuples(index=False):
-            alt = row._asdict()
-            if alt["dominant_dim"] in selected_fields:
-                continue
-            if selected[0]["program_score"] - alt["program_score"] > 0.15:
-                break
-            schools = _feasible_schools(
-                alt["program_id"],
-                student_barangay_id,
-                responses["Q10"],
-                responses["Q11"],
-                university_programs,
-                universities,
-                commute_matrix,
-                economic_burden,
-                scholarship,
-                dimension_scholarship,
-                warnings,
-            )
-            if not schools.empty:
-                alt["primary_school"] = _school_dict(schools.iloc[0])
-                alt["alternate_schools"] = [_school_dict(s) for _, s in schools.iloc[1:].iterrows()]
-                alt["matched_dimensions"] = _matched_dimensions(student_vector, alt["program_vector"])
-                selected[-1] = alt
-                break
 
     return selected
 
@@ -992,7 +967,14 @@ def _apply_q12(score: float, q12_response: str, program_row: dict) -> tuple[bool
         board_exam = bool(program_row.get("board_exam_flag", False))
         program_level = 3 if board_exam or duration > 4 else 2 if duration >= 4 else 1
     if program_level > tolerance:
-        return True, score * Q12_PENALTY
+        overshoot = program_level - tolerance
+        if overshoot >= 3:
+            penalty = Q12_PENALTY_SEVERE
+        elif overshoot == 2:
+            penalty = Q12_PENALTY_MODERATE
+        else:
+            penalty = Q12_PENALTY_MILD
+        return True, score * penalty
     return False, score
 
 
@@ -1005,7 +987,7 @@ def _apply_q13(score: float, q13_response: str, dominant_dim: str) -> tuple[floa
         factor = TRACK_ASPIRATION_SECONDARY_BOOST
     else:
         factor = 1.0
-    return factor, score * factor
+    return factor, min(score * factor, 1.0)
 
 
 def _score_col(df: pd.DataFrame, dim: str, *, question: bool) -> str:
