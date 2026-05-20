@@ -16,3 +16,6 @@ demo/*.fls
 demo/*.fdb_latexmk
 demo/*.synctex.gz
 demo/results.tex
+.DS_Store
+.ipynb_checkpoints/
+pytest-cache-files-*/

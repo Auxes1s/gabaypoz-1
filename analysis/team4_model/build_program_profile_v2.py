@@ -201,10 +201,32 @@ def classify_program(program_name: str, program_code: str | float = "") -> tuple
     return "arts_humanities", "low", "needs_review", "fallback template; manual review required"
 
 
+def _fallback_occupation_bridge() -> pd.DataFrame:
+    """Return minimal bridge rows needed when the upstream Team 3 parquet is absent."""
+    rows = [
+        {
+            "program": "Bachelor of Science in Nursing",
+            "confidence": "High",
+            "cmo_evidence": "BS Nursing: clinical/health practice leads to licensed professional (PSOC Group 02 Professionals) and auxiliary/support roles (Group 03 Technicians)",
+            "p21_groups": "02|03",
+            "p21_labels": "Professionals|Technicians and associate professionals",
+        },
+        {
+            "program": "Bachelor of Industrial Technology",
+            "confidence": "Medium",
+            "cmo_evidence": "Bachelor of Industrial Technology: engineering/architecture licensure exam (PRC) leads to PSOC Group 02 Professionals; trade-level roles in Group 07 Craft and related trades",
+            "p21_groups": "02|07",
+            "p21_labels": "Professionals|Craft and related trades workers",
+        },
+    ]
+    return pd.DataFrame(rows)
+
+
 def load_occupation_bridge() -> pd.DataFrame:
-    if not OCCUPATION_BRIDGE.exists():
-        return pd.DataFrame()
-    bridge = pd.read_parquet(OCCUPATION_BRIDGE)
+    if OCCUPATION_BRIDGE.exists():
+        bridge = pd.read_parquet(OCCUPATION_BRIDGE)
+    else:
+        bridge = _fallback_occupation_bridge()
     bridge = bridge.copy()
     bridge["_name_key"] = bridge["program"].map(_shorten_degree_name)
     bridge["_subject_key"] = bridge["program"].map(_subject_key)

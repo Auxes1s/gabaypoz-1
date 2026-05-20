@@ -451,13 +451,13 @@ def test_q12_duration_penalty_applies_when_student_prefers_fast_path():
     result = call(response_kwargs={"field": "health", "q12": "C"})
 
     nursing = next(r for r in result["recommendations"] if r["program_id"] == 2)
-    assert nursing["penalties_applied"] == ["Q12 duration/board-exam penalty x0.85"]
+    assert nursing["penalties_applied"] == ["Q12 duration/board-exam penalty (tiered)"]
 
 
 def test_medicine_aspiration_boosts_health_above_stem():
     # Uniform affinity (all "3") → all programs score equally before the boost.
     # q12="A" (board-exam tolerant) so BS Nursing's duration_score=3 is not penalised.
-    # medicine aspiration: health ×1.12 (primary), stem ×1.06 (secondary).
+    # medicine aspiration: health ×1.35 (primary), stem ×1.12 (secondary).
     result = recommend_programs(
         session_id="s1",
         student_barangay_id=10,
@@ -466,18 +466,18 @@ def test_medicine_aspiration_boosts_health_above_stem():
     )
     assert result["status"] == "ok"
     recs = result["recommendations"]
-    assert recs[0]["program_name"] == "BS Nursing"            # health-dominant ×1.12
-    assert recs[1]["program_name"] == "BS Computer Science"   # stem-dominant ×1.06
+    assert recs[0]["program_name"] == "BS Nursing"            # health-dominant ×1.35
+    assert recs[1]["program_name"] == "BS Computer Science"   # stem-dominant ×1.12
     traces = result["model_recommendation_trace_rows"]
-    assert traces[0]["explanation_json"]["track_boost_factor"] == pytest.approx(1.12)
-    assert traces[1]["explanation_json"]["track_boost_factor"] == pytest.approx(1.06)
+    assert traces[0]["explanation_json"]["track_boost_factor"] == pytest.approx(1.35)
+    assert traces[1]["explanation_json"]["track_boost_factor"] == pytest.approx(1.12)
     assert traces[2]["explanation_json"]["track_boost_factor"] == pytest.approx(1.0)
 
 
 def test_law_aspiration_boosts_arts_above_business():
     # Uniform affinity → all programs score equally before the boost.
     # q12="B" so BS Nursing (duration 3) is penalised and cannot interfere.
-    # law aspiration: arts ×1.12 (primary), business ×1.06 (secondary).
+    # law aspiration: arts ×1.35 (primary), business ×1.12 (secondary).
     result = recommend_programs(
         session_id="s1",
         student_barangay_id=10,
@@ -486,11 +486,11 @@ def test_law_aspiration_boosts_arts_above_business():
     )
     assert result["status"] == "ok"
     recs = result["recommendations"]
-    assert recs[0]["program_name"] == "AB Communication"            # arts-dominant ×1.12
-    assert recs[1]["program_name"] == "BS Business Administration"  # business-dominant ×1.06
+    assert recs[0]["program_name"] == "AB Communication"            # arts-dominant ×1.35
+    assert recs[1]["program_name"] == "BS Business Administration"  # business-dominant ×1.12
     traces = result["model_recommendation_trace_rows"]
-    assert traces[0]["explanation_json"]["track_boost_factor"] == pytest.approx(1.12)
-    assert traces[1]["explanation_json"]["track_boost_factor"] == pytest.approx(1.06)
+    assert traces[0]["explanation_json"]["track_boost_factor"] == pytest.approx(1.35)
+    assert traces[1]["explanation_json"]["track_boost_factor"] == pytest.approx(1.12)
 
 
 def test_no_aspiration_produces_no_track_boost_in_trace():

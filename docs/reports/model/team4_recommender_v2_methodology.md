@@ -402,8 +402,8 @@ If the student declared a post-graduate professional track (V2Q29 ≡ Q13), prog
 
 ```text
 TRACK_ASPIRATION_FIELD_MAP:
-  medicine / dentistry → primary: health (×1.12), secondary: stem (×1.06)
-  law                  → primary: arts  (×1.12), secondary: business (×1.06)
+  medicine / dentistry → primary: health (×1.35), secondary: stem (×1.12)
+  law                  → primary: arts  (×1.35), secondary: business (×1.12)
   none                 → no boost
 
 program_score = program_score × TRACK_ASPIRATION_PRIMARY_BOOST    (if dominant_dim in primary)
@@ -411,9 +411,9 @@ program_score = program_score × TRACK_ASPIRATION_PRIMARY_BOOST    (if dominant_
              = program_score                                        (otherwise)
 ```
 
-The boost is applied after the Q12 penalty. A student's affinity profile remains the primary signal — the boost is a moderate nudge (≤12%) for programs recognized as effective undergraduate springboards for the declared track. Option D ("none") produces no effect.
+The boost is applied after the Q12 penalty. A student's affinity profile remains the primary signal — the boost is a bounded nudge (primary ×1.35, secondary ×1.12) for programs recognized as effective undergraduate springboards for the declared track. Option D ("none") produces no effect.
 
-Constants: `TRACK_ASPIRATION_PRIMARY_BOOST = 1.12`, `TRACK_ASPIRATION_SECONDARY_BOOST = 1.06` (`recommender_v2.py`). Both are expert priors; see §7. The declared track and per-recommendation boost factor are recorded in the recommendation trace.
+Constants: `TRACK_ASPIRATION_PRIMARY_BOOST = 1.35`, `TRACK_ASPIRATION_SECONDARY_BOOST = 1.12` (`recommender_v2.py`). Both are expert priors; see §7. The declared track and per-recommendation boost factor are recorded in the recommendation trace.
 
 ### 6.8 Ranking and School Selection
 

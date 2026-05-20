@@ -9,6 +9,31 @@ This package is the Team 4 handoff for the DB-aligned, program-first GabayPoz re
 - ID-keyed handoff datasets under `data/processed/team4_model/`
 - Proposed ERD, methodology, validation, and tracker docs under `docs/`
 
+
+## Clone and test
+
+From a fresh clone of this fork:
+
+```bash
+git clone https://github.com/Auxes1s/gabaypoz-1.git
+cd gabaypoz-1
+python -m pip install -e ".[test]"
+python -m pytest -q
+```
+
+Optional focused v2 handoff checks:
+
+```bash
+python -m pytest -q analysis/team4_model/test_recommender_v2.py analysis/team4_model/test_recommender_v2_supabase_contract.py analysis/team4_model/test_program_profile_v2.py
+```
+
+Optional live Supabase smoke tooling requires database access:
+
+```bash
+python -m pip install -e ".[smoke]"
+# set SUPABASE_DB_URL in your shell or in .env.local first
+python analysis/team4_model/smoke_supabase_v2.py
+```
 ## Current contract
 
 - Inputs: `session_id`, `student_barangay_id`, v2 questionnaire responses, `program_profile_v2`, and ERD-shaped tables
