@@ -19,3 +19,4 @@ demo/results.tex
 .DS_Store
 .ipynb_checkpoints/
 pytest-cache-files-*/
+*.local
